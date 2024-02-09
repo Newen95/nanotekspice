@@ -9,24 +9,21 @@
 #ifndef C_AND_HPP
 #define C_AND_HPP
 
-#include <iostream>
-#include <string>
+#include "../AComponent.hpp"
 
-#include "../IComponent.hpp"
+namespace nts {
 
-class C_and : nts::IComponent {
-    private:
-        nts::Tristate _in1;
-        nts::Tristate _in2;
-        nts::Tristate _output;
-
+    class C_and : public AComponent {
     public:
-        C_and();
-        ~C_and();
+        C_and(const std::string &name);
+        ~C_and() override = default;
 
         void simulate(std::size_t tick) override;
         nts::Tristate compute(std::size_t pin) override;
         void setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin) override;
-};
+    };
+
+} // namespace nts
 
 #endif // C_AND_HPP
+
