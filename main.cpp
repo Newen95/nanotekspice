@@ -7,6 +7,7 @@
 
 #include "include/main.hpp"
 #include "include/error_handling.hpp"
+#include "include/nanotekspice.hpp"
 
 int main(int argc, char **argv)
 {
@@ -15,14 +16,15 @@ int main(int argc, char **argv)
     if (error_handling(argc, argv, components) == 84)
         return 84;
 
-    for (const auto &component : components) {
-        std::cout << "NAME: '" << component.name << "' TYPE: '" << component.type << "'" << std::endl;
-        std::cout << "LINKS:" << std::endl;
-        for (const auto &link : component.links) {
-            std::cout << "pin: '" << link.pin << "'\tCMPnom: '" << link.link_component_name << "' CMPpin: '" << link.link_component_pin << "'" << std::endl;
-        }
-        std::cout << std::endl;
-    }
-
-    return 0;
+    int res = nanotekspice(components);
+    return res;
 }
+
+// for (const auto &component : components) {
+//     std::cout << "NAME: '" << component.name << "' TYPE: '" << component.type << "'" << std::endl;
+//     std::cout << "LINKS:" << std::endl;
+//     for (const auto &link : component.links) {
+//         std::cout << "pin: '" << link.pin << "'\tCMPnom: '" << link.link_component_name << "' CMPpin: '" << link.link_component_pin << "'" << std::endl;
+//     }
+//     std::cout << std::endl;
+// }
