@@ -16,6 +16,8 @@
 #include <sstream>
 #include <algorithm>
 
+#include "main.hpp"
+
 int error_handling(int ac, char **av, std::deque<Component> &components);
 
 #endif // ERROR_HPP
