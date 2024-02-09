@@ -19,42 +19,21 @@ namespace nts {
     private:
         std::string _type;
         std::string _name;
-        size_t _numPins;
         std::map<int, std::unique_ptr<Pin>> _pins;
 
     public:
-        AComponent(const std::string &type, const std::string &name, size_t numPins)
-            : _type(type), _name(name), _numPins(numPins) {}
+        AComponent(const std::string &type, const std::string &name);
         virtual ~AComponent() = default;
 
         void simulate(std::size_t tick) override = 0;
         nts::Tristate compute(std::size_t pin) override = 0;
         void setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin) override = 0;
 
-        const std::string &getType() const {
-            return _type;
-        }
+        const std::string &getType() const ;
+        const std::string &getName() const;
+        Pin &getPin(int number);
 
-        const std::string &getName() const {
-            return _name;
-        }
-
-        size_t getNumPins() const {
-            return _numPins;
-        }
-
-        Pin &getPin(int number) {
-            auto it = _pins.find(number);
-            if (it != _pins.end()) {
-                return *(it->second);
-            } else {
-                throw std::out_of_range("Pin not found");
-            }
-        }
-
-        void addPin(int number, PinType type) {
-            _pins[number] = std::make_unique<Pin>(number, type);
-        }
+        void addPin(int number, PinType type);
     };
 
 }

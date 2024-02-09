@@ -9,6 +9,7 @@
 #define PIN_HPP
 
 #include <string>
+#include "IComponent.hpp"
 
 namespace nts {
 
@@ -19,20 +20,15 @@ namespace nts {
     };
 
     class Pin {
-        private:
-            int _number;
+        protected:
             PinType _type;
+            Tristate _state;
+
         public:
-            Pin(int number, PinType type) : _number(number), _type(type) {};
+            Pin(PinType type);
             ~Pin() = default;
 
-            int getNumber() const {
-                return _number;
-            }
-
-            PinType getType() const {
-                return _type;
-            }
+            PinType getType() const;
     };
 
 }
