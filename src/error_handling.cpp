@@ -37,6 +37,15 @@ static int check_link_name(std::string name, std::deque<std::string> &all_compon
     return 0;
 }
 
+static int check_link_pin(std::string pin)
+{
+    if (pin == "") {
+        std::cerr << "Erreur: Pin manquant." << std::endl;
+        return 84;
+    }
+    return 0;
+}
+
 static void add_component_to_list(std::deque<std::string> &all_component_name, std::string name)
 {
     auto it = std::find(all_component_name.begin(), all_component_name.end(), name);
@@ -89,6 +98,8 @@ static int parse_content(std::deque<std::string> &lines, std::deque<Component> &
                 std::getline(cmp2, component2_pin);
 
                 if (check_link_name(component1_name, all_component_name) == 84 || check_link_name(component2_name, all_component_name) == 84)
+                    return 84;
+                if (check_link_pin(component1_pin) == 84 || check_link_pin(component2_pin) == 84)
                     return 84;
 
                 Links link1 {component1_pin, component2_name, component2_pin};
