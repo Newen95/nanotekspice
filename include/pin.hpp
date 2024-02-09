@@ -26,7 +26,6 @@ namespace nts
             Pin(PinType type);
             ~Pin() = default;
     };
-
 }
 
 #endif // PIN_HPP

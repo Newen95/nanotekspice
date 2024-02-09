@@ -35,7 +35,6 @@ namespace nts
 
         void addPin(int number, PinType type);
     };
-
 }
 
 #endif // ACOMPONENT_HPP
