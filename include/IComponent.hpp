@@ -9,6 +9,8 @@
 #define ICOMPONENT_HPP
 
 #include <iostream>
+#include <memory>
+#include "pin.hpp"
 
 namespace nts
 {
@@ -24,6 +26,10 @@ namespace nts
             virtual void simulate(std::size_t tick) = 0;
             virtual nts::Tristate compute(std::size_t pin) = 0;
             virtual void setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin) = 0;
+
+            virtual const std::string &getType() const = 0;
+            virtual const std::string &getName() const = 0;
+            virtual std::unique_ptr<Pin> &getPin(int number) = 0;
     };
 }
 

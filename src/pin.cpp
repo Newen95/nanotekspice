@@ -7,10 +7,5 @@
 
 #include "../include/pin.hpp"
 
-nts::Pin::Pin(PinType type) : _type(type), _state(Undefined)
+nts::Pin::Pin(PinType type) : _type(type)
 {}
-
-nts::PinType nts::Pin::getType() const
-{
-    return _type;
-}

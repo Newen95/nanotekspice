@@ -13,8 +13,8 @@
 #include <map>
 #include <memory>
 
-namespace nts {
-
+namespace nts
+{
     class AComponent : public IComponent {
     private:
         std::string _type;
@@ -23,15 +23,15 @@ namespace nts {
 
     public:
         AComponent(const std::string &type, const std::string &name);
-        virtual ~AComponent() = default;
+        virtual ~AComponent() override;
 
         void simulate(std::size_t tick) override = 0;
         nts::Tristate compute(std::size_t pin) override = 0;
         void setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin) override = 0;
 
-        const std::string &getType() const ;
-        const std::string &getName() const;
-        Pin &getPin(int number);
+        const std::string &getType() const override;
+        const std::string &getName() const override;
+        std::unique_ptr<Pin> &getPin(int number) override;
 
         void addPin(int number, PinType type);
     };

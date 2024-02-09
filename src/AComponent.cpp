@@ -11,6 +11,9 @@ nts::AComponent::AComponent(const std::string &type, const std::string &name)
     : _type(type), _name(name)
 {}
 
+nts::AComponent::~AComponent() {}
+
+
 const std::string &nts::AComponent::getType() const
 {
     return _type;
@@ -21,11 +24,11 @@ const std::string &nts::AComponent::getName() const
     return _name;
 }
 
-nts::Pin &nts::AComponent::getPin(int number)
+std::unique_ptr<nts::Pin> &nts::AComponent::getPin(int number)
 {
     auto it = _pins.find(number);
     if (it != _pins.end()) {
-        return *(it->second);
+        return it->second;
     } else {
         throw std::out_of_range("Pin not found");
     }

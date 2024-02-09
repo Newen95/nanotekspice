@@ -9,10 +9,9 @@
 #define PIN_HPP
 
 #include <string>
-#include "IComponent.hpp"
 
-namespace nts {
-
+namespace nts
+{
     enum PinType {
         Input,
         Output,
@@ -22,13 +21,10 @@ namespace nts {
     class Pin {
         protected:
             PinType _type;
-            Tristate _state;
 
         public:
             Pin(PinType type);
             ~Pin() = default;
-
-            PinType getType() const;
     };
 
 }
