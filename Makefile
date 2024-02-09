@@ -9,9 +9,9 @@ NAME 		=	nanotekspice
 
 CPPFLAGS 	=	-std=c++20 -Wall -Wextra -Werror
 
-SOURCES 	=	main.cpp 				\
-				src/error_handling.cpp 	\
-				src/nanotekspice.cpp
+SOURCES 	=	$(wildcard *.cpp) 				\
+				$(wildcard src/*.cpp)			\
+				$(wildcard src/component/*.cpp)
 
 OBJECTS 	=	$(SOURCES:.cpp=.o)
 

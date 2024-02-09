@@ -20,7 +20,7 @@ int main(int argc, char **argv)
     return res;
 }
 
-// for (const auto &component : components) {
+//     for (const auto &component : components) {
 //     std::cout << "NAME: '" << component.name << "' TYPE: '" << component.type << "'" << std::endl;
 //     std::cout << "LINKS:" << std::endl;
 //     for (const auto &link : component.links) {

@@ -1,0 +1,24 @@
+
+/*
+** EPITECH PROJECT, 2023
+** Some Project
+** File description:
+** C_4514.hpp
+*/
+
+#ifndef C_4514_HPP
+#define C_4514_HPP
+
+#include <iostream>
+#include <string>
+
+#include "../IComponent.hpp"
+
+class C_4514 : nts::IComponent {
+    private:
+    public:
+        C_4514();
+        ~C_4514();
+};
+
+#endif // C_4514_HPP

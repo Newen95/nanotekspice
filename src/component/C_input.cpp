@@ -1,0 +1,13 @@
+
+/*
+** EPITECH PROJECT, 2023
+** Some Project
+** File description:
+** C_input.cpp
+*/
+
+#include "../../include/component/C_input.hpp"
+
+C_input::C_input() {}
+
+C_input::~C_input() {}
