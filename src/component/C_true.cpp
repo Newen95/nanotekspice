@@ -10,7 +10,5 @@
 
 nts::C_true::C_true(const std::string &name) : AComponent("true", name)
 {
-    addPin(1, PinType::Input);
-    addPin(2, PinType::Input);
-    addPin(3, PinType::Output);
+    addPin(1, PinType::Output);
 }

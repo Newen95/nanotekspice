@@ -11,6 +11,5 @@
 nts::C_not::C_not(const std::string &name) : AComponent("not", name)
 {
     addPin(1, PinType::Input);
-    addPin(2, PinType::Input);
-    addPin(3, PinType::Output);
+    addPin(2, PinType::Output);
 }

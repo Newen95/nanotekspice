@@ -32,6 +32,7 @@ void printComponentMap(const std::map<std::string, std::unique_ptr<nts::ACompone
         std::cout << std::endl;
     }
 }
+
 static int create_all_component(std::deque<Component> &components, std::map<std::string, std::unique_ptr<nts::AComponent>> &componentMap)
 {
     for (const auto &component : components) {
