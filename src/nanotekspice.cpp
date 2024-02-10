@@ -123,6 +123,15 @@ int nanotekspice(std::deque<Component> &components)
     if (create_all_component(components, componentMap) == 84 || create_all_link(components, componentMap) == 84)
         return 84;
 
+    std::string input;
+
+    while (true) {
+        std::cout << "> ";
+        std::getline(std::cin, input);
+        if (input == "exit")
+            return 0;
+    }
+
     // printComponentMap(componentMap);
 
     return 0;
