@@ -17,6 +17,8 @@ namespace nts
     enum PinType {
         Input,
         Output,
+        True,
+        False,
         Other
     };
 
