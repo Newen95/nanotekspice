@@ -15,10 +15,22 @@ void printComponentMap(const std::map<std::string, std::unique_ptr<nts::ACompone
         const nts::AComponent &component = *(pair.second);
 
         std::cout << "Component name: " << name << std::endl;
-        std::cout << "Component type: " << component.getType() << std::endl << std::endl;;
+        std::cout << "Component type: " << component.getType() << std::endl;
+
+        // for (const auto &pinPair : component.getPins()) {
+        //     int pinNumber = pinPair.first;
+        //     const auto &pinPtr = pinPair.second;
+
+        //     std::cout << "Pin " << pinNumber << " links:" << std::endl;
+        //     const auto &connectedTo = pinPtr->getConnectedTo();
+        //     for (const auto &link : connectedTo) {
+        //         std::cout << "  Linked to component: " << link->component << ", pin: " << link->pin << std::endl;
+        //     }
+        // }
+
+        std::cout << std::endl; // Pour séparer les composants dans la sortie
     }
 }
-
 static int create_all_component(std::deque<Component> &components, std::map<std::string, std::unique_ptr<nts::AComponent>> &componentMap)
 {
     for (const auto &component : components) {
@@ -81,11 +93,16 @@ static int create_all_component(std::deque<Component> &components, std::map<std:
     return 0;
 }
 
+static int create_all_link(std::deque<Component> &components __attribute_maybe_unused__, std::map<std::string, std::unique_ptr<nts::AComponent>> &componentMap __attribute_maybe_unused__)
+{
+    return 0;
+}
+
 int nanotekspice(std::deque<Component> &components)
 {
     std::map<std::string, std::unique_ptr<nts::AComponent>> componentMap;
 
-    if (create_all_component(components, componentMap) == 84)
+    if (create_all_component(components, componentMap) == 84 || create_all_link(components, componentMap) == 84)
         return 84;
 
     printComponentMap(componentMap);

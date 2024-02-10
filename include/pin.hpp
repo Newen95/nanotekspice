@@ -34,6 +34,8 @@ namespace nts
         public:
             Pin(PinType type);
             ~Pin() = default;
+
+            std::list<std::unique_ptr<Link>> &getConnectedTo();
     };
 }
 

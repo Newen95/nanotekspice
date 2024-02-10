@@ -21,6 +21,11 @@ const std::string &nts::AComponent::getName() const
     return _name;
 }
 
+const std::map<int, std::unique_ptr<nts::Pin>>& nts::AComponent::getPins() const
+{
+    return _pins;
+}
+
 std::unique_ptr<nts::Pin> &nts::AComponent::getPin(int number)
 {
     auto it = _pins.find(number);
@@ -38,12 +43,17 @@ void nts::AComponent::addPin(int number, PinType type)
 
 void nts::AComponent::setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin)
 {
-    try {
-        std::cout << "Linking pin " << pin << " of component " << _name
-                    << " to pin " << otherPin << " of component " << other.getName() << std::endl;
-    } catch (const std::out_of_range &e) {
-        std::cerr << "Error: " << e.what() << std::endl;
+    if (_pins.find(pin) == _pins.end()) {
+        throw std::out_of_range("Le pin spécifié n'existe pas dans ce composant.");
     }
+
+    std::unique_ptr<Pin> &currentPin = _pins[pin];
+
+    std::unique_ptr<Link> link = std::make_unique<Link>();
+    link->component = other.getName();
+    link->pin = otherPin;
+
+    currentPin->getConnectedTo().push_back(std::move(link));
 }
 
 void nts::AComponent::simulate(std::size_t tick __attribute_maybe_unused__)

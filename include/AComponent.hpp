@@ -31,6 +31,7 @@ namespace nts
 
         const std::string &getType() const override;
         const std::string &getName() const override;
+        const std::map<int, std::unique_ptr<Pin>> &getPins() const override;
         std::unique_ptr<Pin> &getPin(int number) override;
 
         void addPin(int number, PinType type);

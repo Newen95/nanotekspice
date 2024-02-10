@@ -9,3 +9,8 @@
 
 nts::Pin::Pin(PinType type) : _type(type)
 {}
+
+std::list<std::unique_ptr<nts::Link>> &nts::Pin::getConnectedTo()
+{
+    return _connectedTo;
+}

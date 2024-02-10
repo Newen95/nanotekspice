@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <memory>
+#include <map>
 #include "pin.hpp"
 
 namespace nts
@@ -29,6 +30,7 @@ namespace nts
 
             virtual const std::string &getType() const = 0;
             virtual const std::string &getName() const = 0;
+            virtual const std::map<int, std::unique_ptr<Pin>> &getPins() const = 0;
             virtual std::unique_ptr<Pin> &getPin(int number) = 0;
     };
 }
