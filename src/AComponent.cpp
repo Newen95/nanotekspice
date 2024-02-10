@@ -54,18 +54,6 @@ void nts::AComponent::setLink(std::size_t pin, nts::IComponent &other, std::size
     link->pin = otherPin;
 
     currentPin->getConnectedTo().push_back(std::move(link));
-
-    auto &otherPins = other.getPins();
-    auto it = otherPins.find(otherPin);
-    if (it == otherPins.end()) {
-        throw std::out_of_range("Le pin spécifié de l'autre composant n'existe pas.");
-    }
-    auto &targetPin = it->second;
-
-    std::unique_ptr<Link> link2 = std::make_unique<Link>();
-    link2->component = getName();
-    link2->pin = pin;
-    targetPin->getConnectedTo().push_back(std::move(link2));
 }
 
 void nts::AComponent::simulate(std::size_t tick __attribute_maybe_unused__)

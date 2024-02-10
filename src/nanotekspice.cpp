@@ -93,15 +93,15 @@ static int create_all_component(std::deque<Component> &components, std::map<std:
     return 0;
 }
 
-static int create_all_link(std::deque<Component> &components __attribute_maybe_unused__, std::map<std::string, std::unique_ptr<nts::AComponent>> &componentMap __attribute_maybe_unused__)
+static int create_all_link(std::deque<Component> &components, std::map<std::string, std::unique_ptr<nts::AComponent>> &componentMap)
 {
-    // for (const auto &component : components) {
-    //     std::string Name = component.name;
+    for (const auto &component : components) {
+        std::string Name = component.name;
 
-    //     for (const auto &links : component.links) {
-    //         // todo
-    //     }
-    // }
+        for (const auto &links : component.links) {
+            // todo
+        }
+    }
     return 0;
 }
 
