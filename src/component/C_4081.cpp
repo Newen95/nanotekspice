@@ -10,18 +10,16 @@
 
 nts::C_4081::C_4081(const std::string &name) : AComponent("4081", name)
 {
-    addPin(1, PinType::Other);
-    addPin(2, PinType::Other);
-    addPin(3, PinType::Other);
-    addPin(4, PinType::Other);
-    addPin(5, PinType::Other);
-    addPin(6, PinType::Other);
-    addPin(7, PinType::Other);
-    addPin(8, PinType::Other);
-    addPin(9, PinType::Other);
-    addPin(10, PinType::Other);
-    addPin(11, PinType::Other);
-    addPin(12, PinType::Other);
-    addPin(13, PinType::Other);
-    addPin(14, PinType::Other);
+    addPin(1, PinType::Input);
+    addPin(2, PinType::Input);
+    addPin(3, PinType::Input);
+    addPin(4, PinType::Input);
+    addPin(5, PinType::Input);
+    addPin(6, PinType::Input);
+    addPin(7, PinType::Input);
+    addPin(8, PinType::Input);
+    addPin(9, PinType::Output);
+    addPin(10, PinType::Output);
+    addPin(11, PinType::Output);
+    addPin(12, PinType::Output);
 }
