@@ -19,7 +19,7 @@ namespace nts
         Output,
         True,
         False,
-        Other
+        Clock
     };
 
     struct Link
