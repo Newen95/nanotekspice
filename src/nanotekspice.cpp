@@ -20,12 +20,13 @@ void printComponentMap(const std::map<std::string, std::unique_ptr<nts::ACompone
         for (const auto &pinPair : component.getPins()) {
             int pinNumber = pinPair.first;
             const auto &pinPtr = *pinPair.second;
+            const auto &pinPtr_ = pinPair.second;
 
             std::cout << "Pin: " << pinNumber << " Type: " << pinPtr.getPinType() << std::endl;
-            // const auto &connectedTo = pinPtr->getConnectedTo();
-            // for (const auto &link : connectedTo) {
-            //     std::cout << "  Linked to component: " << link->component << ", pin: " << link->pin << std::endl;
-            // }
+            const auto &connectedTo = pinPtr_->getConnectedTo();
+            for (const auto &link : connectedTo) {
+                std::cout << "  Linked to component: " << link->component << ", pin: " << link->pin << std::endl;
+            }
         }
 
         std::cout << std::endl;
@@ -98,8 +99,18 @@ static int create_all_link(std::deque<Component> &components, std::map<std::stri
     for (const auto &component : components) {
         std::string Name = component.name;
 
-        for (const auto &links : component.links) {
-            // todo
+        for (const auto &link : component.links) {
+            auto it = componentMap.find(link.link_component_name);
+            auto at = componentMap.find(Name);
+
+            if (it != componentMap.end() && at != componentMap.end()) {
+                nts::AComponent &component_to_link = *(it->second);
+                nts::AComponent &component_actual = *(at->second);
+                std::size_t pin_to_link = std::stoul(link.link_component_pin);
+                std::size_t pin_actual = std::stoul(link.pin);
+
+                component_actual.setLink(pin_actual, component_to_link, pin_to_link);
+            }
         }
     }
     return 0;
@@ -112,7 +123,7 @@ int nanotekspice(std::deque<Component> &components)
     if (create_all_component(components, componentMap) == 84 || create_all_link(components, componentMap) == 84)
         return 84;
 
-    printComponentMap(componentMap);
+    // printComponentMap(componentMap);
 
     return 0;
 }
