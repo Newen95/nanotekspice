@@ -11,6 +11,7 @@
 #include <iostream>
 #include <deque>
 #include <string>
+#include "pin.hpp"
 
 struct Links {
     std::string pin;

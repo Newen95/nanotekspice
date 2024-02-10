@@ -8,6 +8,9 @@
 
 #include "../../include/component/C_xor.hpp"
 
-C_xor::C_xor() {}
-
-C_xor::~C_xor() {}
+nts::C_xor::C_xor(const std::string &name) : AComponent("xor", name)
+{
+    addPin(1, PinType::Input);
+    addPin(2, PinType::Input);
+    addPin(3, PinType::Output);
+}

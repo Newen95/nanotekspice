@@ -9,16 +9,15 @@
 #ifndef C_FALSE_HPP
 #define C_FALSE_HPP
 
-#include <iostream>
-#include <string>
+#include "../AComponent.hpp"
 
-#include "../IComponent.hpp"
+namespace nts {
 
-class C_false : nts::IComponent {
-    private:
+class C_false : public AComponent {
     public:
-        C_false();
-        ~C_false();
-};
+        C_false(const std::string &name);
+        ~C_false() override = default;
+    };
+}
 
 #endif // C_FALSE_HPP

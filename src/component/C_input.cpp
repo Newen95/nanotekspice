@@ -8,6 +8,9 @@
 
 #include "../../include/component/C_input.hpp"
 
-C_input::C_input() {}
-
-C_input::~C_input() {}
+nts::C_input::C_input(const std::string &name) : AComponent("input", name)
+{
+    addPin(1, PinType::Input);
+    addPin(2, PinType::Input);
+    addPin(3, PinType::Output);
+}

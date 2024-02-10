@@ -8,6 +8,9 @@
 
 #include "../../include/component/C_not.hpp"
 
-C_not::C_not() {}
-
-C_not::~C_not() {}
+nts::C_not::C_not(const std::string &name) : AComponent("not", name)
+{
+    addPin(1, PinType::Input);
+    addPin(2, PinType::Input);
+    addPin(3, PinType::Output);
+}

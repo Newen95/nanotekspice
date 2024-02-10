@@ -9,16 +9,16 @@
 #ifndef C_OUTPUT_HPP
 #define C_OUTPUT_HPP
 
-#include <iostream>
-#include <string>
+#include "../AComponent.hpp"
 
-#include "../IComponent.hpp"
+namespace nts {
 
-class C_output : nts::IComponent {
-    private:
+class C_output : public AComponent {
     public:
-        C_output();
-        ~C_output();
-};
+        C_output(const std::string &name);
+        ~C_output() override = default;
+    };
+
+}
 
 #endif // C_OUTPUT_HPP

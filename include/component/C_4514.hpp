@@ -9,16 +9,16 @@
 #ifndef C_4514_HPP
 #define C_4514_HPP
 
-#include <iostream>
-#include <string>
+#include "../AComponent.hpp"
 
-#include "../IComponent.hpp"
+namespace nts {
 
-class C_4514 : nts::IComponent {
-    private:
+class C_4514 : public AComponent {
     public:
-        C_4514();
-        ~C_4514();
-};
+        C_4514(const std::string &name);
+        ~C_4514() override = default;
+    };
+}
+
 
 #endif // C_4514_HPP

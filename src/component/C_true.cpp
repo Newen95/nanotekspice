@@ -8,6 +8,9 @@
 
 #include "../../include/component/C_true.hpp"
 
-C_true::C_true() {}
-
-C_true::~C_true() {}
+nts::C_true::C_true(const std::string &name) : AComponent("true", name)
+{
+    addPin(1, PinType::Input);
+    addPin(2, PinType::Input);
+    addPin(3, PinType::Output);
+}

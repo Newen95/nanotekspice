@@ -9,16 +9,16 @@
 #ifndef C_TRUE_HPP
 #define C_TRUE_HPP
 
-#include <iostream>
-#include <string>
+#include "../AComponent.hpp"
 
-#include "../IComponent.hpp"
+namespace nts {
 
-class C_true : nts::IComponent {
-    private:
+class C_true : public AComponent {
     public:
-        C_true();
-        ~C_true();
-};
+        C_true(const std::string &name);
+        ~C_true() override = default;
+    };
+}
+
 
 #endif // C_TRUE_HPP

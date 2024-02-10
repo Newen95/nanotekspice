@@ -9,6 +9,8 @@
 #define PIN_HPP
 
 #include <string>
+#include <list>
+#include <memory>
 
 namespace nts
 {
@@ -18,9 +20,16 @@ namespace nts
         Other
     };
 
+    struct Link
+    {
+        std::string component;
+        std::size_t pin;
+    };
+
     class Pin {
         protected:
             PinType _type;
+            std::list<std::unique_ptr<Link>> _connectedTo;
 
         public:
             Pin(PinType type);

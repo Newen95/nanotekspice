@@ -9,16 +9,15 @@
 #ifndef C_4013_HPP
 #define C_4013_HPP
 
-#include <iostream>
-#include <string>
+#include "../AComponent.hpp"
 
-#include "../IComponent.hpp"
+namespace nts {
 
-class C_4013 : nts::IComponent {
-    private:
+class C_4013 : public AComponent {
     public:
-        C_4013();
-        ~C_4013();
-};
+        C_4013(const std::string &name);
+        ~C_4013() override = default;
+    };
+}
 
 #endif // C_4013_HPP

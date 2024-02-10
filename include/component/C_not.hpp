@@ -9,16 +9,16 @@
 #ifndef C_NOT_HPP
 #define C_NOT_HPP
 
-#include <iostream>
-#include <string>
 
-#include "../IComponent.hpp"
+#include "../AComponent.hpp"
 
-class C_not : nts::IComponent {
-    private:
+namespace nts {
+
+class C_not : public AComponent {
     public:
-        C_not();
-        ~C_not();
-};
+        C_not(const std::string &name);
+        ~C_not() override = default;
+    };
 
+}
 #endif // C_NOT_HPP

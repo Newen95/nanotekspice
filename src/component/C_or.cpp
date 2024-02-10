@@ -8,6 +8,9 @@
 
 #include "../../include/component/C_or.hpp"
 
-C_or::C_or() {}
-
-C_or::~C_or() {}
+nts::C_or::C_or(const std::string &name) : AComponent("or", name)
+{
+    addPin(1, PinType::Input);
+    addPin(2, PinType::Input);
+    addPin(3, PinType::Output);
+}

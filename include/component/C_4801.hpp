@@ -9,16 +9,15 @@
 #ifndef C_4801_HPP
 #define C_4801_HPP
 
-#include <iostream>
-#include <string>
+#include "../AComponent.hpp"
 
-#include "../IComponent.hpp"
+namespace nts {
 
-class C_4801 : nts::IComponent {
-    private:
+class C_4801 : public AComponent {
     public:
-        C_4801();
-        ~C_4801();
-};
+        C_4801(const std::string &name);
+        ~C_4801() override = default;
+    };
+}
 
 #endif // C_4801_HPP

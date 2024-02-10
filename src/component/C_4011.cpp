@@ -8,6 +8,9 @@
 
 #include "../../include/component/C_4011.hpp"
 
-C_4011::C_4011() {}
-
-C_4011::~C_4011() {}
+nts::C_4011::C_4011(const std::string &name) : AComponent("4011", name)
+{
+    addPin(1, PinType::Input);
+    addPin(2, PinType::Input);
+    addPin(3, PinType::Output);
+}

@@ -9,7 +9,34 @@
 #define NANOTEKSPICE_HPP
 
 #include <iostream>
+#include <map>
+#include "AComponent.hpp"
 #include "../include/main.hpp"
+
+#include "../include/component/C_2716.hpp"
+#include "../include/component/C_4011.hpp"
+#include "../include/component/C_4030.hpp"
+#include "../include/component/C_4071.hpp"
+#include "../include/component/C_4512.hpp"
+#include "../include/component/C_4001.hpp"
+#include "../include/component/C_4013.hpp"
+#include "../include/component/C_4040.hpp"
+#include "../include/component/C_4081.hpp"
+#include "../include/component/C_4514.hpp"
+#include "../include/component/C_4008.hpp"
+#include "../include/component/C_4017.hpp"
+#include "../include/component/C_4069.hpp"
+#include "../include/component/C_4094.hpp"
+#include "../include/component/C_4801.hpp"
+#include "../include/component/C_and.hpp"
+#include "../include/component/C_input.hpp"
+#include "../include/component/C_output.hpp"
+#include "../include/component/C_clock.hpp"
+#include "../include/component/C_not.hpp"
+#include "../include/component/C_true.hpp"
+#include "../include/component/C_false.hpp"
+#include "../include/component/C_or.hpp"
+#include "../include/component/C_xor.hpp"
 
 int nanotekspice(std::deque<Component> &components);
 

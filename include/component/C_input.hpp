@@ -9,16 +9,15 @@
 #ifndef C_INPUT_HPP
 #define C_INPUT_HPP
 
-#include <iostream>
-#include <string>
+#include "../AComponent.hpp"
 
-#include "../IComponent.hpp"
+namespace nts {
 
-class C_input : nts::IComponent {
-    private:
+class C_input : public AComponent {
     public:
-        C_input();
-        ~C_input();
-};
+        C_input(const std::string &name);
+        ~C_input() override = default;
+    };
+}
 
 #endif // C_INPUT_HPP

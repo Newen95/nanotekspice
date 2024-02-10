@@ -9,16 +9,15 @@
 #ifndef C_4040_HPP
 #define C_4040_HPP
 
-#include <iostream>
-#include <string>
+#include "../AComponent.hpp"
 
-#include "../IComponent.hpp"
+namespace nts {
 
-class C_4040 : nts::IComponent {
-    private:
+class C_4040 : public AComponent {
     public:
-        C_4040();
-        ~C_4040();
-};
+        C_4040(const std::string &name);
+        ~C_4040() override = default;
+    };
+}
 
 #endif // C_4040_HPP

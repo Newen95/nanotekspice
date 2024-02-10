@@ -8,6 +8,9 @@
 
 #include "../../include/component/C_false.hpp"
 
-C_false::C_false() {}
-
-C_false::~C_false() {}
+nts::C_false::C_false(const std::string &name) : AComponent("false", name)
+{
+    addPin(1, PinType::Input);
+    addPin(2, PinType::Input);
+    addPin(3, PinType::Output);
+}
