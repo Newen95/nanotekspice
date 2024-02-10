@@ -10,17 +10,17 @@
 
 nts::C_4094::C_4094(const std::string &name) : AComponent("4094", name)
 {
-    addPin(1, PinType::Input);
-    addPin(2, PinType::True);
-    addPin(3, PinType::True);
-    addPin(4, PinType::Output);
-    addPin(5, PinType::Output);
-    addPin(6, PinType::Output);
-    addPin(7, PinType::Output);
-    addPin(8, PinType::Output);
-    addPin(9, PinType::Output);
-    addPin(10, PinType::Output);
-    addPin(11, PinType::Output);
-    addPin(12, PinType::Output);
-    addPin(13, PinType::Output);
+    addPin(1, PinType::typeInput);
+    addPin(2, PinType::typeTrue);
+    addPin(3, PinType::typeTrue);
+    addPin(4, PinType::typeOutput);
+    addPin(5, PinType::typeOutput);
+    addPin(6, PinType::typeOutput);
+    addPin(7, PinType::typeOutput);
+    addPin(8, PinType::typeOutput);
+    addPin(9, PinType::typeOutput);
+    addPin(10, PinType::typeOutput);
+    addPin(11, PinType::typeOutput);
+    addPin(12, PinType::typeOutput);
+    addPin(13, PinType::typeOutput);
 }

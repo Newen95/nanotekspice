@@ -10,5 +10,5 @@
 
 nts::C_output::C_output(const std::string &name) : AComponent("output", name)
 {
-    addPin(1, PinType::Input);
+    addPin(1, PinType::typeInput);
 }

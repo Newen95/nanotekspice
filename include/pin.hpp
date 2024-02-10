@@ -14,12 +14,19 @@
 
 namespace nts
 {
+    enum Tristate {
+        Undefined = (-true),
+        True = true,
+        False = false
+    };
+
     enum PinType {
-        Input,
-        Output,
-        True,
-        False,
-        Clock
+        typeInput,
+        typeOutput,
+        typeFalse,
+        typeTrue,
+        typeClock,
+        typeOther
     };
 
     struct Link
@@ -32,6 +39,7 @@ namespace nts
         protected:
             PinType _type;
             std::list<std::unique_ptr<Link>> _connectedTo;
+            Tristate _state;
 
         public:
             Pin(PinType type);

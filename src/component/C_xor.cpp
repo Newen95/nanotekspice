@@ -10,7 +10,7 @@
 
 nts::C_xor::C_xor(const std::string &name) : AComponent("xor", name)
 {
-    addPin(1, PinType::Input);
-    addPin(2, PinType::Input);
-    addPin(3, PinType::Output);
+    addPin(1, PinType::typeInput);
+    addPin(2, PinType::typeInput);
+    addPin(3, PinType::typeOutput);
 }

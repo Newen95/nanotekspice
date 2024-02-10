@@ -117,12 +117,43 @@ static int create_all_link(std::deque<Component> &components, std::map<std::stri
     return 0;
 }
 
+void display(nts::Circuit &circuit)
+{
+    // std::map<std::string, std::unique_ptr<nts::AComponent>> components = circuit.getComponentMap();
+
+    std::cout << "tick: " << circuit.getTick() << std::endl;
+    // for (const auto &componentPair : components) {
+    //     const std::string &name = componentPair.first;
+    //     const nts::AComponent &component = *(componentPair.second);
+
+    //     std::cout << "Component name: " << name << std::endl;
+    //     std::cout << "Component type: " << component.getType() << std::endl;
+
+    //     for (const auto &pinPair : component.getPins()) {
+    //         int pinNumber = pinPair.first;
+    //         const auto &pinPtr = *pinPair.second;
+    //         const auto &pinPtr_ = pinPair.second;
+
+    //         std::cout << "Pin: " << pinNumber << " Type: " << pinPtr.getPinType() << std::endl;
+    //         const auto &connectedTo = pinPtr_->getConnectedTo();
+    //         for (const auto &link : connectedTo) {
+    //             std::cout << "  Linked to component: " << link->component << ", pin: " << link->pin << std::endl;
+    //         }
+    //     }
+
+    //     std::cout << std::endl;
+    // }
+}
+
 int nanotekspice(std::deque<Component> &components)
 {
     std::map<std::string, std::unique_ptr<nts::AComponent>> componentMap;
 
     if (create_all_component(components, componentMap) == 84 || create_all_link(components, componentMap) == 84)
         return 84;
+
+    nts::Circuit circuit;
+    circuit.setComponentMap(std::move(componentMap));
 
     std::string input;
 
@@ -131,9 +162,9 @@ int nanotekspice(std::deque<Component> &components)
         std::getline(std::cin, input);
         if (input == "exit")
             return 0;
+        if (input == "display")
+            display(circuit);
     }
-
-    // printComponentMap(componentMap);
 
     return 0;
 }

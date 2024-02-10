@@ -10,26 +10,26 @@
 
 nts::C_4514::C_4514(const std::string &name) : AComponent("4514", name)
 {
-    addPin(1, PinType::Input);
-    addPin(2, PinType::Input);
-    addPin(3, PinType::Input);
-    addPin(4, PinType::Input);
-    addPin(5, PinType::Input);
-    addPin(6, PinType::Input);
-    addPin(7, PinType::Output);
-    addPin(8, PinType::Output);
-    addPin(9, PinType::Output);
-    addPin(10, PinType::Output);
-    addPin(11, PinType::Output);
-    addPin(12, PinType::Output);
-    addPin(13, PinType::Output);
-    addPin(14, PinType::Output);
-    addPin(15, PinType::Output);
-    addPin(16, PinType::Output);
-    addPin(17, PinType::Output);
-    addPin(18, PinType::Output);
-    addPin(19, PinType::Output);
-    addPin(20, PinType::Output);
-    addPin(21, PinType::Output);
-    addPin(22, PinType::Output);
+    addPin(1, PinType::typeInput);
+    addPin(2, PinType::typeInput);
+    addPin(3, PinType::typeInput);
+    addPin(4, PinType::typeInput);
+    addPin(5, PinType::typeInput);
+    addPin(6, PinType::typeInput);
+    addPin(7, PinType::typeOutput);
+    addPin(8, PinType::typeOutput);
+    addPin(9, PinType::typeOutput);
+    addPin(10, PinType::typeOutput);
+    addPin(11, PinType::typeOutput);
+    addPin(12, PinType::typeOutput);
+    addPin(13, PinType::typeOutput);
+    addPin(14, PinType::typeOutput);
+    addPin(15, PinType::typeOutput);
+    addPin(16, PinType::typeOutput);
+    addPin(17, PinType::typeOutput);
+    addPin(18, PinType::typeOutput);
+    addPin(19, PinType::typeOutput);
+    addPin(20, PinType::typeOutput);
+    addPin(21, PinType::typeOutput);
+    addPin(22, PinType::typeOutput);
 }

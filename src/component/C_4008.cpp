@@ -10,18 +10,18 @@
 
 nts::C_4008::C_4008(const std::string &name) : AComponent("4008", name)
 {
-    addPin(1, PinType::Input);
-    addPin(2, PinType::Input);
-    addPin(3, PinType::Input);
-    addPin(4, PinType::Input);
-    addPin(5, PinType::Input);
-    addPin(6, PinType::Input);
-    addPin(7, PinType::Input);
-    addPin(8, PinType::Input);
-    addPin(9, PinType::Input);
-    addPin(10, PinType::Output);
-    addPin(11, PinType::Output);
-    addPin(12, PinType::Output);
-    addPin(13, PinType::Output);
-    addPin(14, PinType::Output);
+    addPin(1, PinType::typeInput);
+    addPin(2, PinType::typeInput);
+    addPin(3, PinType::typeInput);
+    addPin(4, PinType::typeInput);
+    addPin(5, PinType::typeInput);
+    addPin(6, PinType::typeInput);
+    addPin(7, PinType::typeInput);
+    addPin(8, PinType::typeInput);
+    addPin(9, PinType::typeInput);
+    addPin(10, PinType::typeOutput);
+    addPin(11, PinType::typeOutput);
+    addPin(12, PinType::typeOutput);
+    addPin(13, PinType::typeOutput);
+    addPin(14, PinType::typeOutput);
 }
