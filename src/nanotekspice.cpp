@@ -17,18 +17,18 @@ void printComponentMap(const std::map<std::string, std::unique_ptr<nts::ACompone
         std::cout << "Component name: " << name << std::endl;
         std::cout << "Component type: " << component.getType() << std::endl;
 
-        // for (const auto &pinPair : component.getPins()) {
-        //     int pinNumber = pinPair.first;
-        //     const auto &pinPtr = pinPair.second;
+        for (const auto &pinPair : component.getPins()) {
+            int pinNumber = pinPair.first;
+            const auto &pinPtr = *pinPair.second;
 
-        //     std::cout << "Pin " << pinNumber << " links:" << std::endl;
-        //     const auto &connectedTo = pinPtr->getConnectedTo();
-        //     for (const auto &link : connectedTo) {
-        //         std::cout << "  Linked to component: " << link->component << ", pin: " << link->pin << std::endl;
-        //     }
-        // }
+            std::cout << "Pin: " << pinNumber << " Type: " << pinPtr.getPinType() << std::endl;
+            // const auto &connectedTo = pinPtr->getConnectedTo();
+            // for (const auto &link : connectedTo) {
+            //     std::cout << "  Linked to component: " << link->component << ", pin: " << link->pin << std::endl;
+            // }
+        }
 
-        std::cout << std::endl; // Pour séparer les composants dans la sortie
+        std::cout << std::endl;
     }
 }
 static int create_all_component(std::deque<Component> &components, std::map<std::string, std::unique_ptr<nts::AComponent>> &componentMap)

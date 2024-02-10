@@ -14,3 +14,8 @@ std::list<std::unique_ptr<nts::Link>> &nts::Pin::getConnectedTo()
 {
     return _connectedTo;
 }
+
+const nts::PinType &nts::Pin::getPinType() const
+{
+    return _type;
+}
