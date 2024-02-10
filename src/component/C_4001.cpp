@@ -16,10 +16,12 @@ nts::C_4001::C_4001(const std::string &name) : AComponent("4001", name)
     addPin(4, PinType::typeOutput);
     addPin(5, PinType::typeInput);
     addPin(6, PinType::typeInput);
-    addPin(7, PinType::typeInput);
+    addPin(7, PinType::typeIgnored);
     addPin(8, PinType::typeInput);
-    addPin(9, PinType::typeOutput);
+    addPin(9, PinType::typeInput);
     addPin(10, PinType::typeOutput);
-    addPin(11, PinType::typeInput);
+    addPin(11, PinType::typeOutput);
     addPin(12, PinType::typeInput);
+    addPin(13, PinType::typeInput);
+    addPin(14, PinType::typeIgnored);
 }

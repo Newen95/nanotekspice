@@ -10,15 +10,17 @@
 
 nts::C_4013::C_4013(const std::string &name) : AComponent("4013", name)
 {
-    addPin(1, PinType::typeInput);
-    addPin(2, PinType::typeInput);
-    addPin(3, PinType::typeInput);
-    addPin(4, PinType::typeOutput);
-    addPin(5, PinType::typeOutput);
-    addPin(6, PinType::typeClock);
-    addPin(7, PinType::typeInput);
+    addPin(1, PinType::typeOutput);
+    addPin(2, PinType::typeOutput);
+    addPin(3, PinType::typeClock);
+    addPin(4, PinType::typeInput);
+    addPin(5, PinType::typeInput);
+    addPin(6, PinType::typeInput);
+    addPin(7, PinType::typeIgnored);
     addPin(8, PinType::typeInput);
     addPin(9, PinType::typeInput);
-    addPin(10, PinType::typeOutput);
-    addPin(11, PinType::typeOutput);
+    addPin(10, PinType::typeInput);
+    addPin(11, PinType::typeClock);
+    addPin(12, PinType::typeOutput);
+    addPin(13, PinType::typeOutput);
 }

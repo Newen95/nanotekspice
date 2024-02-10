@@ -23,9 +23,11 @@ namespace nts
     enum PinType {
         typeInput,
         typeOutput,
+        typeInOut,
         typeFalse,
         typeTrue,
         typeClock,
+        typeIgnored,
         typeOther
     };
 
