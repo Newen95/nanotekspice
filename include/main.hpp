@@ -51,7 +51,7 @@ namespace nts {
                 return _tick;
             }
 
-            const std::map<std::string, std::unique_ptr<AComponent>>& getComponentMap() const
+            const std::map<std::string, std::unique_ptr<AComponent>> &getComponentMap() const
             {
                 return _componentMap;
             }

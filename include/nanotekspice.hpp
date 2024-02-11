@@ -10,6 +10,8 @@
 
 #include <iostream>
 #include <map>
+#include <vector>
+#include <algorithm>
 #include "AComponent.hpp"
 #include "main.hpp"
 #include "pin.hpp"

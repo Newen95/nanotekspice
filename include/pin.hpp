@@ -41,15 +41,20 @@ namespace nts
         protected:
             PinType _type;
             std::list<std::unique_ptr<Link>> _connectedTo;
-            Tristate _state;
+            Tristate _state = Undefined;
+            Tristate _nexState = Undefined;
 
         public:
             Pin(PinType type);
             ~Pin() = default;
 
             const PinType &getPinType() const;
-
+            const Tristate &getState() const;
+            const Tristate &getNextState() const;
             std::list<std::unique_ptr<Link>> &getConnectedTo();
+
+            void setState(const Tristate state);
+            void setNextState(const Tristate state);
     };
 }
 

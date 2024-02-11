@@ -19,3 +19,23 @@ const nts::PinType &nts::Pin::getPinType() const
 {
     return _type;
 }
+
+const nts::Tristate &nts::Pin::getState() const
+{
+    return _state;
+}
+
+void nts::Pin::setState(const nts::Tristate state)
+{
+    _state = state;
+}
+
+const nts::Tristate &nts::Pin::getNextState() const
+{
+    return _nexState;
+}
+
+void nts::Pin::setNextState(const nts::Tristate state)
+{
+    _nexState = state;
+}
