@@ -8,7 +8,7 @@
 
 #include "../../include/component/C_4069.hpp"
 
-nts::C_4069::C_4069(const std::string &name) : AComponent("4069", name)
+nts::C_4069::C_4069() : AComponent("4069")
 {
     addPin(1, PinType::typeInput);
     addPin(2, PinType::typeOutput);

@@ -15,6 +15,7 @@ namespace nts {
 
 class C_4069 : public AComponent {
     public:
+        C_4069();
         C_4069(const std::string &name);
         ~C_4069() override = default;
     };

@@ -8,6 +8,12 @@
 
 #include "../../include/component/C_true.hpp"
 
+nts::C_true::C_true() : AComponent("true")
+{
+    addPin(1, PinType::typeOutput);
+}
+
+
 nts::C_true::C_true(const std::string &name) : AComponent("true", name)
 {
     addPin(1, PinType::typeOutput);

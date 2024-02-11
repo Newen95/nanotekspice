@@ -15,6 +15,7 @@ namespace nts {
 
 class C_or : public AComponent {
     public:
+        C_or();
         C_or(const std::string &name);
         ~C_or() override = default;
     };

@@ -16,6 +16,7 @@ namespace nts {
 
 class C_not : public AComponent {
     public:
+        C_not();
         C_not(const std::string &name);
         ~C_not() override = default;
     };

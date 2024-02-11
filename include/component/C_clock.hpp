@@ -15,6 +15,7 @@ namespace nts {
 
 class C_clock : public AComponent {
     public:
+        C_clock();
         C_clock(const std::string &name);
         ~C_clock() override = default;
     };

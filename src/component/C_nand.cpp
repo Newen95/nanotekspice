@@ -8,6 +8,13 @@
 
 #include "../../include/component/C_nand.hpp"
 
+nts::C_nand::C_nand() : AComponent("nand")
+{
+    addPin(1, PinType::typeInput);
+    addPin(2, PinType::typeInput);
+    addPin(3, PinType::typeOutput);
+}
+
 nts::C_nand::C_nand(const std::string &name) : AComponent("nand", name)
 {
     addPin(1, PinType::typeInput);

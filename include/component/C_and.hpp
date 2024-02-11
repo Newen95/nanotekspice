@@ -15,6 +15,7 @@ namespace nts {
 
 class C_and : public AComponent {
     public:
+        C_and();
         C_and(const std::string &name);
         ~C_and() override = default;
     };

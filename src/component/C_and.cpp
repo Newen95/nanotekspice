@@ -8,6 +8,12 @@
 
 #include "../../include/component/C_and.hpp"
 
+nts::C_and::C_and() : AComponent("and")
+{
+    addPin(1, PinType::typeInput);
+    addPin(2, PinType::typeInput);
+    addPin(3, PinType::typeOutput);
+}
 
 nts::C_and::C_and(const std::string &name) : AComponent("and", name)
 {

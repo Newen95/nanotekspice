@@ -23,6 +23,7 @@ namespace nts
 
     public:
         AComponent() = default;
+        AComponent(const std::string &type);
         AComponent(const std::string &type, const std::string &name);
 
         void simulate(std::size_t tick) override;

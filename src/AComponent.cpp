@@ -11,6 +11,10 @@ nts::AComponent::AComponent(const std::string &type, const std::string &name)
     : _type(type), _name(name)
 {}
 
+nts::AComponent::AComponent(const std::string &type)
+    : _type(type)
+{}
+
 const std::string &nts::AComponent::getType() const
 {
     return _type;

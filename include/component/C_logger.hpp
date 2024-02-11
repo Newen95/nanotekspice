@@ -1,4 +1,3 @@
-
 /*
 ** EPITECH PROJECT, 2023
 ** Some Project
@@ -15,6 +14,7 @@ namespace nts {
 
 class C_logger : public AComponent {
     public:
+        C_logger();
         C_logger(const std::string &name);
         ~C_logger() override = default;
     };

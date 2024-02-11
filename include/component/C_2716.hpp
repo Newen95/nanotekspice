@@ -15,6 +15,7 @@ namespace nts {
 
 class C_2716 : public AComponent {
     public:
+        C_2716();
         C_2716(const std::string &name);
         ~C_2716() override = default;
     };

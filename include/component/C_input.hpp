@@ -17,6 +17,7 @@ class C_input : public AComponent {
     protected:
         nts::Tristate _state;
     public:
+        C_input();
         C_input(const std::string &name);
         ~C_input() override = default;
     };

@@ -15,6 +15,7 @@ namespace nts {
 
 class C_true : public AComponent {
     public:
+        C_true();
         C_true(const std::string &name);
         ~C_true() override = default;
     };

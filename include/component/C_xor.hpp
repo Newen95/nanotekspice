@@ -15,6 +15,7 @@ namespace nts {
 
 class C_xor : public AComponent {
     public:
+        C_xor();
         C_xor(const std::string &name);
         ~C_xor() override = default;
     };

@@ -17,6 +17,7 @@ class C_output : public AComponent {
     protected:
         nts::Tristate _state;
     public:
+        C_output();
         C_output(const std::string &name);
         ~C_output() override = default;
     };
