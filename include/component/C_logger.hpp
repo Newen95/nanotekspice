@@ -19,7 +19,8 @@ class C_logger : public AComponent {
         C_logger(const std::string &name);
         ~C_logger() override = default;
 
-        void simulate();
+        void simulate(Circuit &Circuit);
+        Tristate getRealPinStatus(int nbr, Circuit &Circuit);
     };
 
 }

@@ -290,7 +290,7 @@ static void simulate(nts::Circuit &circuit)
                 comp->simulate(circuit);
             } else if (component->getType() == "logger") {
                 nts::C_logger *comp = dynamic_cast<nts::C_logger*>(component);
-                comp->simulate();
+                comp->simulate(circuit);
             } else if (component->getType() == "4008") {
                 nts::C_4008 *comp = dynamic_cast<nts::C_4008*>(component);
                 comp->simulate(circuit);

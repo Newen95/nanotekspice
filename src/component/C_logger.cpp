@@ -36,17 +36,28 @@ nts::C_logger::C_logger(const std::string &name) : AComponent("logger", name)
     addPin(10, PinType::typeInput);
 }
 
-void nts::C_logger::simulate()
+nts::Tristate nts::C_logger::getRealPinStatus(int nbr, Circuit &Circuit)
 {
-    std::ofstream logfile("log.bin", std::ios::app);
+    const auto &pin_connected = (*getPin(nbr)).getConnectedTo();
+    for (const auto &tmp : pin_connected) {
+        std::string component_name = tmp.get()->component;
+        std::size_t component_pin = tmp.get()->pin;
+        return Circuit.getComponentMap().find(component_name)->second.get()->getPins().find(component_pin)->second.get()->getState();
+    }
+    return Undefined;
+}
+
+void nts::C_logger::simulate(Circuit &Circuit)
+{
+    std::ofstream logfile("log.bin", std::ios::trunc);
     std::string data;
-    nts::Tristate inhibit = (*getPin(10)).getState();
+    nts::Tristate inhibit = getRealPinStatus(10, Circuit);
     nts::Tristate state;
     std::cout << "Value of inhibit: " << inhibit << std::endl;
 
     if (inhibit == nts::False){
-        for (size_t i = 0; i < 9; ++i) {
-            state = (*getPin(i)).getState();
+        for (int i = 1; i < 9; i++) {
+            state = getRealPinStatus(i, Circuit);
             if (state == nts::True) {
                 data += "1";
             } else if (state == nts::False){
