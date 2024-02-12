@@ -8,7 +8,7 @@
 
 #include "../../include/component/C_logger.hpp"
 
-nts::C_logger::C_logger() : AComponent("xor")
+nts::C_logger::C_logger() : AComponent("logger")
 {
     addPin(1, PinType::typeInput);
     addPin(2, PinType::typeInput);
@@ -22,7 +22,7 @@ nts::C_logger::C_logger() : AComponent("xor")
     addPin(10, PinType::typeInput);
 }
 
-nts::C_logger::C_logger(const std::string &name) : AComponent("xor", name)
+nts::C_logger::C_logger(const std::string &name) : AComponent("logger", name)
 {
     addPin(1, PinType::typeInput);
     addPin(2, PinType::typeInput);
@@ -40,13 +40,16 @@ void nts::C_logger::simulate()
 {
     std::ofstream logfile("log.bin", std::ios::app);
     std::string data;
-    nts::Tristate inhibit= (*getPin(10)).getState();
+    nts::Tristate inhibit = (*getPin(10)).getState();
+    nts::Tristate state;
+    std::cout << "Value of inhibit: " << inhibit << std::endl;
 
-    if (inhibit == Tristate::False){
+    if (inhibit == nts::False){
         for (size_t i = 0; i < 9; ++i) {
-            if ((*getPin(i)).getState() == Tristate::True) {
+            state = (*getPin(i)).getState();
+            if (state == nts::True) {
                 data += "1";
-            } else if ((*getPin(i)).getState() == Tristate::False){
+            } else if (state == nts::False){
                 data += "0";
             } else {
                 data += "-1";
