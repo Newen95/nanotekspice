@@ -45,3 +45,8 @@ nts::C_4017::C_4017(const std::string &name) : AComponent("4017", name)
     addPin(14, PinType::typeInput);
     addPin(15, PinType::typeInput);
 }
+
+void nts::C_4017::simulate(Circuit &Circuit __attribute_maybe_unused__)
+{
+    // todo
+}

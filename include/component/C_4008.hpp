@@ -20,7 +20,7 @@ class C_4008 : public AComponent {
         ~C_4008() override = default;
 
         void simulate(Circuit &circuit);
-        Tristate adder_(Circuit &Circuit, int in1, int in2, int out);
+        void adder_(Circuit &Circuit, int in1, int in2, int out);
         void assignValue(Circuit &Circuit, int out, Tristate sate);
         Tristate getRealPinStatus(int nbr, Circuit &Circuit);
     };
