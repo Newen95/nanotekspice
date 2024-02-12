@@ -19,7 +19,8 @@ class C_4069 : public AComponent {
         C_4069(const std::string &name);
         ~C_4069() override = default;
 
-        void simulate(Circuit &circuit __attribute_maybe_unused__) { return; }
+        void not_(Circuit &Circuit, int in, int out);
+        void simulate(Circuit &circuit);
     };
 }
 #endif // C_4069_HPP

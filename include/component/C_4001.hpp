@@ -19,7 +19,8 @@ class C_4001 : public AComponent {
         C_4001(const std::string &name);
         ~C_4001() override = default;
 
-        void simulate(Circuit &circuit __attribute_maybe_unused__) { return; }
+        void simulate(Circuit &circuit);
+        void nor_(Circuit &Circuit, int in_1, int in_2, int out);
     };
 }
 

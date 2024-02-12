@@ -19,7 +19,7 @@ class C_nor : public AComponent {
         C_nor(const std::string &name);
         ~C_nor() override = default;
 
-        void simulate(Circuit &circuit __attribute_maybe_unused__) { return; }
+        void simulate(Circuit &circuit);
     };
 
 }

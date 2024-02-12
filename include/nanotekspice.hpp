@@ -40,6 +40,8 @@
 #include "component/C_false.hpp"
 #include "component/C_or.hpp"
 #include "component/C_xor.hpp"
+#include "component/C_nor.hpp"
+#include "component/C_nand.hpp"
 
 int nanotekspice(std::deque<Component> &components);
 

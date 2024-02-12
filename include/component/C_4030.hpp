@@ -19,7 +19,8 @@ class C_4030 : public AComponent {
         C_4030(const std::string &name);
         ~C_4030() override = default;
 
-        void simulate(Circuit &circuit __attribute_maybe_unused__) { return; }
+        void xor_(Circuit &Circuit, int in1, int in2, int out);
+        void simulate(Circuit &circuit);
     };
 }
 

@@ -19,7 +19,7 @@ class C_nand : public AComponent {
         C_nand(const std::string &name);
         ~C_nand() override = default;
 
-        void simulate(Circuit &circuit __attribute_maybe_unused__) { return; }
+        void simulate(Circuit &circuit);
     };
 
 }

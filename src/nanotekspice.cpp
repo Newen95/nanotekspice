@@ -262,6 +262,24 @@ static void simulate(nts::Circuit &circuit)
             } else if (component->getType() == "not") {
                 nts::C_not *comp = dynamic_cast<nts::C_not*>(component);
                 comp->simulate(circuit);
+            } else if (component->getType() == "nor") {
+                nts::C_nor *comp = dynamic_cast<nts::C_nor*>(component);
+                comp->simulate(circuit);
+            } else if (component->getType() == "nand") {
+                nts::C_nand *comp = dynamic_cast<nts::C_nand*>(component);
+                comp->simulate(circuit);
+            } else if (component->getType() == "4001") {
+                nts::C_4001 *comp = dynamic_cast<nts::C_4001*>(component);
+                comp->simulate(circuit);
+            } else if (component->getType() == "4011") {
+                nts::C_4011 *comp = dynamic_cast<nts::C_4011*>(component);
+                comp->simulate(circuit);
+            } else if (component->getType() == "4069") {
+                nts::C_4069 *comp = dynamic_cast<nts::C_4069*>(component);
+                comp->simulate(circuit);
+            } else if (component->getType() == "4071") {
+                nts::C_4071 *comp = dynamic_cast<nts::C_4071*>(component);
+                comp->simulate(circuit);
             }
         }
     }

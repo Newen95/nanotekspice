@@ -19,7 +19,8 @@ class C_4011 : public AComponent {
         C_4011(const std::string &name);
         ~C_4011() override = default;
 
-        void simulate(Circuit &circuit __attribute_maybe_unused__) { return; }
+        void nand_(Circuit &Circuit, int in1, int in2, int out);
+        void simulate(Circuit &circuit);
     };
 }
 
