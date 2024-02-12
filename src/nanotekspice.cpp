@@ -311,13 +311,19 @@ int nanotekspice(std::deque<Component> &components)
 
     while (true) {
         std::cout << "> ";
-        std::getline(std::cin, input);
-        if (input == "exit")
+        if (input == "exit" || !std::getline(std::cin, input) || std::cin.eof())
             return 0;
         if (input == "display")
             display(circuit);
         if (input == "simulate")
             simulate(circuit);
+        if (input == "loop") {
+            while (true) {
+                simulate(circuit);
+                display(circuit);
+                attributeValue(input, circuit);
+            }
+        }
         attributeValue(input, circuit);
     }
 
