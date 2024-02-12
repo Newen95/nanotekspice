@@ -10,7 +10,7 @@
 
 static int check_type(std::string type)
 {
-    if (type != "input" && type != "output" && type != "true" && type != "false" && type != "clock" && type != "and" && type != "or" && type != "xor" && type != "not" && type != "4001" && type != "4011" && type != "4030" && type != "4069" && type != "4071" && type != "4081" && type != "4008" && type != "4013" && type != "4017" && type != "4040" && type != "4094" && type != "4512" && type != "4514" && type != "4801" && type != "2716") {
+    if (type != "input" && type != "output" && type != "true" && type != "false" && type != "clock" && type != "and" && type != "or" && type != "xor" && type != "not" && type != "4001" && type != "4011" && type != "4030" && type != "4069" && type != "4071" && type != "4081" && type != "4008" && type != "4013" && type != "4017" && type != "4040" && type != "4094" && type != "4512" && type != "4514" && type != "4801" && type != "2716" && type != "logger") {
         std::cerr << "Erreur: Mauvais type de composant." << std::endl;
         return 84;
     }

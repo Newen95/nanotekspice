@@ -87,6 +87,8 @@ static int create_all_component(std::deque<Component> &components, std::map<std:
             cComponent = std::make_unique<nts::C_input>(componentName);
         } else if (component.type == "output") {
             cComponent = std::make_unique<nts::C_output>(componentName);
+        } else if (component.type == "logger") {
+            cComponent = std::make_unique<nts::C_logger>(componentName);
         } else {
             std::cerr << "Type de composant non pris en charge : " << component.type << std::endl;
         }
