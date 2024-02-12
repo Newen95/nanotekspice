@@ -199,7 +199,7 @@ static void attributeValue(std::string input, nts::Circuit &circuit)
     const std::string valueStr = input.substr(equalPos + 1);
 
     if (valueStr != "1" && valueStr != "0" && valueStr != "U") {
-        std::cerr << "Erreur : mauvaise valeur. (0, 1 ou U)" << std::endl;
+        std::cerr << "Erreur : mauvaise valeur. (0, 1 ou U)" << valueStr << std::endl;
         return;
     }
 
@@ -293,6 +293,9 @@ static void simulate(nts::Circuit &circuit)
                 comp->simulate();
             } else if (component->getType() == "4008") {
                 nts::C_4008 *comp = dynamic_cast<nts::C_4008*>(component);
+                comp->simulate(circuit);
+            } else if (component->getType() == "4013") {
+                nts::C_4013 *comp = dynamic_cast<nts::C_4013*>(component);
                 comp->simulate(circuit);
             }
         }
