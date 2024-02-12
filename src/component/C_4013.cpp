@@ -66,39 +66,72 @@ nts::Tristate nts::C_4013::getRealPinStatus(int nbr, Circuit &Circuit)
 }
 
 
+
 void nts::C_4013::simulate(Circuit &Circuit)
 {
-    Tristate cl_1_clock_state = getRealPinStatus(1, Circuit);
-    Tristate cl_2_clock_state = getRealPinStatus(11, Circuit);
+    Tristate clk1 = getRealPinStatus(3, Circuit);
+    Tristate clk2 = getRealPinStatus(11, Circuit);
 
-    Tristate in_1_data_state = getRealPinStatus(5, Circuit);
-    Tristate in_1_set_state = getRealPinStatus(6, Circuit);
-    Tristate in_1_reset_state = getRealPinStatus(4, Circuit);
+    Tristate data1 = getRealPinStatus(5, Circuit);
+    Tristate data2 = getRealPinStatus(9, Circuit);
 
-    Tristate in_2_data_state = getRealPinStatus(9, Circuit);
-    Tristate in_2_set_state = getRealPinStatus(8, Circuit);
-    Tristate in_2_reset_state = getRealPinStatus(10, Circuit);
+    Tristate reset1 = getRealPinStatus(4, Circuit);
+    Tristate reset2 = getRealPinStatus(10, Circuit);
 
-    if (cl_1_clock_state == True) {
-        if (in_1_reset_state == True)
-            state_1 = False;
-        else if (in_1_set_state == True)
-            state_1 = True;
-        else
-            state_1 = in_1_data_state;
+    Tristate set1 = getRealPinStatus(6, Circuit);
+    Tristate set2 = getRealPinStatus(8, Circuit);
+
+    if (clk1 == True) {
+        if (data1 == False && set1 == False && reset1 == False) {
+            assignValue(Circuit, 1, False);
+            assignValue(Circuit, 2, True);
+            _state1 = False;
+        } else if (data1 == True && set1 == False && reset1 == False) {
+            assignValue(Circuit, 1, True);
+            assignValue(Circuit, 2, False);
+            _state1 = True;
+        }
+    } if (reset1 == True && set1 == False) {
+        assignValue(Circuit, 1, False);
+        assignValue(Circuit, 2, True);
+        _state1 = False;
+    } else if (reset1 == False && set1 == True) {
+        assignValue(Circuit, 1, True);
+        assignValue(Circuit, 2, False);
+        _state1 = True;
+    } else if (reset1 == True && set1 == True) {
+        assignValue(Circuit, 1, True);
+        assignValue(Circuit, 2, True);
+        _state1 = True;
+    } else {
+        assignValue(Circuit, 1, _state1);
+        assignValue(Circuit, 2, _state1 == True ? False : True);
     }
 
-    if (cl_2_clock_state == True) {
-        if (in_2_reset_state == True)
-            state_2 = False;
-        else if (in_2_set_state == True)
-            state_2 = True;
-        else
-            state_2 = in_2_data_state;
+    if (clk2 == True) {
+        if (data2 == False && set2 == False && reset2 == False) {
+            assignValue(Circuit, 1, False);
+            assignValue(Circuit, 2, True);
+            _state2 = False;
+        } else if (data2 == True && set2 == False && reset2 == False) {
+            assignValue(Circuit, 1, True);
+            assignValue(Circuit, 2, False);
+            _state2 = True;
+        }
+    } if (reset2 == True && set2 == False) {
+        assignValue(Circuit, 1, False);
+        assignValue(Circuit, 2, True);
+        _state2 = False;
+    } else if (reset2 == False && set2 == True) {
+        assignValue(Circuit, 1, True);
+        assignValue(Circuit, 2, False);
+        _state2 = True;
+    } else if (reset2 == True && set2 == True) {
+        assignValue(Circuit, 1, True);
+        assignValue(Circuit, 2, True);
+        _state2 = True;
+    } else {
+        assignValue(Circuit, 1, _state2);
+        assignValue(Circuit, 2, _state2 == True ? False : True);
     }
-
-    assignValue(Circuit, 1, state_1);
-    assignValue(Circuit, 2, state_1 == True ? False : True);
-    assignValue(Circuit, 13, state_2);
-    assignValue(Circuit, 12, state_2 == True ? False : True);
 }
