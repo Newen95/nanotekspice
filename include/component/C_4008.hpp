@@ -19,7 +19,9 @@ class C_4008 : public AComponent {
         C_4008(const std::string &name);
         ~C_4008() override = default;
 
-        void simulate(Circuit &circuit __attribute_maybe_unused__) { return; }
+        void simulate(Circuit &circuit);
+        Tristate test02(Circuit &Circuit, int in1, int in2, int out);
+        void assignValue(Circuit &Circuit, int out, Tristate sate);
     };
 }
 
