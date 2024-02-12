@@ -280,6 +280,9 @@ static void simulate(nts::Circuit &circuit)
             } else if (component->getType() == "4071") {
                 nts::C_4071 *comp = dynamic_cast<nts::C_4071*>(component);
                 comp->simulate(circuit);
+            } else if (component->getType() == "4081") {
+                nts::C_4081 *comp = dynamic_cast<nts::C_4081*>(component);
+                comp->simulate(circuit);
             }
         }
     }
