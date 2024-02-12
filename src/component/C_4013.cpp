@@ -81,23 +81,22 @@ void nts::C_4013::simulate(Circuit &Circuit)
 
     if (cl_1_clock_state == True) {
         if (in_1_reset_state == True)
-            state_1 = False; // Réinitialisation
+            state_1 = False;
         else if (in_1_set_state == True)
-            state_1 = True; // Réglage
+            state_1 = True;
         else
-            state_1 = in_1_data_state; // Chargement
+            state_1 = in_1_data_state;
     }
 
     if (cl_2_clock_state == True) {
         if (in_2_reset_state == True)
-            state_2 = False; // Réinitialisation
+            state_2 = False;
         else if (in_2_set_state == True)
-            state_2 = True; // Réglage
+            state_2 = True;
         else
-            state_2 = in_2_data_state; // Chargement
+            state_2 = in_2_data_state;
     }
 
-    // Mise à jour des sorties Q et Qb pour chaque flip-flop
     assignValue(Circuit, 1, state_1);
     assignValue(Circuit, 2, state_1 == True ? False : True);
     assignValue(Circuit, 13, state_2);
