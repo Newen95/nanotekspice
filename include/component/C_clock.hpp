@@ -19,7 +19,7 @@ class C_clock : public AComponent {
         C_clock(const std::string &name);
         ~C_clock() override = default;
 
-        void simulate(Circuit &circuit __attribute_maybe_unused__) { return; }
+        void simulate(Circuit &Circuit);
     };
 }
 

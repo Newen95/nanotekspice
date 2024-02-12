@@ -148,7 +148,7 @@ static void display(nts::Circuit &circuit)
     for (const auto &componentPair : components) {
         const nts::AComponent &component = *(componentPair.second);
 
-        if (component.getType() == "input") {
+        if (component.getType() == "input" || component.getType() == "clock") {
             inputList.push_back(component.getName());
         } else if (component.getType() == "output") {
             outputList.push_back(component.getName());
@@ -209,7 +209,7 @@ static void attributeValue(std::string input, nts::Circuit &circuit)
         if (!component) {
             std::cerr << "Erreur : attributeValue() : composant inacessible." << std::endl;
             return;
-        } if (component->getType() != "input") {
+        } if (component->getType() != "input" && component->getType() != "clock") {
             std::cerr << "Erreur : Assignation possible uniquement sur les input." << std::endl;
             return;
         }
@@ -282,6 +282,9 @@ static void simulate(nts::Circuit &circuit)
                 comp->simulate(circuit);
             } else if (component->getType() == "4081") {
                 nts::C_4081 *comp = dynamic_cast<nts::C_4081*>(component);
+                comp->simulate(circuit);
+            } else if (component->getType() == "clock") {
+                nts::C_clock *comp = dynamic_cast<nts::C_clock*>(component);
                 comp->simulate(circuit);
             }
         }
