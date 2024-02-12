@@ -8,6 +8,7 @@
 #ifndef C_LOGGER_HPP
 #define C_LOGGER_HPP
 
+#include <fstream>
 #include "../main.hpp"
 
 namespace nts {
@@ -18,7 +19,7 @@ class C_logger : public AComponent {
         C_logger(const std::string &name);
         ~C_logger() override = default;
 
-        void simulate(Circuit &circuit __attribute_maybe_unused__) { return; }
+        void simulate();
     };
 
 }

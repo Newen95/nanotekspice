@@ -286,6 +286,9 @@ static void simulate(nts::Circuit &circuit)
             } else if (component->getType() == "clock") {
                 nts::C_clock *comp = dynamic_cast<nts::C_clock*>(component);
                 comp->simulate(circuit);
+            } else if (component->getType() == "logger") {
+                nts::C_logger *comp = dynamic_cast<nts::C_logger*>(component);
+                comp->simulate();
             }
         }
     }

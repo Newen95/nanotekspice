@@ -42,6 +42,7 @@
 #include "component/C_xor.hpp"
 #include "component/C_nor.hpp"
 #include "component/C_nand.hpp"
+#include "component/C_logger.hpp"
 
 int nanotekspice(std::deque<Component> &components);
 
