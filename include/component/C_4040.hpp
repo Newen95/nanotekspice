@@ -9,7 +9,7 @@
 #ifndef C_4040_HPP
 #define C_4040_HPP
 
-#include "../AComponent.hpp"
+#include "../main.hpp"
 
 namespace nts {
 
@@ -18,6 +18,8 @@ class C_4040 : public AComponent {
         C_4040();
         C_4040(const std::string &name);
         ~C_4040() override = default;
+
+        void simulate(Circuit &circuit __attribute_maybe_unused__) { return; }
     };
 }
 

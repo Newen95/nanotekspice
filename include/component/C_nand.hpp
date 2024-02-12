@@ -9,7 +9,7 @@
 #ifndef C_NAND_HPP
 #define C_NAND_HPP
 
-#include "../AComponent.hpp"
+#include "../main.hpp"
 
 namespace nts {
 
@@ -18,6 +18,8 @@ class C_nand : public AComponent {
         C_nand();
         C_nand(const std::string &name);
         ~C_nand() override = default;
+
+        void simulate(Circuit &circuit __attribute_maybe_unused__) { return; }
     };
 
 }

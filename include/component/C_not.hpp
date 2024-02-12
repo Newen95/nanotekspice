@@ -10,7 +10,7 @@
 #define C_NOT_HPP
 
 
-#include "../AComponent.hpp"
+#include "../main.hpp"
 
 namespace nts {
 
@@ -19,6 +19,8 @@ class C_not : public AComponent {
         C_not();
         C_not(const std::string &name);
         ~C_not() override = default;
+
+        void simulate(Circuit &circuit);
     };
 
 }

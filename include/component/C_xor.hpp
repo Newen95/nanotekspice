@@ -9,7 +9,7 @@
 #ifndef C_XOR_HPP
 #define C_XOR_HPP
 
-#include "../AComponent.hpp"
+#include "../main.hpp"
 
 namespace nts {
 
@@ -18,6 +18,8 @@ class C_xor : public AComponent {
         C_xor();
         C_xor(const std::string &name);
         ~C_xor() override = default;
+
+        void simulate(Circuit &circuit);
     };
 
 }

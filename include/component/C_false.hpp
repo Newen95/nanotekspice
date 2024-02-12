@@ -9,7 +9,7 @@
 #ifndef C_FALSE_HPP
 #define C_FALSE_HPP
 
-#include "../AComponent.hpp"
+#include "../main.hpp"
 
 namespace nts {
 
@@ -18,6 +18,8 @@ class C_false : public AComponent {
         C_false();
         C_false(const std::string &name);
         ~C_false() override = default;
+
+        void simulate(Circuit &circuit __attribute_maybe_unused__) { return; }
     };
 }
 

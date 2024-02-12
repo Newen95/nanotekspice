@@ -9,7 +9,7 @@
 #ifndef C_OUTPUT_HPP
 #define C_OUTPUT_HPP
 
-#include "../AComponent.hpp"
+#include "../main.hpp"
 
 namespace nts {
 
@@ -20,6 +20,8 @@ class C_output : public AComponent {
         C_output();
         C_output(const std::string &name);
         ~C_output() override = default;
+
+        void simulate(Circuit &circuit __attribute_maybe_unused__) { return; }
     };
 
 }

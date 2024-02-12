@@ -232,6 +232,7 @@ static void attributeValue(std::string input, nts::Circuit &circuit)
 static void simulate(nts::Circuit &circuit)
 {
     const auto &components = circuit.getComponentMap();
+    circuit.setTick(circuit.getTick() + 1);
 
     for (const auto &componentPair : components) {
         nts::AComponent *component = componentPair.second.get();
@@ -245,6 +246,26 @@ static void simulate(nts::Circuit &circuit)
             }
         }
     }
+
+    for (const auto &componentPair : components) {
+        nts::AComponent *component = componentPair.second.get();
+        if (component) {
+            if (component->getType() == "or") {
+                nts::C_or *comp = dynamic_cast<nts::C_or*>(component);
+                comp->simulate(circuit);
+            } else if (component->getType() == "xor") {
+                nts::C_xor *comp = dynamic_cast<nts::C_xor*>(component);
+                comp->simulate(circuit);
+            } else if (component->getType() == "and") {
+                nts::C_and *comp = dynamic_cast<nts::C_and*>(component);
+                comp->simulate(circuit);
+            } else if (component->getType() == "not") {
+                nts::C_not *comp = dynamic_cast<nts::C_not*>(component);
+                comp->simulate(circuit);
+            }
+        }
+    }
+
 }
 
 int nanotekspice(std::deque<Component> &components)

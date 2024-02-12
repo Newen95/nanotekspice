@@ -9,7 +9,7 @@
 #ifndef C_INPUT_HPP
 #define C_INPUT_HPP
 
-#include "../AComponent.hpp"
+#include "../main.hpp"
 
 namespace nts {
 
@@ -20,6 +20,8 @@ class C_input : public AComponent {
         C_input();
         C_input(const std::string &name);
         ~C_input() override = default;
+
+        void simulate(Circuit &circuit __attribute_maybe_unused__) { return; }
     };
 }
 

@@ -9,7 +9,7 @@
 #ifndef C_4001_HPP
 #define C_4001_HPP
 
-#include "../AComponent.hpp"
+#include "../main.hpp"
 
 namespace nts {
 
@@ -18,6 +18,8 @@ class C_4001 : public AComponent {
         C_4001();
         C_4001(const std::string &name);
         ~C_4001() override = default;
+
+        void simulate(Circuit &circuit __attribute_maybe_unused__) { return; }
     };
 }
 

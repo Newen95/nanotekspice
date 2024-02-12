@@ -9,7 +9,7 @@
 #ifndef C_4013_HPP
 #define C_4013_HPP
 
-#include "../AComponent.hpp"
+#include "../main.hpp"
 
 namespace nts {
 
@@ -18,6 +18,8 @@ class C_4013 : public AComponent {
         C_4013();
         C_4013(const std::string &name);
         ~C_4013() override = default;
+
+        void simulate(Circuit &circuit __attribute_maybe_unused__) { return; }
     };
 }
 

@@ -9,7 +9,7 @@
 #ifndef C_AND_HPP
 #define C_AND_HPP
 
-#include "../AComponent.hpp"
+#include "../main.hpp"
 
 namespace nts {
 
@@ -18,6 +18,8 @@ class C_and : public AComponent {
         C_and();
         C_and(const std::string &name);
         ~C_and() override = default;
+
+        void simulate(Circuit &circuit);
     };
 }
 

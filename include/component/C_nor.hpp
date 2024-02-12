@@ -9,7 +9,7 @@
 #ifndef C_NOR_HPP
 #define C_NOR_HPP
 
-#include "../AComponent.hpp"
+#include "../main.hpp"
 
 namespace nts {
 
@@ -18,6 +18,8 @@ class C_nor : public AComponent {
         C_nor();
         C_nor(const std::string &name);
         ~C_nor() override = default;
+
+        void simulate(Circuit &circuit __attribute_maybe_unused__) { return; }
     };
 
 }

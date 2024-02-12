@@ -60,11 +60,6 @@ void nts::AComponent::setLink(std::size_t pin, nts::IComponent &other, std::size
     currentPin->getConnectedTo().push_back(std::move(link));
 }
 
-void nts::AComponent::simulate(std::size_t tick __attribute_maybe_unused__)
-{
-    return;
-}
-
 nts::Tristate nts::AComponent::compute(std::size_t pin __attribute_maybe_unused__)
 {
     return nts::Tristate::Undefined;

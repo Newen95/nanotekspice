@@ -9,7 +9,7 @@
 #ifndef C_4514_HPP
 #define C_4514_HPP
 
-#include "../AComponent.hpp"
+#include "../main.hpp"
 
 namespace nts {
 
@@ -18,6 +18,8 @@ class C_4514 : public AComponent {
         C_4514();
         C_4514(const std::string &name);
         ~C_4514() override = default;
+
+        void simulate(Circuit &circuit __attribute_maybe_unused__) { return; }
     };
 }
 

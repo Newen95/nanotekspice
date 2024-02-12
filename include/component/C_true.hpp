@@ -9,7 +9,7 @@
 #ifndef C_TRUE_HPP
 #define C_TRUE_HPP
 
-#include "../AComponent.hpp"
+#include "../main.hpp"
 
 namespace nts {
 
@@ -18,6 +18,8 @@ class C_true : public AComponent {
         C_true();
         C_true(const std::string &name);
         ~C_true() override = default;
+
+        void simulate(Circuit &circuit __attribute_maybe_unused__) { return; }
     };
 }
 
