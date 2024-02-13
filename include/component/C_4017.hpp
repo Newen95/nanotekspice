@@ -20,6 +20,8 @@ class C_4017 : public AComponent {
         ~C_4017() override = default;
 
         void simulate(Circuit &circuit);
+        Tristate getRealPinStatus(int nbr, Circuit &Circuit);
+        void assignValue(Circuit &Circuit, int out, Tristate sate);
     };
 }
 
