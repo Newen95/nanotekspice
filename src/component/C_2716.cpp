@@ -63,3 +63,43 @@ nts::C_2716::C_2716(const std::string &name) : AComponent("2716", name)
     addPin(23, PinType::typeInput);
     addPin(24, PinType::typeIgnored);
 }
+
+void nts::C_2716::assignValue(Circuit &Circuit, int out, Tristate sate)
+{
+    const auto &map = Circuit.getComponentMap();
+    const auto &f = (*getPin(out)).getConnectedTo();
+
+    for (const auto &tmp : f) {
+        std::string component_name = tmp.get()->component;
+        std::size_t component_pin = tmp.get()->pin;
+        map.find(component_name)->second.get()->getPins().find(component_pin)->second.get()->setState(sate);
+    }
+}
+
+nts::Tristate nts::C_2716::getRealPinStatus(int nbr, Circuit &Circuit)
+{
+    const auto &pin_connected = (*getPin(nbr)).getConnectedTo();
+    for (const auto &tmp : pin_connected) {
+        std::string component_name = tmp.get()->component;
+        std::size_t component_pin = tmp.get()->pin;
+        return Circuit.getComponentMap().find(component_name)->second.get()->getPins().find(component_pin)->second.get()->getState();
+    }
+    return Undefined;
+}
+
+void nts::C_2716::simulate(Circuit &Circuit)
+{
+    Tristate enable = getRealPinStatus(18, Circuit);
+    Tristate read = getRealPinStatus(20, Circuit);
+
+    if (enable == True && read == True) {
+        for (int i = 9; i <= 17 ; i++) {
+            assignValue(Circuit, i, True);
+        }
+    } else {
+        for (int i = 9; i <= 17 ; i++) {
+            assignValue(Circuit, i, Undefined);
+        }
+    }
+
+}
