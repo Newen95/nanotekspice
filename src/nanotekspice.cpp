@@ -242,7 +242,7 @@ static void simulate(nts::Circuit &circuit)
             const std::map<int, std::unique_ptr<nts::Pin>> &pinsMap = component->getPins();
             for (const auto &pinPair : pinsMap) {
                 nts::Pin *pin = pinPair.second.get();
-                if (pin) {
+                if (pin->getPinType() == nts::typeOutput) {
                     pin->setState(pin->getNextState());
                 }
             }

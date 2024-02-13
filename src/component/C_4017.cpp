@@ -69,45 +69,59 @@ nts::Tristate nts::C_4017::getRealPinStatus(int nbr, Circuit &Circuit)
     return Undefined;
 }
 
+static int getNextIndex(int index)
+{
+    if (index == 1)
+        index = 5;
+    else if (index == 2)
+        index = 4;
+    else if (index == 3)
+        index = 2;
+    else if (index == 4)
+        index = 7;
+    else if (index == 5)
+        index = 6;
+    else if (index == 6)
+        index = 9;
+    else if (index == 7)
+        index = 10;
+    else if (index == 9)
+        index = 11;
+    else if (index == 10)
+        index = 1;
+    else if (index == 11 || index == 12)
+        index = 3;
+
+    return index;
+}
+
 void nts::C_4017::simulate(Circuit &Circuit)
 {
-    Tristate in_0_state = getRealPinStatus(13, Circuit);
-    Tristate in_1_state = getRealPinStatus(14, Circuit);
+    Tristate in_0_state = getRealPinStatus(14, Circuit);
+    Tristate in_1_state = getRealPinStatus(13, Circuit);
     Tristate in_r_state = getRealPinStatus(15, Circuit);
+    int index = 1;
 
-    bool all_undefined = true;
-    for (int i = 1; i <= 12; ++i) {
-        if (getRealPinStatus(i, Circuit) != Undefined) {
-            all_undefined = false;
-            break;
-        }
-    } for (int i = 13; i <= 15; ++i) {
-        if (getRealPinStatus(i, Circuit) != Undefined) {
-            all_undefined = true;
-            break;
-        }
-        all_undefined = false;
-    }
-
-    if (in_r_state == True || all_undefined) {
-        for (int i = 1; i <= 11; ++i)
+    if (in_r_state == True) {
+        for (int i = 1; i <= 11; ++i) {
+            if (i == 8)
+                continue;
             assignValue(Circuit, i, False);
+        }
         assignValue(Circuit, 3, True);
     }
 
-    else if (in_0_state == True || in_1_state == True) {
-        for (int i = 1; i <= 11; ++i) {
-            if (getRealPinStatus(i, Circuit) == True) {
+    else if ((in_0_state == True || in_1_state == True) && in_r_state != Undefined) {
+        for (; index <= 11; index++)
+            if (getRealPinStatus(index, Circuit) == True)
+        index = getNextIndex(index);
+        for (int i = 1; i <= 11; i++) {
+            if (i == 8)
+                continue;
+            if (i == index)
+                assignValue(Circuit, i, True);
+            else
                 assignValue(Circuit, i, False);
-                if (i == 11)
-                    assignValue(Circuit, 3, True);
-                else
-                    assignValue(Circuit, i + 1, True);
-                break;
-            }
         }
     }
 }
-
-
-
