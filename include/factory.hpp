@@ -5,6 +5,9 @@
 ** factory.hpp
 */
 
+#ifndef FACTORY_HPP
+#define FACTORY_HPP
+
 #include <memory>
 #include <iostream>
 #include "AComponent.hpp"
@@ -36,14 +39,6 @@
 #include "component/C_4001.hpp"
 #include "component/C_2716.hpp"
 
-#ifndef FACTORY_HPP
-#define FACTORY_HPP
-
-namespace nts {
-    class Factory {
-    public:
-        std::unique_ptr<nts::IComponent> createComponent(const std::string& type);
-    };
-}
+std::unique_ptr<nts::AComponent> createComponent(const std::string& type, const std::string& name);
 
 #endif // FACTORY_HPP

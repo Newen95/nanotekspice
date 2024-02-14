@@ -13,6 +13,7 @@
 #include <vector>
 #include <algorithm>
 #include "AComponent.hpp"
+#include "factory.hpp"
 #include "main.hpp"
 #include "pin.hpp"
 
