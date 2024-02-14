@@ -19,7 +19,8 @@ class C_true : public AComponent {
         C_true(const std::string &name);
         ~C_true() override = default;
 
-        void simulate(Circuit &circuit __attribute_maybe_unused__) { return; }
+        void simulate(Circuit &circuit);
+        void assignValue(Circuit &Circuit, int out, Tristate sate);
     };
 }
 

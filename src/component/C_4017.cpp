@@ -114,6 +114,7 @@ void nts::C_4017::simulate(Circuit &Circuit)
     else if ((in_0_state == True || in_1_state == True) && in_r_state != Undefined) {
         for (; index <= 11; index++)
             if (getRealPinStatus(index, Circuit) == True)
+                break;
         index = getNextIndex(index);
         for (int i = 1; i <= 11; i++) {
             if (i == 8)

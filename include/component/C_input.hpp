@@ -21,7 +21,8 @@ class C_input : public AComponent {
         C_input(const std::string &name);
         ~C_input() override = default;
 
-        void simulate(Circuit &circuit __attribute_maybe_unused__) { return; }
+        void assignValue(Circuit &Circuit, int out, Tristate sate);
+        void simulate(Circuit &circuit);
     };
 }
 
