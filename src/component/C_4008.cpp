@@ -119,13 +119,7 @@ void nts::C_4008::adder_(Circuit &Circuit, int in1, int in2, int out)
             _sum = True;
         else if (in_1 == False && in_2 == False && in_c == True)
             _sum = True;
-        else if (in_1 == Undefined && in_2 == Undefined && in_c == Undefined)
-            _sum = Undefined;
-        else if (in_1 == Undefined && in_2 == Undefined)
-            _sum = Undefined;
-        else if (in_1 == Undefined && in_c == Undefined)
-            _sum = Undefined;
-        else if (in_2 == Undefined && in_c == Undefined)
+        else if (in_1 == Undefined || in_2 == Undefined || in_c == Undefined)
             _sum = Undefined;
         else
             _sum = False;
