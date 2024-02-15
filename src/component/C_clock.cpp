@@ -10,12 +10,12 @@
 
 nts::C_clock::C_clock() : AComponent("clock")
 {
-    addPin(1, PinType::typeInput);
+    addPin(1, PinType::typeOutput);
 }
 
 nts::C_clock::C_clock(const std::string &name) : AComponent("clock", name)
 {
-    addPin(1, PinType::typeInput);
+    addPin(1, PinType::typeOutput);
 }
 
 void nts::C_clock::simulate(Circuit &Circuit)

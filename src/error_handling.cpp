@@ -62,13 +62,20 @@ static int parse_content(std::deque<std::string> &lines, std::deque<Component> &
     bool is_links_section = false;
 
     for (const auto &line : lines) {
-        if (line == ".chipsets:") {
+        if (line[0] == '.' && line != ".chipsets:" && line != ".links:") {
+            std::cerr << "Erreur: Parametre inconnu: {" << line << "}" << std::endl;
+            return 84;
+        } if (line == ".chipsets:") {
             is_chipsets = true;
-            continue;
-        } if (!is_chipsets) {
             continue;
         } if (line == ".links:") {
             is_links_section = true;
+            if (is_chipsets == false) {
+                std::cerr << "Erreur: Le parametre '.chipsets' n'est pas fournis, ou est fournis apres '.links'." << std::endl;
+                return 84;
+            }
+            continue;
+        } if (!is_chipsets) {
             continue;
         }
 
