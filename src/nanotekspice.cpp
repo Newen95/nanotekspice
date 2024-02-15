@@ -272,8 +272,26 @@ int nanotekspice(std::deque<Component> &components)
 
     nts::Circuit circuit;
     circuit.setComponentMap(std::move(componentMap));
-
     std::string input;
+
+    const auto &map = circuit.getComponentMap();
+    for (const auto &cmp : map) {
+        if (cmp.second.get()->getType() == "false") {
+            const auto &f = cmp.second.get()->getPin(1).get()->getConnectedTo();
+            for (const auto &tmp : f) {
+                std::string component_name = tmp.get()->component;
+                std::size_t component_pin = tmp.get()->pin;
+                map.find(component_name)->second.get()->getPins().find(component_pin)->second.get()->setState(nts::False);
+            }
+        } if (cmp.second.get()->getType() == "true") {
+            const auto &f = cmp.second.get()->getPin(1).get()->getConnectedTo();
+            for (const auto &tmp : f) {
+                std::string component_name = tmp.get()->component;
+                std::size_t component_pin = tmp.get()->pin;
+                map.find(component_name)->second.get()->getPins().find(component_pin)->second.get()->setState(nts::True);
+            }
+        }
+    }
 
     while (true) {
         std::cout << "> ";
