@@ -125,7 +125,8 @@ void nts::C_4008::adder_(Circuit &Circuit, int in1, int in2, int out)
             _sum = False;
     }
 
-    assignValue(Circuit, 9, _out);
+    if (out != 13)
+        assignValue(Circuit, 9, _out);
     assignValue(Circuit, 14, _out);
     assignValue(Circuit, out, _sum);
 }
