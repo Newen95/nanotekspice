@@ -53,7 +53,6 @@ void nts::C_logger::simulate(Circuit &Circuit)
     std::string data;
     nts::Tristate inhibit = getRealPinStatus(10, Circuit);
     nts::Tristate state;
-    std::cout << "Value of inhibit: " << inhibit << std::endl;
 
     if (inhibit == nts::False){
         for (int i = 1; i < 9; i++) {
