@@ -15,8 +15,8 @@ namespace nts {
 
 class C_4013 : public AComponent {
     private:
-        Tristate _state1;
-        Tristate _state2;
+        Tristate _state1 = Undefined;
+        Tristate _state2 = Undefined;
     public:
         C_4013();
         C_4013(const std::string &name);

@@ -82,56 +82,24 @@ void nts::C_4013::simulate(Circuit &Circuit)
     Tristate set2 = getRealPinStatus(8, Circuit);
 
     if (clk1 == True) {
-        if (data1 == False && set1 == False && reset1 == False) {
-            assignValue(Circuit, 1, False);
-            assignValue(Circuit, 2, True);
+        if (reset1 == True)
             _state1 = False;
-        } else if (data1 == True && set1 == False && reset1 == False) {
-            assignValue(Circuit, 1, True);
-            assignValue(Circuit, 2, False);
+        else if (set1 == True)
             _state1 = True;
-        }
-    } if (reset1 == True && set1 == False) {
-        assignValue(Circuit, 1, False);
-        assignValue(Circuit, 2, True);
-        _state1 = False;
-    } else if (reset1 == False && set1 == True) {
-        assignValue(Circuit, 1, True);
-        assignValue(Circuit, 2, False);
-        _state1 = True;
-    } else if (reset1 == True && set1 == True) {
-        assignValue(Circuit, 1, True);
-        assignValue(Circuit, 2, True);
-        _state1 = True;
-    } else {
-        assignValue(Circuit, 1, _state1);
-        assignValue(Circuit, 2, _state1 == True ? False : True);
+        else
+            _state1 = data1;
     }
+    assignValue(Circuit, 1, _state1);
+    assignValue(Circuit, 2, _state1 == True ? False : (_state1 == Undefined ? Undefined : True));
 
     if (clk2 == True) {
-        if (data2 == False && set2 == False && reset2 == False) {
-            assignValue(Circuit, 1, False);
-            assignValue(Circuit, 2, True);
+        if (reset2 == True)
             _state2 = False;
-        } else if (data2 == True && set2 == False && reset2 == False) {
-            assignValue(Circuit, 1, True);
-            assignValue(Circuit, 2, False);
+        else if (set2 == True)
             _state2 = True;
-        }
-    } if (reset2 == True && set2 == False) {
-        assignValue(Circuit, 1, False);
-        assignValue(Circuit, 2, True);
-        _state2 = False;
-    } else if (reset2 == False && set2 == True) {
-        assignValue(Circuit, 1, True);
-        assignValue(Circuit, 2, False);
-        _state2 = True;
-    } else if (reset2 == True && set2 == True) {
-        assignValue(Circuit, 1, True);
-        assignValue(Circuit, 2, True);
-        _state2 = True;
-    } else {
-        assignValue(Circuit, 1, _state2);
-        assignValue(Circuit, 2, _state2 == True ? False : True);
+        else
+            _state2 = data2;
     }
+    assignValue(Circuit, 13, _state2);
+    assignValue(Circuit, 12, _state1 == True ? False : (_state2 == Undefined ? Undefined : True));
 }
