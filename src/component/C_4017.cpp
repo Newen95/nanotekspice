@@ -108,10 +108,11 @@ void nts::C_4017::simulate(Circuit &Circuit)
                 continue;
             assignValue(Circuit, i, False);
         }
-        assignValue(Circuit, 3, True);
+        assignValue(Circuit, 12, False);
     }
 
     else if ((in_0_state == True || in_1_state == True) && in_r_state != Undefined) {
+        assignValue(Circuit, 12, False);
         for (; index <= 11; index++)
             if (getRealPinStatus(index, Circuit) == True)
                 break;
@@ -124,5 +125,7 @@ void nts::C_4017::simulate(Circuit &Circuit)
             else
                 assignValue(Circuit, i, False);
         }
+    } else if ((in_0_state == False && in_1_state == False) && in_r_state != Undefined) {
+        assignValue(Circuit, 12, True);
     }
 }
