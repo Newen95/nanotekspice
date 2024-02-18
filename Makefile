@@ -11,7 +11,7 @@ SRC_DIR     =   src
 
 OBJ_DIR     =   $(SRC_DIR)/obj
 
-CPPFLAGS 	=	-std=c++20 -Wall -Wextra -Werror
+CPPFLAGS 	=	-std=c++20 # -Wall -Wextra -Werror
 
 SOURCES 	=	$(wildcard *.cpp) 					\
 				$(wildcard $(SRC_DIR)/*.cpp) 		\

@@ -76,6 +76,6 @@ void nts::C_4081::simulateComponent()
 {
     _and(1, 2, 3);
     _and(5, 6, 4);
-    _and(8, 9, 10);
     _and(12, 13, 11);
+    _and(8, 9, 10);
 }
