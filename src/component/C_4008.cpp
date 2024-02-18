@@ -28,5 +28,69 @@ nts::C_4008::C_4008() : AComponent("4008")
     addPin(16, PinType::typeIgnored);
 }
 
+void nts::C_4008::_adder(int in1, int in2, int out)
+{
+    Tristate in_1 = this->getPin(in1)->getState();
+    Tristate in_2 = this->getPin(in2)->getState();
+    Tristate in_c = this->getPin(9)->getState();
+    Tristate _out, _sum;
+
+    const auto &f = (*getPin(out)).getConnectedTo();
+
+    for (const auto &tmp : f) {
+        IComponent *component = tmp->component;
+        std::size_t piNbr = tmp->pin;
+
+        if (in_1 == True && in_2 == True) {
+            component->assignPinValue(piNbr, True, component);
+            _out = True;
+        } else if (in_1 == True && in_c == True) {
+            component->assignPinValue(piNbr, True, component);
+            _out = True;
+        } else if (in_2 == True && in_c == True) {
+            component->assignPinValue(piNbr, True, component);
+            _out = True;
+        } else if (in_1 == Undefined && in_2 == Undefined && in_c == Undefined) {
+            component->assignPinValue(piNbr, Undefined, component);
+            _out = Undefined;
+        } else if (in_1 == Undefined && in_2 == Undefined) {
+            component->assignPinValue(piNbr, Undefined, component);
+            _out = Undefined;
+        } else if (in_1 == Undefined && in_c == Undefined) {
+            component->assignPinValue(piNbr, Undefined, component);
+            _out = Undefined;
+        } else if (in_2 == Undefined && in_c == Undefined) {
+            component->assignPinValue(piNbr, Undefined, component);
+            _out = Undefined;
+        } else {
+            component->assignPinValue(piNbr, False, component);
+            _out = False;
+        }
+
+        if (in_1 == True && in_2 == True && in_c == True)
+            _sum = True;
+        else if (in_1 == True && in_2 == False && in_c == False)
+            _sum = True;
+        else if (in_1 == False && in_2 == True && in_c == False)
+            _sum = True;
+        else if (in_1 == False && in_2 == False && in_c == True)
+            _sum = True;
+        else if (in_1 == Undefined || in_2 == Undefined || in_c == Undefined)
+            _sum = Undefined;
+        else
+            _sum = False;
+    }
+
+    if (out != 13)
+        assignPinValue(9, _out, this);
+    assignPinValue(14, _out, this);
+    assignPinValue(out, _sum, this);
+}
+
 void nts::C_4008::simulateComponent()
-{}
+{
+    _adder(6, 7, 10);
+    _adder(4, 5, 11);
+    _adder(2, 3, 12);
+    _adder(1, 15, 13);
+}

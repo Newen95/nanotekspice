@@ -19,6 +19,7 @@ namespace nts
             ~C_4008() override = default;
 
             void simulateComponent() override;
+            void _adder(int in1, int in2, int out);
     };
 }
 
