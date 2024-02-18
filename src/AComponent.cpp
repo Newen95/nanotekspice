@@ -69,7 +69,7 @@ void nts::AComponent::addPin(int number, PinType type)
     _pins[number] = std::make_unique<Pin>(type);
 }
 
-const std::size_t nts::AComponent::getCurrentTick() const
+const std::size_t &nts::AComponent::getCurrentTick() const
 {
     return _currentTick;
 }

@@ -30,7 +30,7 @@ namespace nts
             virtual void setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin) = 0;
 
             // OTHER
-            virtual const std::size_t getCurrentTick() const = 0;
+            virtual const std::size_t &getCurrentTick() const = 0;
             virtual const std::string &getType() const = 0;
             virtual const std::map<int, std::unique_ptr<Pin>> &getPins() const = 0;
             virtual std::unique_ptr<Pin> &getPin(int number) = 0;

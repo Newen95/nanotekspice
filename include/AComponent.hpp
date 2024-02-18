@@ -35,7 +35,7 @@ namespace nts
 
         // OTHER
         void addPin(int number, PinType type);
-        const std::size_t getCurrentTick() const override;
+        const std::size_t &getCurrentTick() const override;
 
         const std::string &getType() const override;
         const std::map<int, std::unique_ptr<Pin>> &getPins() const override;
