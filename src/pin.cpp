@@ -63,9 +63,11 @@ void nts::Pin::setOutNextState(const nts::Tristate state)
     for (const auto &element : _connectedTo) {
         IComponent &component = *element.get()->component;
         std::size_t &component_pin = element.get()->pin;
-
-        if (component.getPin(component_pin).get()->getPinType() == typeInput)
-            component.getPin(component_pin).get()->setNextState(state);
+        component.getPin(component_pin).get()->setNextState(state);
+        if (!_isLock) {
+            _isLock = true;
+            component.getPin(component_pin).get()->setOutNextState(state);
+        }
     }
 }
 
