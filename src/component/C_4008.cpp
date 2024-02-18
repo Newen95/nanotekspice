@@ -50,6 +50,12 @@ void nts::C_4008::_adder(int in1, int in2, int out)
         } else if (in_2 == True && in_c == True) {
             component->assignPinValue(piNbr, True, component);
             _out = True;
+        } else if (in_1 == True && in_2 == True && in_c == Undefined) {
+            component->assignPinValue(piNbr, True, component);
+            _out = True;
+        } else if (in_1 == False && in_2 == False && in_c == Undefined) {
+            component->assignPinValue(piNbr, True, component);
+            _out = True;
         } else if (in_1 == Undefined && in_2 == Undefined && in_c == Undefined) {
             component->assignPinValue(piNbr, Undefined, component);
             _out = Undefined;
@@ -81,8 +87,7 @@ void nts::C_4008::_adder(int in1, int in2, int out)
             _sum = False;
     }
 
-    if (out != 13)
-        assignPinValue(9, _out, this);
+
     assignPinValue(14, _out, this);
     assignPinValue(out, _sum, this);
 }
