@@ -24,27 +24,26 @@ nts::C_logger::C_logger() : AComponent("logger")
 
 void nts::C_logger::simulateComponent()
 {
-    std::ofstream logfile("log.bin", std::ios::trunc);
-    std::string data;
+    std::ofstream logfile("log.bin", std::ios::out | std::ios::binary | std::ios::app);
+    char to_write = 0;
     nts::Tristate inhibit = this->getPin(10)->getState();
     nts::Tristate state;
 
-    if (inhibit == nts::False){
-        for (int i = 1; i < 9; i++) {
+    if (inhibit == nts::False && this->getPin(9)->getState() == nts::True) {
+        for (int i = 1; i <= 8; ++i) {
             state = this->getPin(i)->getState();
-            if (state == nts::True) {
-                data += "1";
-            } else if (state == nts::False){
-                data += "0";
+            if (state != nts::Undefined) {
+                to_write |= (1 << (i - 1));
             } else {
-                data += "-1";
+                return;
             }
         }
         if (logfile.is_open()) {
-            logfile << data << std::endl;
+            logfile.write(&to_write, 1);
             logfile.close();
         } else {
             std::cerr << "Erreur : Impossible d'ouvrir le fichier log.bin" << std::endl;
         }
     }
 }
+
