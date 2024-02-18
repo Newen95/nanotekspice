@@ -24,5 +24,27 @@ nts::C_logger::C_logger() : AComponent("logger")
 
 void nts::C_logger::simulateComponent()
 {
-    std::cerr << "IM BATMAN. I LIVE IN THE SHADOW." << std::endl;
+    std::ofstream logfile("log.bin", std::ios::trunc);
+    std::string data;
+    nts::Tristate inhibit = this->getPin(10)->getState();
+    nts::Tristate state;
+
+    if (inhibit == nts::False){
+        for (int i = 1; i < 9; i++) {
+            state = this->getPin(i)->getState();
+            if (state == nts::True) {
+                data += "1";
+            } else if (state == nts::False){
+                data += "0";
+            } else {
+                data += "-1";
+            }
+        }
+        if (logfile.is_open()) {
+            logfile << data << std::endl;
+            logfile.close();
+        } else {
+            std::cerr << "Erreur : Impossible d'ouvrir le fichier log.bin" << std::endl;
+        }
+    }
 }
