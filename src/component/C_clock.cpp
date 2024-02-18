@@ -24,9 +24,12 @@ void nts::C_clock::simulateComponent()
         if (in_1 == False) {
             component->assignPinValue(piNbr, False, component);
             (*getPin(1)).setNextState(True);
-        } if (in_1 == True) {
+        } else if (in_1 == True) {
             component->assignPinValue(piNbr, True, component);
             (*getPin(1)).setNextState(False);
+        } else {
+            component->assignPinValue(piNbr, Undefined, component);
+            (*getPin(1)).setNextState(Undefined);
         }
 
         in_1 = component->getPin(piNbr)->getState();
