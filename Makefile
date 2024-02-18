@@ -7,26 +7,36 @@
 
 NAME 		=	nanotekspice
 
-CPPFLAGS 	=	-std=c++20 -Wall -Wextra -Werror
+SRC_DIR     =   src
 
-SOURCES 	=	$(wildcard *.cpp) 				\
-				$(wildcard src/*.cpp)			\
-				$(wildcard src/component/*.cpp)
+OBJ_DIR     =   $(SRC_DIR)/obj
 
-OBJECTS 	=	$(SOURCES:.cpp=.o)
+CPPFLAGS 	=	-std=c++20 # -Wall -Wextra -Werror
 
-all: 	$(NAME)
+SOURCES 	=	$(wildcard *.cpp) 					\
+				$(wildcard $(SRC_DIR)/*.cpp) 		\
+				$(wildcard $(SRC_DIR)/component/*.cpp)
 
-$(NAME):	$(OBJECTS)
+OBJECTS 	=	$(patsubst %.cpp,$(OBJ_DIR)/%.o,$(notdir $(SOURCES)))
+
+all: $(NAME)
+
+$(NAME): $(OBJECTS)
 	g++ $(CPPFLAGS) -o $@ $^
 
-%.o: 	%.cpp
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	mkdir -p $(OBJ_DIR)
+	g++ $(CPPFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/component/%.cpp
+	mkdir -p $(OBJ_DIR)
 	g++ $(CPPFLAGS) -c $< -o $@
 
 clean:
-	rm -rf $(OBJECTS)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+

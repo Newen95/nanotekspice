@@ -10,18 +10,18 @@
 #define C_NOT_HPP
 
 
-#include "../main.hpp"
+#include "../AComponent.hpp"
 
-namespace nts {
+namespace nts
+{
+    class C_not : public AComponent {
+        public:
+            C_not();
+            ~C_not() override = default;
 
-class C_not : public AComponent {
-    public:
-        C_not();
-        C_not(const std::string &name);
-        ~C_not() override = default;
-
-        void simulate(Circuit &circuit);
+            void simulateComponent() override;
     };
 
 }
+
 #endif // C_NOT_HPP

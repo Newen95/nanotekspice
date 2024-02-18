@@ -9,21 +9,17 @@
 #ifndef C_OUTPUT_HPP
 #define C_OUTPUT_HPP
 
-#include "../main.hpp"
+#include "../AComponent.hpp"
 
-namespace nts {
+namespace nts
+{
+    class C_output : public AComponent {
+        public:
+            C_output();
+            ~C_output() override = default;
 
-class C_output : public AComponent {
-    protected:
-        nts::Tristate _state;
-    public:
-        C_output();
-        C_output(const std::string &name);
-        ~C_output() override = default;
-
-        void simulate(Circuit &circuit __attribute_maybe_unused__) { return; }
+            void simulateComponent() override;
     };
-
 }
 
 #endif // C_OUTPUT_HPP

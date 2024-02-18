@@ -9,18 +9,17 @@
 #ifndef C_4081_HPP
 #define C_4081_HPP
 
-#include "../main.hpp"
+#include "../AComponent.hpp"
 
-namespace nts {
+namespace nts
+{
+    class C_4081 : public AComponent {
+        public:
+            C_4081();
+            ~C_4081() override = default;
 
-class C_4081 : public AComponent {
-    public:
-        C_4081();
-        C_4081(const std::string &name);
-        ~C_4081() override = default;
-
-        void and_(Circuit &Circuit, int in1, int in2, int out);
-        void simulate(Circuit &circuit);
+            void simulateComponent() override;
+            void _and(int in1, int in2, int out);
     };
 }
 

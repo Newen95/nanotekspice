@@ -13,28 +13,23 @@ nts::C_clock::C_clock() : AComponent("clock")
     addPin(1, PinType::typeOutput);
 }
 
-nts::C_clock::C_clock(const std::string &name) : AComponent("clock", name)
+void nts::C_clock::simulateComponent()
 {
-    addPin(1, PinType::typeOutput);
-}
-
-void nts::C_clock::simulate(Circuit &Circuit)
-{
-    const auto &map = Circuit.getComponentMap();
     Tristate in_1 = (*getPin(1)).getState();
 
-    const auto &f = (*getPin(1)).getConnectedTo();
-
-    for (const auto &tmp : f) {
-        std::string component_name = tmp.get()->component;
-        std::size_t component_pin = tmp.get()->pin;
+    for (const auto &tmp : (*getPin(1)).getConnectedTo()) {
+        IComponent *component = tmp->component;
+        std::size_t piNbr = tmp->pin;
 
         if (in_1 == False) {
-            map.find(component_name)->second.get()->getPins().find(component_pin)->second.get()->setState(False);
+            component->assignPinValue(piNbr, False, component);
             (*getPin(1)).setNextState(True);
         } if (in_1 == True) {
-            map.find(component_name)->second.get()->getPins().find(component_pin)->second.get()->setState(True);
+            component->assignPinValue(piNbr, True, component);
             (*getPin(1)).setNextState(False);
         }
+
+        in_1 = component->getPin(piNbr)->getState();
+        break;
     }
 }

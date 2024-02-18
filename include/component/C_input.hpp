@@ -9,20 +9,16 @@
 #ifndef C_INPUT_HPP
 #define C_INPUT_HPP
 
-#include "../main.hpp"
+#include "../AComponent.hpp"
 
-namespace nts {
+namespace nts
+{
+    class C_input : public AComponent {
+        public:
+            C_input();
+            ~C_input() override = default;
 
-class C_input : public AComponent {
-    protected:
-        nts::Tristate _state;
-    public:
-        C_input();
-        C_input(const std::string &name);
-        ~C_input() override = default;
-
-        void assignValue(Circuit &Circuit, int out, Tristate sate);
-        void simulate(Circuit &circuit);
+            void simulateComponent() override;
     };
 }
 

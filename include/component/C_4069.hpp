@@ -9,18 +9,18 @@
 #ifndef C_4069_HPP
 #define C_4069_HPP
 
-#include "../main.hpp"
+#include "../AComponent.hpp"
 
-namespace nts {
+namespace nts
+{
+    class C_4069 : public AComponent {
+        public:
+            C_4069();
+            ~C_4069() override = default;
 
-class C_4069 : public AComponent {
-    public:
-        C_4069();
-        C_4069(const std::string &name);
-        ~C_4069() override = default;
-
-        void not_(Circuit &Circuit, int in, int out);
-        void simulate(Circuit &circuit);
+            void simulateComponent() override;
+            void _not(int in, int out);
     };
 }
+
 #endif // C_4069_HPP

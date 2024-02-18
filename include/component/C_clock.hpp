@@ -9,17 +9,16 @@
 #ifndef C_CLOCK_HPP
 #define C_CLOCK_HPP
 
-#include "../main.hpp"
+#include "../AComponent.hpp"
 
-namespace nts {
+namespace nts
+{
+    class C_clock : public AComponent {
+        public:
+            C_clock();
+            ~C_clock() override = default;
 
-class C_clock : public AComponent {
-    public:
-        C_clock();
-        C_clock(const std::string &name);
-        ~C_clock() override = default;
-
-        void simulate(Circuit &Circuit);
+            void simulateComponent() override;
     };
 }
 

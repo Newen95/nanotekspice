@@ -9,19 +9,17 @@
 #ifndef C_AND_HPP
 #define C_AND_HPP
 
-#include "../main.hpp"
+#include "../AComponent.hpp"
 
-namespace nts {
+namespace nts
+{
+    class C_and : public AComponent {
+        public:
+            C_and();
+            ~C_and() override = default;
 
-class C_and : public AComponent {
-    public:
-        C_and();
-        C_and(const std::string &name);
-        ~C_and() override = default;
-
-        void simulate(Circuit &circuit);
+            void simulateComponent() override;
     };
 }
 
 #endif // C_AND_HPP
-

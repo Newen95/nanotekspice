@@ -39,3 +39,25 @@ void nts::Pin::setNextState(const nts::Tristate state)
 {
     _nexState = state;
 }
+
+void nts::Pin::setOutState(const nts::Tristate state)
+{
+    for (const auto &element : _connectedTo) {
+        IComponent &component = *element.get()->component;
+        std::size_t &component_pin = element.get()->pin;
+
+        if (component.getPin(component_pin).get()->getPinType() == typeInput)
+            component.getPin(component_pin).get()->setState(state);
+    }
+}
+
+void nts::Pin::setOutNextState(const nts::Tristate state)
+{
+    for (const auto &element : _connectedTo) {
+        IComponent &component = *element.get()->component;
+        std::size_t &component_pin = element.get()->pin;
+
+        if (component.getPin(component_pin).get()->getPinType() == typeInput)
+            component.getPin(component_pin).get()->setNextState(state);
+    }
+}

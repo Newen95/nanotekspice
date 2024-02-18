@@ -9,20 +9,18 @@
 #ifndef C_4001_HPP
 #define C_4001_HPP
 
-#include "../main.hpp"
+#include "../AComponent.hpp"
 
-namespace nts {
+namespace nts
+{
+    class C_4001 : public AComponent {
+        public:
+            C_4001();
+            ~C_4001() override = default;
 
-class C_4001 : public AComponent {
-    public:
-        C_4001();
-        C_4001(const std::string &name);
-        ~C_4001() override = default;
-
-        void simulate(Circuit &circuit);
-        void nor_(Circuit &Circuit, int in_1, int in_2, int out);
+            void simulateComponent() override;
+            void _nor(int in1, int in2, int out);
     };
 }
-
 
 #endif // C_4001_HPP

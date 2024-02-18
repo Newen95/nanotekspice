@@ -11,9 +11,9 @@
 #include <iostream>
 #include <deque>
 #include <string>
-#include "pin.hpp"
-#include "AComponent.hpp"
 #include <map>
+
+#include "IComponent.hpp"
 
 struct Links {
     std::string pin;
@@ -27,16 +27,19 @@ struct Component {
     std::deque<Links> links;
 };
 
-namespace nts {
+namespace nts
+{
+    class AComponent;
+
     class Circuit {
         protected:
-            std::map<std::string, std::unique_ptr<AComponent>> _componentMap;
+            std::map<std::string, std::unique_ptr<IComponent>> _componentMap;
             std::size_t _tick;
         public:
             Circuit() : _tick(0) {}
             ~Circuit() = default;
 
-            void setComponentMap(std::map<std::string, std::unique_ptr<AComponent>> map)
+            void setComponentMap(std::map<std::string, std::unique_ptr<IComponent>> map)
             {
                 _componentMap = std::move(map);
             }
@@ -51,7 +54,7 @@ namespace nts {
                 return _tick;
             }
 
-            const std::map<std::string, std::unique_ptr<AComponent>> &getComponentMap() const
+            const std::map<std::string, std::unique_ptr<IComponent>> &getComponentMap() const
             {
                 return _componentMap;
             }

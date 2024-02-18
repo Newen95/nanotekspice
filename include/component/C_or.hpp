@@ -9,19 +9,17 @@
 #ifndef C_OR_HPP
 #define C_OR_HPP
 
-#include "../main.hpp"
+#include "../AComponent.hpp"
 
-namespace nts {
+namespace nts
+{
+    class C_or : public AComponent {
+        public:
+            C_or();
+            ~C_or() override = default;
 
-class C_or : public AComponent {
-    public:
-        C_or();
-        C_or(const std::string &name);
-        ~C_or() override = default;
-
-        void simulate(Circuit &circuit);
+            void simulateComponent() override;
     };
-
 }
 
 #endif // C_OR_HPP

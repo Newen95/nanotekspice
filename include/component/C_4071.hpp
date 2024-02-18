@@ -9,18 +9,17 @@
 #ifndef C_4071_HPP
 #define C_4071_HPP
 
-#include "../main.hpp"
+#include "../AComponent.hpp"
 
-namespace nts {
+namespace nts
+{
+    class C_4071 : public AComponent {
+        public:
+            C_4071();
+            ~C_4071() override = default;
 
-class C_4071 : public AComponent {
-    public:
-        C_4071();
-        C_4071(const std::string &name);
-        ~C_4071() override = default;
-
-        void or_(Circuit &Circuit, int in1, int in2, int out);
-        void simulate(Circuit &circuit);
+            void simulateComponent() override;
+            void _or(int in1, int in2, int out);
     };
 }
 

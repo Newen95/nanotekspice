@@ -9,19 +9,17 @@
 #ifndef C_NOR_HPP
 #define C_NOR_HPP
 
-#include "../main.hpp"
+#include "../AComponent.hpp"
 
-namespace nts {
+namespace nts
+{
+    class C_nor : public AComponent {
+        public:
+            C_nor();
+            ~C_nor() override = default;
 
-class C_nor : public AComponent {
-    public:
-        C_nor();
-        C_nor(const std::string &name);
-        ~C_nor() override = default;
-
-        void simulate(Circuit &circuit);
+            void simulateComponent() override;
     };
-
 }
 
 #endif // C_NOR_HPP

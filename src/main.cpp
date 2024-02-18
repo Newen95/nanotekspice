@@ -5,9 +5,9 @@
 ** main.cpp
 */
 
-#include "include/main.hpp"
-#include "include/error_handling.hpp"
-#include "include/nanotekspice.hpp"
+#include "../include/main.hpp"
+#include "../include/error_handling.hpp"
+#include "../include/nanotekspice.hpp"
 
 int main(int argc, char **argv)
 {

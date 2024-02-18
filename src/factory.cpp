@@ -7,62 +7,57 @@
 
 #include "../include/factory.hpp"
 
-std::unique_ptr<nts::AComponent> createComponent(const std::string& type, const std::string& name) {
-    if (type == "xor") {
-        return std::make_unique<nts::C_xor>(name);
-    } else if (type == "true") {
-        return std::make_unique<nts::C_true>(name);
-    } else if (type == "output") {
-        return std::make_unique<nts::C_output>(name);
-    } else if (type == "or") {
-        return std::make_unique<nts::C_or>(name);
-    } else if (type == "not") {
-        return std::make_unique<nts::C_not>(name);
-    } else if (type == "nor") {
-        return std::make_unique<nts::C_nor>(name);
-    } else if (type == "nand") {
-        return std::make_unique<nts::C_nand>(name);
-    } else if (type == "logger") {
-        return std::make_unique<nts::C_logger>(name);
-    } else if (type == "input") {
-        return std::make_unique<nts::C_input>(name);
-    } else if (type == "false") {
-        return std::make_unique<nts::C_false>(name);
-    } else if (type == "clock") {
-        return std::make_unique<nts::C_clock>(name);
-    } else if (type == "and") {
-        return std::make_unique<nts::C_and>(name);
-    } else if (type == "4801") {
-        return std::make_unique<nts::C_4801>(name);
-    } else if (type == "4514") {
-        return std::make_unique<nts::C_4514>(name);
-    } else if (type == "4512") {
-        return std::make_unique<nts::C_4512>(name);
-    } else if (type == "4094") {
-        return std::make_unique<nts::C_4094>(name);
-    } else if (type == "4081") {
-        return std::make_unique<nts::C_4081>(name);
-    } else if (type == "4071") {
-        return std::make_unique<nts::C_4071>(name);
-    } else if (type == "4069") {
-        return std::make_unique<nts::C_4069>(name);
-    } else if (type == "4040") {
-        return std::make_unique<nts::C_4040>(name);
-    } else if (type == "4030") {
-        return std::make_unique<nts::C_4030>(name);
-    } else if (type == "4017") {
-        return std::make_unique<nts::C_4017>(name);
-    } else if (type == "4013") {
-        return std::make_unique<nts::C_4013>(name);
-    } else if (type == "4011") {
-        return std::make_unique<nts::C_4011>(name);
-    } else if (type == "4008") {
-        return std::make_unique<nts::C_4008>(name);
-    } else if (type == "4001") {
-        return std::make_unique<nts::C_4001>(name);
-    } else if (type == "2716") {
-        return std::make_unique<nts::C_2716>(name);
+std::unique_ptr<nts::IComponent> createComponent(const std::string &type)
+{
+    std::unordered_set<std::string> allTypes = {
+        "input", "output", "true", "false", "clock",
+        "and", "or", "xor", "not", "4001", "4011",
+        "4030", "4069", "4071", "4081", "4008", "4013",
+        "4017", "4040", "4094", "4512", "4514", "4801",
+        "2716", "logger"
+    };
+
+    bool checkType = allTypes.find(type) != allTypes.end();
+
+    if (checkType) {
+        if (type == "false")
+            return std::make_unique<nts::C_false>();
+        if (type == "true")
+            return std::make_unique<nts::C_true>();
+        if (type == "input")
+            return std::make_unique<nts::C_input>();
+        if (type == "output")
+            return std::make_unique<nts::C_output>();
+        if (type == "xor")
+            return std::make_unique<nts::C_xor>();
+        if (type == "or")
+            return std::make_unique<nts::C_or>();
+        if (type == "nor")
+            return std::make_unique<nts::C_nor>();
+        if (type == "not")
+            return std::make_unique<nts::C_not>();
+        if (type == "nand")
+            return std::make_unique<nts::C_nand>();
+        if (type == "4001")
+            return std::make_unique<nts::C_4001>();
+        if (type == "4011")
+            return std::make_unique<nts::C_4011>();
+        if (type == "4030")
+            return std::make_unique<nts::C_4030>();
+        if (type == "4069")
+            return std::make_unique<nts::C_4069>();
+        if (type == "4071")
+            return std::make_unique<nts::C_4071>();
+        if (type == "4081")
+            return std::make_unique<nts::C_4081>();
+        if (type == "and")
+            return std::make_unique<nts::C_and>();
+        if (type == "logger")
+            return std::make_unique<nts::C_logger>();
+        if (type == "clock")
+            return std::make_unique<nts::C_clock>();
     } else {
-        throw std::invalid_argument("Erreur: Type inconnu: " + type);
+        throw std::invalid_argument("Erreur: factory.cpp: Type inconnu: " + type);
     }
+    throw std::invalid_argument("Erreur: factory.cpp: IM BATMAN. I LIVE IN THE SHADOW.");
 }

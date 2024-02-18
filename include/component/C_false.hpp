@@ -9,18 +9,16 @@
 #ifndef C_FALSE_HPP
 #define C_FALSE_HPP
 
-#include "../main.hpp"
+#include "../AComponent.hpp"
 
-namespace nts {
+namespace nts
+{
+    class C_false : public AComponent {
+        public:
+            C_false();
+            ~C_false() override = default;
 
-class C_false : public AComponent {
-    public:
-        C_false();
-        C_false(const std::string &name);
-        ~C_false() override = default;
-
-        void simulate(Circuit &circuit);
-        void assignValue(Circuit &Circuit, int out, Tristate sate);
+            void simulateComponent() override;
     };
 }
 

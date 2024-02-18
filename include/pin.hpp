@@ -12,14 +12,12 @@
 #include <list>
 #include <memory>
 
+#include "IComponent.hpp"
+#include "Tristate.hpp"
+#include "main.hpp"
+
 namespace nts
 {
-    enum Tristate {
-        Undefined = (-true),
-        True = true,
-        False = false
-    };
-
     enum PinType {
         typeInput,
         typeOutput,
@@ -33,7 +31,7 @@ namespace nts
 
     struct Link
     {
-        std::string component;
+        IComponent *component;
         std::size_t pin;
     };
 
@@ -55,6 +53,8 @@ namespace nts
 
             void setState(const Tristate state);
             void setNextState(const Tristate state);
+            void setOutState(const Tristate state);
+            void setOutNextState(const Tristate state);
     };
 }
 

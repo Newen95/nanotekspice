@@ -7,22 +7,76 @@
 
 #include "../include/AComponent.hpp"
 
-nts::AComponent::AComponent(const std::string &type, const std::string &name)
-    : _type(type), _name(name)
+
+// CTOR
+
+
+nts::AComponent::AComponent(const std::string &type) : _type(type), _currentTick(0), _isLock(false)
 {}
 
-nts::AComponent::AComponent(const std::string &type)
-    : _type(type)
-{}
+// ICOMPONENT FUNCTION
+
+
+nts::Tristate nts::AComponent::compute(std::size_t pin)
+{
+    (void)pin;
+    // fonction qui sert a rien
+    return Undefined;
+}
+
+void nts::AComponent::simulate(std::size_t tick)
+{
+    if (_isLock)
+        return;
+
+    _currentTick += tick;
+    _isLock = true;
+
+    for (auto& pinPair : _pins) {
+        Pin* pin = pinPair.second.get();
+
+        for (auto& linkPtr : pin->getConnectedTo()) {
+            IComponent* component = linkPtr->component;
+
+            if (component->getCurrentTick() != _currentTick && component->getType() == "input")
+                component->simulate(1);
+        }
+    }
+    this->simulateComponent();
+}
+
+void nts::AComponent::setLink(std::size_t pin, IComponent &other, std::size_t otherPin)
+{
+    if (_pins.find(pin) == _pins.end()) {
+        throw std::out_of_range("Erreur: AComponent.cpp: Le pin spécifié n'existe pas dans ce composant.");
+    }
+
+    std::unique_ptr<Pin> &currentPin = _pins[pin];
+    std::unique_ptr<Link> link = std::make_unique<Link>();
+
+    link->component = &other;
+    link->pin = otherPin;
+
+    currentPin->getConnectedTo().push_back(std::move(link));
+}
+
+
+// OTHER
+
+
+void nts::AComponent::addPin(int number, PinType type)
+{
+    _pins[number] = std::make_unique<Pin>(type);
+}
+
+const std::size_t nts::AComponent::getCurrentTick() const
+{
+    return _currentTick;
+}
 
 const std::string &nts::AComponent::getType() const
 {
     return _type;
-}
-
-const std::string &nts::AComponent::getName() const
-{
-    return _name;
 }
 
 const std::map<int, std::unique_ptr<nts::Pin>>& nts::AComponent::getPins() const
@@ -40,27 +94,16 @@ std::unique_ptr<nts::Pin> &nts::AComponent::getPin(int number)
     }
 }
 
-void nts::AComponent::addPin(int number, PinType type)
+void nts::AComponent::setIsLock(bool state)
 {
-    _pins[number] = std::make_unique<Pin>(type);
+    _isLock = state;
 }
 
-void nts::AComponent::setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin)
+void nts::AComponent::assignPinValue(int pinNbr, Tristate state, IComponent *Component)
 {
-    if (_pins.find(pin) == _pins.end()) {
-        throw std::out_of_range("Le pin spécifié n'existe pas dans ce composant.");
+    std::unique_ptr<Pin> &pin = Component->getPin(pinNbr);
+    if (pin) {
+        pin->setState(state);
+        pin->setOutState(state);
     }
-
-    std::unique_ptr<Pin> &currentPin = _pins[pin];
-
-    std::unique_ptr<Link> link = std::make_unique<Link>();
-    link->component = other.getName();
-    link->pin = otherPin;
-
-    currentPin->getConnectedTo().push_back(std::move(link));
-}
-
-nts::Tristate nts::AComponent::compute(std::size_t pin __attribute_maybe_unused__)
-{
-    return nts::Tristate::Undefined;
 }

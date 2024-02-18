@@ -7,56 +7,30 @@
 
 #include "../include/nanotekspice.hpp"
 
-void printComponentMap(const std::map<std::string, std::unique_ptr<nts::AComponent>> &componentMap)
-{
-    std::cout << "Component Map:" << std::endl;
-    for (const auto &pair : componentMap) {
-        const std::string &name = pair.first;
-        const nts::AComponent &component = *(pair.second);
-
-        std::cout << "Component name: " << name << std::endl;
-        std::cout << "Component type: " << component.getType() << std::endl;
-
-        for (const auto &pinPair : component.getPins()) {
-            int pinNumber = pinPair.first;
-            const auto &pinPtr = *pinPair.second;
-            const auto &pinPtr_ = pinPair.second;
-
-            std::cout << "Pin: " << pinNumber << " Type: " << pinPtr.getPinType() << std::endl;
-            const auto &connectedTo = pinPtr_->getConnectedTo();
-            for (const auto &link : connectedTo) {
-                std::cout << "  Linked to component: " << link->component << ", pin: " << link->pin << std::endl;
-            }
-        }
-
-        std::cout << std::endl;
-    }
-}
-
-static int create_all_component(std::deque<Component> &components, std::map<std::string, std::unique_ptr<nts::AComponent>> &componentMap)
+static int create_all_component(std::deque<Component> &components, std::map<std::string, std::unique_ptr<nts::IComponent>> &componentMap)
 {
     for (const auto &component : components) {
         std::string componentName = component.name;
-        std::unique_ptr<nts::AComponent> cComponent;
+        std::unique_ptr<nts::IComponent> new_component;
 
-        cComponent = createComponent(component.type, component.name);
-        componentMap[componentName] = std::move(cComponent);
+        new_component = createComponent(component.type);
+        componentMap[componentName] = std::move(new_component);
     }
     return 0;
 }
 
-static int create_all_link(std::deque<Component> &components, std::map<std::string, std::unique_ptr<nts::AComponent>> &componentMap)
+static int create_all_link(std::deque<Component> &components, std::map<std::string, std::unique_ptr<nts::IComponent>> &componentMap)
 {
     for (const auto &component : components) {
-        std::string Name = component.name;
+        std::string current_component_name = component.name;
+        auto at = componentMap.find(current_component_name);
 
         for (const auto &link : component.links) {
             auto it = componentMap.find(link.link_component_name);
-            auto at = componentMap.find(Name);
 
             if (it != componentMap.end() && at != componentMap.end()) {
-                nts::AComponent &component_to_link = *(it->second);
-                nts::AComponent &component_actual = *(at->second);
+                nts::IComponent &component_to_link = *(it->second);
+                nts::IComponent &component_actual = *(at->second);
                 std::size_t pin_to_link = std::stoul(link.link_component_pin);
                 std::size_t pin_actual = std::stoul(link.pin);
 
@@ -67,11 +41,11 @@ static int create_all_link(std::deque<Component> &components, std::map<std::stri
     return 0;
 }
 
-static nts::Tristate accessPinValue(const std::map<std::string, std::unique_ptr<nts::AComponent>> &components, const std::string &componentName)
+static nts::Tristate accessPinValue(const std::map<std::string, std::unique_ptr<nts::IComponent>> &components, const std::string &componentName)
 {
     auto it = components.find(componentName);
     if (it != components.end()) {
-        nts::AComponent *component = it->second.get();
+        nts::IComponent *component = it->second.get();
         if (component) {
             const std::map<int, std::unique_ptr<nts::Pin>> &pinsMap = component->getPins();
             auto pinIt = pinsMap.find(1);
@@ -96,12 +70,13 @@ static void display(nts::Circuit &circuit)
     std::vector<std::string> outputList;
 
     for (const auto &componentPair : components) {
-        const nts::AComponent &component = *(componentPair.second);
+        const std::string &componentName = componentPair.first;
+        const std::string &componentType = componentPair.second->getType();
 
-        if (component.getType() == "input" || component.getType() == "clock") {
-            inputList.push_back(component.getName());
-        } else if (component.getType() == "output") {
-            outputList.push_back(component.getName());
+        if (componentType == "input" || componentType == "clock") {
+            inputList.push_back(componentName);
+        } else if (componentType == "output") {
+                outputList.push_back(componentName);
         }
     }
 
@@ -155,7 +130,7 @@ static void attributeValue(std::string input, nts::Circuit &circuit)
 
     auto it = components.find(name);
     if (it != components.end()) {
-        nts::AComponent *component = it->second.get();
+        nts::IComponent *component = it->second.get();
         if (!component) {
             std::cerr << "Erreur : attributeValue() : composant inacessible." << std::endl;
             return;
@@ -168,24 +143,28 @@ static void attributeValue(std::string input, nts::Circuit &circuit)
         if (pinIt != pinsMap.end()) {
             nts::Pin *pin1 = pinIt->second.get();
             if (pin1) {
-                if (valueStr == "1")
+                if (valueStr == "1") {
                     pin1->setNextState(nts::True);
-                if (valueStr == "0")
+                    pin1->setOutNextState(nts::True);
+                } if (valueStr == "0") {
                     pin1->setNextState(nts::False);
-                if (valueStr == "U")
+                    pin1->setOutNextState(nts::False);
+                } if (valueStr == "U") {
                     pin1->setNextState(nts::Undefined);
+                    pin1->setOutNextState(nts::Undefined);
+                }
             }
         }
     }
 }
 
-static void simulate(nts::Circuit &circuit)
+void simulateTick(nts::Circuit &circuit)
 {
     const auto &components = circuit.getComponentMap();
     circuit.setTick(circuit.getTick() + 1);
 
     for (const auto &componentPair : components) {
-        nts::AComponent *component = componentPair.second.get();
+        nts::IComponent *component = componentPair.second.get();
         if (component) {
             const std::map<int, std::unique_ptr<nts::Pin>> &pinsMap = component->getPins();
             for (const auto &pinPair : pinsMap) {
@@ -198,101 +177,30 @@ static void simulate(nts::Circuit &circuit)
     }
 
     for (const auto &componentPair : components) {
-        nts::AComponent *component = componentPair.second.get();
-        if (component) {
-            if (component->getType() == "or") {
-                nts::C_or *comp = dynamic_cast<nts::C_or*>(component);
-                comp->simulate(circuit);
-            } else if (component->getType() == "xor") {
-                nts::C_xor *comp = dynamic_cast<nts::C_xor*>(component);
-                comp->simulate(circuit);
-            } else if (component->getType() == "and") {
-                nts::C_and *comp = dynamic_cast<nts::C_and*>(component);
-                comp->simulate(circuit);
-            } else if (component->getType() == "not") {
-                nts::C_not *comp = dynamic_cast<nts::C_not*>(component);
-                comp->simulate(circuit);
-            } else if (component->getType() == "nor") {
-                nts::C_nor *comp = dynamic_cast<nts::C_nor*>(component);
-                comp->simulate(circuit);
-            } else if (component->getType() == "nand") {
-                nts::C_nand *comp = dynamic_cast<nts::C_nand*>(component);
-                comp->simulate(circuit);
-            } else if (component->getType() == "4001") {
-                nts::C_4001 *comp = dynamic_cast<nts::C_4001*>(component);
-                comp->simulate(circuit);
-            } else if (component->getType() == "4011") {
-                nts::C_4011 *comp = dynamic_cast<nts::C_4011*>(component);
-                comp->simulate(circuit);
-            } else if (component->getType() == "4069") {
-                nts::C_4069 *comp = dynamic_cast<nts::C_4069*>(component);
-                comp->simulate(circuit);
-            } else if (component->getType() == "4071") {
-                nts::C_4071 *comp = dynamic_cast<nts::C_4071*>(component);
-                comp->simulate(circuit);
-            } else if (component->getType() == "4081") {
-                nts::C_4081 *comp = dynamic_cast<nts::C_4081*>(component);
-                comp->simulate(circuit);
-            } else if (component->getType() == "clock") {
-                nts::C_clock *comp = dynamic_cast<nts::C_clock*>(component);
-                comp->simulate(circuit);
-            } else if (component->getType() == "logger") {
-                nts::C_logger *comp = dynamic_cast<nts::C_logger*>(component);
-                comp->simulate(circuit);
-            } else if (component->getType() == "4008") {
-                nts::C_4008 *comp = dynamic_cast<nts::C_4008*>(component);
-                comp->simulate(circuit);
-            } else if (component->getType() == "4013") {
-                nts::C_4013 *comp = dynamic_cast<nts::C_4013*>(component);
-                comp->simulate(circuit);
-            } else if (component->getType() == "4017") {
-                nts::C_4017 *comp = dynamic_cast<nts::C_4017*>(component);
-                comp->simulate(circuit);
-            } else if (component->getType() == "input") {
-                nts::C_input *comp = dynamic_cast<nts::C_input*>(component);
-                comp->simulate(circuit);
-            } else if (component->getType() == "true") {
-                nts::C_true *comp = dynamic_cast<nts::C_true*>(component);
-                comp->simulate(circuit);
-            } else if (component->getType() == "false") {
-                nts::C_false *comp = dynamic_cast<nts::C_false*>(component);
-                comp->simulate(circuit);
-            } else if (component->getType() == "4030") {
-                nts::C_4030 *comp = dynamic_cast<nts::C_4030*>(component);
-                comp->simulate(circuit);
-            }
-        }
+        nts::IComponent *component = componentPair.second.get();
+        component->simulate(1);
+    } for (const auto &componentPair : components) {
+        nts::IComponent *component = componentPair.second.get();
+        component->setIsLock(false);
     }
-
 }
 
 int nanotekspice(std::deque<Component> &components)
 {
-    std::map<std::string, std::unique_ptr<nts::AComponent>> componentMap;
+    std::string input;
+    nts::Circuit circuit;
+    std::map<std::string, std::unique_ptr<nts::IComponent>> componentMap;
 
     if (create_all_component(components, componentMap) == 84 || create_all_link(components, componentMap) == 84)
         return 84;
 
-    nts::Circuit circuit;
     circuit.setComponentMap(std::move(componentMap));
-    std::string input;
 
-    const auto &map = circuit.getComponentMap();
-    for (const auto &cmp : map) {
+    for (const auto &cmp : circuit.getComponentMap()) {
         if (cmp.second.get()->getType() == "false") {
-            const auto &f = cmp.second.get()->getPin(1).get()->getConnectedTo();
-            for (const auto &tmp : f) {
-                std::string component_name = tmp.get()->component;
-                std::size_t component_pin = tmp.get()->pin;
-                map.find(component_name)->second.get()->getPins().find(component_pin)->second.get()->setState(nts::False);
-            }
+            cmp.second.get()->assignPinValue(1, nts::False, cmp.second.get());
         } if (cmp.second.get()->getType() == "true") {
-            const auto &f = cmp.second.get()->getPin(1).get()->getConnectedTo();
-            for (const auto &tmp : f) {
-                std::string component_name = tmp.get()->component;
-                std::size_t component_pin = tmp.get()->pin;
-                map.find(component_name)->second.get()->getPins().find(component_pin)->second.get()->setState(nts::True);
-            }
+            cmp.second.get()->assignPinValue(1, nts::True, cmp.second.get());
         }
     }
 
@@ -303,10 +211,10 @@ int nanotekspice(std::deque<Component> &components)
         if (input == "display")
             display(circuit);
         if (input == "simulate")
-            simulate(circuit);
+            simulateTick(circuit);
         if (input == "loop") {
             while (true) {
-                simulate(circuit);
+                simulateTick(circuit);
                 display(circuit);
                 attributeValue(input, circuit);
             }

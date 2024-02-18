@@ -9,22 +9,17 @@
 #define C_LOGGER_HPP
 
 #include <fstream>
-#include "../main.hpp"
+#include "../AComponent.hpp"
 
-namespace nts {
+namespace nts
+{
+    class C_logger : public AComponent {
+        public:
+            C_logger();
+            ~C_logger() override = default;
 
-class C_logger : public AComponent {
-    public:
-        C_logger();
-        C_logger(const std::string &name);
-        ~C_logger() override = default;
-
-        void simulate(Circuit &Circuit);
-        Tristate getRealPinStatus(int nbr, Circuit &Circuit);
+            void simulateComponent() override;
     };
-
 }
 
-
 #endif // C_LOGGER_HPP
-
