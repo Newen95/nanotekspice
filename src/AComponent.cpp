@@ -42,7 +42,6 @@ void nts::AComponent::simulate(std::size_t tick)
                 component->simulate(1);
         }
     }
-    std::cerr << "TEST: " << _type << std::endl;
     this->simulateComponent();
 }
 
