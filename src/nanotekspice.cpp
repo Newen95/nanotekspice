@@ -165,6 +165,15 @@ void simulateTick(nts::Circuit &circuit)
 
     for (const auto &componentPair : components) {
         nts::IComponent *component = componentPair.second.get();
+        component->setIsLock(false);
+        for (const auto &pin : component->getPins()) {
+            const auto &_pin = pin.second.get();
+            _pin->setIsLock(false);
+        }
+    }
+
+    for (const auto &componentPair : components) {
+        nts::IComponent *component = componentPair.second.get();
         if (component) {
             const std::map<int, std::unique_ptr<nts::Pin>> &pinsMap = component->getPins();
             for (const auto &pinPair : pinsMap) {
@@ -179,9 +188,6 @@ void simulateTick(nts::Circuit &circuit)
     for (const auto &componentPair : components) {
         nts::IComponent *component = componentPair.second.get();
         component->simulate(1);
-    } for (const auto &componentPair : components) {
-        nts::IComponent *component = componentPair.second.get();
-        component->setIsLock(false);
     }
 }
 

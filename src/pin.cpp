@@ -7,7 +7,7 @@
 
 #include "../include/pin.hpp"
 
-nts::Pin::Pin(PinType type) : _type(type)
+nts::Pin::Pin(PinType type) : _type(type), _isLock(false)
 {}
 
 std::list<std::unique_ptr<nts::Link>> &nts::Pin::getConnectedTo()
@@ -23,6 +23,11 @@ const nts::PinType &nts::Pin::getPinType() const
 const nts::Tristate &nts::Pin::getState() const
 {
     return _state;
+}
+
+const bool &nts::Pin::getIsLock() const
+{
+    return _isLock;
 }
 
 void nts::Pin::setState(const nts::Tristate state)
@@ -45,9 +50,11 @@ void nts::Pin::setOutState(const nts::Tristate state)
     for (const auto &element : _connectedTo) {
         IComponent &component = *element.get()->component;
         std::size_t &component_pin = element.get()->pin;
-
-        if (component.getPin(component_pin).get()->getPinType() == typeInput)
-            component.getPin(component_pin).get()->setState(state);
+        component.getPin(component_pin).get()->setState(state);
+        if (!_isLock) {
+            _isLock = true;
+            component.getPin(component_pin).get()->setOutState(state);
+        }
     }
 }
 
@@ -60,4 +67,9 @@ void nts::Pin::setOutNextState(const nts::Tristate state)
         if (component.getPin(component_pin).get()->getPinType() == typeInput)
             component.getPin(component_pin).get()->setNextState(state);
     }
+}
+
+void nts::Pin::setIsLock(const bool state)
+{
+    _isLock = state;
 }

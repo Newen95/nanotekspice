@@ -52,6 +52,8 @@ std::unique_ptr<nts::IComponent> createComponent(const std::string &type)
             return std::make_unique<nts::C_4081>();
         if (type == "4008")
             return std::make_unique<nts::C_4008>();
+        if (type == "4013")
+            return std::make_unique<nts::C_4013>();
         if (type == "and")
             return std::make_unique<nts::C_and>();
         if (type == "logger")

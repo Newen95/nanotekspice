@@ -41,6 +41,7 @@ namespace nts
             std::list<std::unique_ptr<Link>> _connectedTo;
             Tristate _state = Undefined;
             Tristate _nexState = Undefined;
+            bool _isLock;
 
         public:
             Pin(PinType type);
@@ -50,11 +51,13 @@ namespace nts
             const Tristate &getState() const;
             const Tristate &getNextState() const;
             std::list<std::unique_ptr<Link>> &getConnectedTo();
+            const bool &getIsLock() const;
 
             void setState(const Tristate state);
             void setNextState(const Tristate state);
             void setOutState(const Tristate state);
             void setOutNextState(const Tristate state);
+            void setIsLock(const bool state);
     };
 }
 
