@@ -60,6 +60,8 @@ std::unique_ptr<nts::IComponent> createComponent(const std::string &type)
             return std::make_unique<nts::C_logger>();
         if (type == "clock")
             return std::make_unique<nts::C_clock>();
+        if (type == "4017")
+            return std::make_unique<nts::C_4017>();
     } else {
         throw std::invalid_argument("Erreur: factory.cpp: Type inconnu: " + type);
     }
