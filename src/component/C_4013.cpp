@@ -48,7 +48,8 @@ void nts::C_4013::simulateComponent()
         _state1 = True;
     } else if (reset1 == True) {
         _state1 = False;
-    }
+    } else if (data1 == Undefined)
+        _state1 = Undefined;
 
     if (reset1 == True && set1 == True)
         _qstate1 = True;
@@ -68,7 +69,8 @@ void nts::C_4013::simulateComponent()
         _state2 = True;
     } else if (reset2 == True) {
         _state2 = False;
-    }
+    } else if (data2 == Undefined)
+        _state2 = Undefined;
 
     if (reset2 == True && set2 == True)
         _qstate2 = True;

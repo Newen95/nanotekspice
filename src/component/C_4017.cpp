@@ -61,19 +61,24 @@ void nts::C_4017::simulateComponent()
     int index = 1;
 
     if (in_r_state == True) {
-        for (int i = 1; i <= 11; ++i) {
+        for (int i = 1; i <= 12; ++i) {
             if (i == 8)
                 continue;
             assignPinValue(i, False, this);
+            this->getPin(index)->setState(False);
         }
-        assignPinValue(12, False, this);
     }
 
     else if ((in_0_state == True || in_1_state == True) && in_r_state != Undefined) {
         assignPinValue(12, False, this);
-        for (; index <= 11; index++)
+        for (; index <= 11; index++) {
+            std::cerr << "TEST: " <<  this->getPin(index)->getState() << std::endl;
             if (this->getPin(index)->getState() == True)
                 break;
+        }
+
+        std::cerr << "TEST: " <<  index << std::endl;
+
         index = getNextIndex(index);
         for (int i = 1; i <= 11; i++) {
             if (i == 8)
