@@ -26,8 +26,8 @@ nts::Tristate nts::AComponent::compute(std::size_t pin)
 
 void nts::AComponent::simulate(std::size_t tick)
 {
-    if (_isLock)
-        return;
+    // if (_isLock)
+    //     return;
 
     _currentTick += tick;
     _isLock = true;
