@@ -40,25 +40,45 @@ void nts::C_4013::simulateComponent()
     Tristate set1 = this->getPin(6)->getState();
     Tristate set2 = this->getPin(8)->getState();
 
+    Tristate _qstate1, _qstate2;
+
     if (clk1 == True) {
-        if (reset1 == True)
-            _state1 = False;
-        else if (set1 == True)
-            _state1 = True;
-        else
-            _state1 = data1;
+        _state1 = data1;
+    } if (set1 == True) {
+        _state1 = True;
+    } else if (reset1 == True) {
+        _state1 = False;
     }
+
+    if (reset1 == True && set1 == True)
+        _qstate1 = True;
+    else if (_state1 == True && reset1 != Undefined)
+        _qstate1 = False;
+    else if (_state1 == False && set1 != Undefined)
+        _qstate1 = True;
+    else
+        _qstate1 = Undefined;
+
     assignPinValue(1, _state1, this);
-    assignPinValue(2, _state1 == True ? False : (_state1 == Undefined ? Undefined : True), this);
+    assignPinValue(2, _qstate1, this);
 
     if (clk2 == True) {
-        if (reset2 == True)
-            _state2 = False;
-        else if (set2 == True)
-            _state2 = True;
-        else
-            _state2 = data2;
+        _state2 = data2;
+    } if (set2 == True) {
+        _state2 = True;
+    } else if (reset2 == True) {
+        _state2 = False;
     }
+
+    if (reset2 == True && set2 == True)
+        _qstate2 = True;
+    else if (_state2 == True && reset2 != Undefined)
+        _qstate2 = False;
+    else if (_state2 == False && set2 != Undefined)
+        _qstate2 = True;
+    else
+        _qstate2 = Undefined;
+
     assignPinValue(13, _state2, this);
-    assignPinValue(12, _state1 == True ? False : (_state2 == Undefined ? Undefined : True), this);
+    assignPinValue(12, _qstate2, this);
 }
