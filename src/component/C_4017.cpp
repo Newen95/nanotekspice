@@ -27,7 +27,7 @@ nts::C_4017::C_4017() : AComponent("4017")
     addPin(15, PinType::typeInput);
 }
 
-static int getNextIndex(int index)
+void nts::C_4017::getNextIndex(int index)
 {
     if (index == 1)
         index = 5;
@@ -47,10 +47,10 @@ static int getNextIndex(int index)
         index = 11;
     else if (index == 10)
         index = 1;
-    else if (index == 11 || index == 12)
+    else if (index == 11 || index == -1)
         index = 3;
 
-    return index;
+    _index = index;
 }
 
 void nts::C_4017::simulateComponent()
@@ -58,32 +58,23 @@ void nts::C_4017::simulateComponent()
     Tristate in_0_state = this->getPin(14)->getState();
     Tristate in_1_state = this->getPin(13)->getState();
     Tristate in_r_state = this->getPin(15)->getState();
-    int index = 1;
 
     if (in_r_state == True) {
-        for (int i = 1; i <= 12; ++i) {
+        for (int i = 1; i <= 12; i++) {
             if (i == 8)
                 continue;
             assignPinValue(i, False, this);
-            this->getPin(index)->setState(False);
         }
     }
 
     else if ((in_0_state == True || in_1_state == True) && in_r_state != Undefined) {
         assignPinValue(12, False, this);
-        for (; index <= 11; index++) {
-            std::cerr << "TEST: " <<  this->getPin(index)->getState() << std::endl;
-            if (this->getPin(index)->getState() == True)
-                break;
-        }
+        getNextIndex(_index);
 
-        std::cerr << "TEST: " <<  index << std::endl;
-
-        index = getNextIndex(index);
         for (int i = 1; i <= 11; i++) {
             if (i == 8)
                 continue;
-            if (i == index)
+            if (i == _index)
                 assignPinValue(i, True, this);
             else
                 assignPinValue(i, False, this);
