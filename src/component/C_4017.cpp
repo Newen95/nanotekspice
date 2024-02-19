@@ -61,7 +61,6 @@ void nts::C_4017::simulateComponent()
     int index = 1;
 
     if (in_r_state == True) {
-        std::cerr << "TEST: " << std::endl;
         for (int i = 1; i <= 11; ++i) {
             if (i == 8)
                 continue;
