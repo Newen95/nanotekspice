@@ -64,6 +64,8 @@ std::unique_ptr<nts::IComponent> createComponent(const std::string &type)
             return std::make_unique<nts::C_4017>();
         if (type == "4040")
             return std::make_unique<nts::C_4040>();
+        if (type == "4094")
+            return std::make_unique<nts::C_4094>();
     } else {
         throw std::invalid_argument("Erreur: factory.cpp: Type inconnu: " + type);
     }

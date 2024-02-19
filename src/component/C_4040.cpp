@@ -77,7 +77,7 @@ void nts::C_4040::simulateComponent()
         }
     }
 
-    else if (clock == True) {
+    else if (clock == False) {
         _nbr += 1;
         if (_nbr > 4095)
             _nbr = 0;

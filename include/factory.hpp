@@ -39,6 +39,7 @@
 #include "component/C_4013.hpp"
 #include "component/C_4017.hpp"
 #include "component/C_4040.hpp"
+#include "component/C_4094.hpp"
 
 #include "component/C_logger.hpp"
 #include "component/C_clock.hpp"
