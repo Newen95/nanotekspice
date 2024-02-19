@@ -57,24 +57,55 @@ void nts::C_4094::simulateComponent()
     Tristate data = this->getPin(2)->getState();
     Tristate strobe = this->getPin(1)->getState();
     Tristate enable = this->getPin(15)->getState();
+    Tristate toAssign;
+    int len;
 
     if (clock == True) {
-        if (strobe == True && enable == True) {
-            for (int i = 7; i >= 0; i--) {
-                Tristate bit = static_cast<Tristate>((data >> i) & 0x1);
-                this->getPin(getPos(i))->setState(bit);
+        if (enable == False) {
+            for (int i = 0; i < 8; i++)
+                assignPinValue(getPos(i), Undefined, this);
+            assignPinValue(9, Undefined, this);
+        }
+
+        if (enable == True && strobe == True && data != Undefined) {
+
+            if (data == False)
+                _data = '0' + _data;
+            else
+                _data = '1' + _data;
+
+            len = _data.length();
+
+            if (len > 8) {
+                toAssign = _data[8] == '0' ? False : True;
+                assignPinValue(9, toAssign, this);
+                _data.pop_back();
+                len--;
+            }
+
+            for (int i = 0; i < len; i++) {
+                if (_data[i] == '0')
+                    toAssign = False;
+                else
+                    toAssign = True;
+                assignPinValue(getPos(i), toAssign, this);
             }
         }
+    }
 
-        Tristate lastBit = this->getPin(11)->getState();
 
-        for (int i = 7; i > 0; --i) {
-            this->getPin(getPos(i))->setState(this->getPin(getPos(i - 1))->getState());
+    else {
+        if (enable == False) {
+            for (int i = 0; i < 8; i++)
+                assignPinValue(getPos(i), Undefined, this);
+            assignPinValue(10, Undefined, this);
+        } if (enable == True && strobe == True && data == True) {
+            len = _data.length();
+            if (len >= 8) {
+                toAssign = _data[7] == '0' ? False : True;
+                assignPinValue(10, toAssign, this);
+            }
         }
-        this->getPin(4)->setState(lastBit);
-
-        this->getPin(9)->setState(this->getPin(11)->getState());
-        this->getPin(10)->setState(this->getPin(15)->getState());
     }
 }
 

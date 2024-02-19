@@ -10,13 +10,12 @@
 #define C_4094_HPP
 
 #include "../AComponent.hpp"
-#include <bitset>
 
 namespace nts
 {
     class C_4094 : public AComponent {
         protected:
-            int _data;
+            std::string _data = "";
         public:
             C_4094();
             ~C_4094() override = default;
