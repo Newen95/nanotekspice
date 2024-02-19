@@ -38,7 +38,7 @@ void nts::AComponent::simulate(std::size_t tick)
         for (auto& linkPtr : pin->getConnectedTo()) {
             IComponent* component = linkPtr->component;
 
-            if (component->getCurrentTick() != _currentTick && component->getType() == "input")
+            if (component->getCurrentTick() != _currentTick)
                 component->simulate(1);
         }
     }
