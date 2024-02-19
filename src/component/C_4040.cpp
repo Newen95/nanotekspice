@@ -82,7 +82,6 @@ void nts::C_4040::simulateComponent()
         if (_nbr > 4095)
             _nbr = 0;
         std::string binaryString = std::bitset<12>(_nbr).to_string();
-        std::cerr << "TEST: " << binaryString << std::endl;
         for (int i = 15; i > 0; i--) {
             if (i == 8 || i == 10 || i == 11)
                 continue;
