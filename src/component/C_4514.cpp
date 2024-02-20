@@ -44,44 +44,12 @@ void nts::C_4514::allUndefined()
 
 int nts::C_4514::getTotalValue(Tristate in_0, Tristate in_1, Tristate in_2, Tristate in_3)
 {
-    int val_0 = 0;
-    int val_1 = 0;
-    int val_2 = 0;
-    int val_3 = 0;
+    int val_0 = (in_0 == True) ? 1 : 0;
+    int val_1 = (in_1 == True) ? 1 : 0;
+    int val_2 = (in_2 == True) ? 1 : 0;
+    int val_3 = (in_3 == True) ? 1 : 0;
 
-    if (in_0 == False) {
-        val_0 = 0;
-    } else if (in_0 == True){
-        val_0 = 1;
-    } else {
-        return 84;
-    }
-
-    if (in_1 == False) {
-        val_1 = 0;
-    } else if (in_1 == True){
-        val_1 = 1;
-    } else {
-        return 84;
-    }
-
-    if (in_2 == False) {
-        val_2 = 0;
-    } else if (in_2 == True){
-        val_2 = 1;
-    } else {
-        return 84;
-    }
-
-    if (in_3 == False) {
-        val_3 = 0;
-    } else if (in_3 == True){
-        val_3 = 1;
-    } else {
-        return 84;
-    }
-
-    return ((val_0 * 1) + (val_1 * 2) + (val_2 * 4) + (val_3 * 8));
+    return val_0 + (val_1 << 1) + (val_2 << 2) + (val_3 << 3);
 }
 
 void nts::C_4514::simulateComponent()
@@ -98,11 +66,18 @@ void nts::C_4514::simulateComponent()
             assignPinValue(i, False, this);
         }
     } else {
-        printf("Total value: %d\n", total_value);
         total_value = getTotalValue(in_0, in_1, in_2, in_3);
         if (total_value == 84) {
             allUndefined();
+            return;
         }
-        assignPinValue(total_value + 4, False, this);
+        for (int i = 4; i <= 20; i++) {
+            if (i == total_value + 4) {
+                assignPinValue(total_value + 4, True, this);
+            } else {
+                assignPinValue(i, False, this);
+            }
+        }
+        assignPinValue(total_value + 4, True, this);
     }
 }
