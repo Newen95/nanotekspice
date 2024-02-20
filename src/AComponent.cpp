@@ -35,11 +35,13 @@ void nts::AComponent::simulate(std::size_t tick)
     for (auto& pinPair : _pins) {
         Pin* pin = pinPair.second.get();
 
-        for (auto& linkPtr : pin->getConnectedTo()) {
-            IComponent* component = linkPtr->component;
+        if (pin->getPinType()== typeInput) {
+            for (auto& linkPtr : pin->getConnectedTo()) {
+                IComponent* component = linkPtr->component;
 
-            if (component->getCurrentTick() != _currentTick)
-                component->simulate(1);
+                if (component->getCurrentTick() != _currentTick)
+                    component->simulate(1);
+            }
         }
     }
     this->simulateComponent();
