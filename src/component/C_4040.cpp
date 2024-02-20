@@ -68,6 +68,9 @@ void nts::C_4040::simulateComponent()
     bool first = false;
     int index = 0;
 
+    if (_nbr == 0)
+        first = True;
+
     if (reset == True) {
         _nbr = 0;
         for (int i = 1; i <= 15; i++) {
@@ -78,7 +81,6 @@ void nts::C_4040::simulateComponent()
     }
 
     else if (clock == True && reset == False) {
-        _nbr += 1;
         if (_nbr > 4095)
             _nbr = 0;
         std::string binaryString = std::bitset<12>(_nbr).to_string();
@@ -96,5 +98,6 @@ void nts::C_4040::simulateComponent()
             assignPinValue(getPos(i), toAssign, this);
             index++;
         }
+        _nbr += 1;
     }
 }
