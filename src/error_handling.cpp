@@ -60,6 +60,7 @@ static int parse_content(std::deque<std::string> &lines, std::deque<Component> &
 {
     bool is_chipsets = false;
     bool is_links_section = false;
+    bool is_there_component = false;
 
     for (const auto &line : lines) {
         if (line[0] == '.' && line != ".chipsets:" && line != ".links:") {
@@ -95,10 +96,15 @@ static int parse_content(std::deque<std::string> &lines, std::deque<Component> &
                         return 84;
 
                     components.push_back(new_component);
+                    is_there_component = true;
                     add_component_to_list(all_component_name, new_component.name);
                 }
             }
         } else if (is_links_section && !line.empty()) {
+            if (is_there_component == false) {
+                std::cerr << "Erreur: Aucun composant fournis." << std::endl;
+                return 84;
+            }
             std::istringstream iss(line);
             std::string component1, component2, component1_pin, component2_pin, component1_name, component2_name;
             while (iss >> component1 >> component2) {
