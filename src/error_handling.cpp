@@ -81,17 +81,22 @@ static int parse_content(std::deque<std::string> &lines, std::deque<Component> &
 
         if (!is_links_section && !line.empty()) {
             Component new_component;
-            size_t pos = line.find_first_of(" \t");
-            if (pos != std::string::npos) {
-                new_component.type = line.substr(0, pos);
-                new_component.name = line.substr(pos + 1);
-                new_component.links.clear();
+            size_t type_end_pos = line.find_first_of(" \t");
+            if (type_end_pos != std::string::npos) {
+                new_component.type = line.substr(0, type_end_pos);
 
-                if (check_type(new_component.type) == 84 || check_name(new_component.name, all_component_name) == 84)
-                    return 84;
+                size_t name_start_pos = line.find_first_not_of(" \t", type_end_pos);
+                if (name_start_pos != std::string::npos) {
+                    new_component.name = line.substr(name_start_pos);
 
-                components.push_back(new_component);
-                add_component_to_list(all_component_name, new_component.name);
+                    new_component.links.clear();
+
+                    if (check_type(new_component.type) == 84 || check_name(new_component.name, all_component_name) == 84)
+                        return 84;
+
+                    components.push_back(new_component);
+                    add_component_to_list(all_component_name, new_component.name);
+                }
             }
         } else if (is_links_section && !line.empty()) {
             std::istringstream iss(line);
