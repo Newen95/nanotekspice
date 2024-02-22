@@ -65,11 +65,16 @@ void nts::C_4017::simulateComponent()
                 continue;
             assignPinValue(i, False, this);
         }
+        assignPinValue(3, True, this);
+        assignPinValue(12, True, this);
     }
 
     else if ((in_0_state == True || in_1_state == False) && in_r_state != Undefined) {
-        assignPinValue(12, False, this);
+        assignPinValue(12, True, this);
         getNextIndex(_index);
+
+        if (_index == 1 || _index == 5 || _index == 6 || _index == 9 || _index == 11)
+            assignPinValue(12, False, this);
 
         for (int i = 1; i <= 11; i++) {
             if (i == 8)
@@ -79,7 +84,5 @@ void nts::C_4017::simulateComponent()
             else
                 assignPinValue(i, False, this);
         }
-    } else if ((in_0_state == False && in_1_state == True) && in_r_state != Undefined) {
-        assignPinValue(12, True, this);
     }
 }
