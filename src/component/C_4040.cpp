@@ -80,7 +80,7 @@ void nts::C_4040::simulateComponent()
         }
     }
 
-    else if (clock == True && reset == False) {
+    else if (clock == False && reset == False) {
         if (_nbr > 4095)
             _nbr = 0;
         std::string binaryString = std::bitset<12>(_nbr).to_string();
