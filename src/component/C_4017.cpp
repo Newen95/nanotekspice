@@ -67,7 +67,7 @@ void nts::C_4017::simulateComponent()
         }
     }
 
-    else if ((in_0_state == True || in_1_state == True) && in_r_state != Undefined) {
+    else if ((in_0_state == True || in_1_state == False) && in_r_state != Undefined) {
         assignPinValue(12, False, this);
         getNextIndex(_index);
 
@@ -79,7 +79,7 @@ void nts::C_4017::simulateComponent()
             else
                 assignPinValue(i, False, this);
         }
-    } else if ((in_0_state == False && in_1_state == False) && in_r_state != Undefined) {
+    } else if ((in_0_state == False && in_1_state == True) && in_r_state != Undefined) {
         assignPinValue(12, True, this);
     }
 }
