@@ -19,6 +19,7 @@ namespace nts
             ~C_4514() override = default;
 
             void allUndefined();
+            int isUndefined(Tristate in_0, Tristate in_1, Tristate in_2, Tristate in_3);
             int getTotalValue(Tristate in_0, Tristate in_1, Tristate in_2, Tristate in_3);
             void simulateComponent() override;
     };

@@ -42,6 +42,14 @@ void nts::C_4514::allUndefined()
     }
 }
 
+int nts::C_4514::isUndefined(Tristate in_0, Tristate in_1, Tristate in_2, Tristate in_3)
+{
+    if (in_0 == Undefined && in_1 == Undefined && in_2 == Undefined && in_3 == Undefined) {
+        return 1;
+    }
+    return 0;
+}
+
 int nts::C_4514::getTotalValue(Tristate in_0, Tristate in_1, Tristate in_2, Tristate in_3)
 {
     int val_0 = (in_0 == True) ? 1 : 0;
@@ -66,6 +74,8 @@ void nts::C_4514::simulateComponent()
             assignPinValue(i, False, this);
         }
     } else {
+        if (isUndefined(in_0, in_1, in_2, in_3) == 1)
+            return;
         total_value = getTotalValue(in_0, in_1, in_2, in_3);
         if (total_value == 84) {
             allUndefined();
