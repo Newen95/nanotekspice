@@ -9,6 +9,7 @@
 #define C_LOGGER_HPP
 
 #include <fstream>
+#include <cmath>
 #include "../AComponent.hpp"
 
 namespace nts
@@ -18,6 +19,7 @@ namespace nts
             C_logger();
             ~C_logger() override = default;
 
+            int convertBoolToDecimal(bool boolArray[8]);
             void simulateComponent() override;
     };
 }

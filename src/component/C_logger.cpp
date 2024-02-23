@@ -22,28 +22,26 @@ nts::C_logger::C_logger() : AComponent("logger")
     addPin(10, PinType::typeInput);
 }
 
-void nts::C_logger::simulateComponent()
-{
+void nts::C_logger::simulateComponent() {
     std::ofstream logfile("log.bin", std::ios::out | std::ios::binary | std::ios::app);
-    char to_write = 0;
+    char to_write = 0; // Modifier le type de to_write en char pour stocker un caractère ASCII
     nts::Tristate inhibit = this->getPin(10)->getState();
     nts::Tristate state;
 
     if (inhibit == nts::False && this->getPin(9)->getState() == nts::True) {
         for (int i = 1; i <= 8; ++i) {
             state = this->getPin(i)->getState();
-            if (state != nts::Undefined) {
-                to_write |= (1 << (i - 1));
-            } else {
-                return;
+            if (state == nts::True) { // Modifier pour vérifier si l'état est True
+                to_write += pow(2, (i - 1)); // Inverser l'ordre des bits
+            } else if (state == nts::Undefined) {
+                return; // Sortir de la fonction si un état est Undefined
             }
         }
         if (logfile.is_open()) {
-            logfile.write(&to_write, 1);
+            logfile.write(&to_write, 1); // Écrire le caractère dans le fichier binaire
             logfile.close();
         } else {
             std::cerr << "Erreur : Impossible d'ouvrir le fichier log.bin" << std::endl;
         }
     }
 }
-
