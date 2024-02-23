@@ -23,6 +23,7 @@ nts::C_4512::C_4512() : AComponent("4512")
     addPin(12, PinType::typeInput);
     addPin(13, PinType::typeInput);
     addPin(14, PinType::typeOutput);
+    addPin(15, PinType::typeInput);
 }
 
 void nts::C_4512::simulateComponent()
