@@ -42,6 +42,7 @@
 #include "component/C_4094.hpp"
 #include "component/C_4512.hpp"
 #include "component/C_4514.hpp"
+#include "component/C_2716.hpp"
 
 #include "component/C_logger.hpp"
 #include "component/C_clock.hpp"
