@@ -1,0 +1,111 @@
+/*
+** EPITECH PROJECT, 2023
+** B-OOP-400-LYN-4-1-tekspice-tom.blancheton
+** File description:
+** AComponent.cpp
+*/
+
+#include "../include/AComponent.hpp"
+
+
+// CTOR
+
+
+nts::AComponent::AComponent(const std::string &type) : _type(type), _currentTick(0), _isLock(false)
+{}
+
+// ICOMPONENT FUNCTION
+
+
+nts::Tristate nts::AComponent::compute(std::size_t pin)
+{
+    (void)pin;
+    // fonction qui sert a rien
+    return Undefined;
+}
+
+void nts::AComponent::simulate(std::size_t tick)
+{
+    if (_isLock)
+        return;
+
+    _currentTick += tick;
+    _isLock = true;
+
+    for (auto& pinPair : _pins) {
+        Pin* pin = pinPair.second.get();
+
+        if (pin->getPinType()== typeInput) {
+            for (auto& linkPtr : pin->getConnectedTo()) {
+                IComponent* component = linkPtr->component;
+
+                if (component->getCurrentTick() != _currentTick)
+                    component->simulate(1);
+            }
+        }
+    }
+    this->simulateComponent();
+}
+
+void nts::AComponent::setLink(std::size_t pin, IComponent &other, std::size_t otherPin)
+{
+    if (_pins.find(pin) == _pins.end()) {
+        throw std::out_of_range("Erreur: AComponent.cpp: Le pin spécifié n'existe pas dans ce composant.");
+    }
+
+    std::unique_ptr<Pin> &currentPin = _pins[pin];
+    std::unique_ptr<Link> link = std::make_unique<Link>();
+
+    link->component = &other;
+    link->pin = otherPin;
+
+    currentPin->getConnectedTo().push_back(std::move(link));
+}
+
+
+// OTHER
+
+
+void nts::AComponent::addPin(int number, PinType type)
+{
+    _pins[number] = std::make_unique<Pin>(type);
+}
+
+const std::size_t &nts::AComponent::getCurrentTick() const
+{
+    return _currentTick;
+}
+
+const std::string &nts::AComponent::getType() const
+{
+    return _type;
+}
+
+const std::map<int, std::unique_ptr<nts::Pin>>& nts::AComponent::getPins() const
+{
+    return _pins;
+}
+
+std::unique_ptr<nts::Pin> &nts::AComponent::getPin(int number)
+{
+    auto it = _pins.find(number);
+    if (it != _pins.end()) {
+        return it->second;
+    } else {
+        throw std::out_of_range("Pin not found");
+    }
+}
+
+void nts::AComponent::setIsLock(bool state)
+{
+    _isLock = state;
+}
+
+void nts::AComponent::assignPinValue(int pinNbr, Tristate state, IComponent *Component)
+{
+    std::unique_ptr<Pin> &pin = Component->getPin(pinNbr);
+    if (pin) {
+        pin->setState(state);
+        pin->setOutState(state);
+    }
+}
