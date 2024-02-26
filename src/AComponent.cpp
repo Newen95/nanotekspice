@@ -33,11 +33,8 @@ void nts::AComponent::simulate(std::size_t tick)
     for (auto& pinPair : _pins) {
         Pin* pin = pinPair.second.get();
 
-        if (pin->getPinType() == typeInput && pin->getScdLock() != true) {
-            if (pin->getLock() != true)
-                pin->setLock(true);
-            else
-                pin->setScdLock(true);
+        if (pin->getPinType() == typeInput && pin->getLock() != true) {
+            pin->setLock(true);
             for (auto& linkPtr : pin->getConnectedTo()) {
                 IComponent* component = linkPtr->component;
 

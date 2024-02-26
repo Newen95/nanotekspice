@@ -170,7 +170,6 @@ void simulateTick(nts::Circuit &circuit)
             const auto &_pin = pin.second.get();
             _pin->setIsLock(false);
             _pin->setLock(false);
-            _pin->setScdLock(false);
         }
     }
 

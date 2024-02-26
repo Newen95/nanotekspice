@@ -35,11 +35,6 @@ const bool &nts::Pin::getLock() const
     return _Lock;
 }
 
-const bool &nts::Pin::getScdLock() const
-{
-    return _ScdLock;
-}
-
 void nts::Pin::setState(const nts::Tristate state)
 {
     _state = state;
@@ -89,9 +84,4 @@ void nts::Pin::setIsLock(const bool state)
 void nts::Pin::setLock(const bool state)
 {
     _Lock = state;
-}
-
-void nts::Pin::setScdLock(const bool state)
-{
-    _ScdLock = state;
 }
