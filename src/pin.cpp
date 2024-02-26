@@ -60,6 +60,7 @@ void nts::Pin::setOutState(const nts::Tristate state)
             _isLock = true;
             component.getPin(component_pin).get()->setOutState(state);
         }
+        _isLock = false;
     }
 }
 
@@ -74,7 +75,6 @@ void nts::Pin::setOutNextState(const nts::Tristate state)
             component.getPin(component_pin).get()->setOutNextState(state);
         }
     }
-    _isLock = false;
 }
 
 void nts::Pin::setIsLock(const bool state)
