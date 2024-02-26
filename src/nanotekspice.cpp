@@ -169,6 +169,8 @@ void simulateTick(nts::Circuit &circuit)
         for (const auto &pin : component->getPins()) {
             const auto &_pin = pin.second.get();
             _pin->setIsLock(false);
+            _pin->setLock(false);
+            _pin->setScdLock(false);
         }
     }
 

@@ -10,6 +10,10 @@
 #include <chrono>
 #include <thread>
 
+
+// UTILS
+
+
 static nts::Tristate accessPinValue(const std::map<std::string, std::unique_ptr<nts::IComponent>> &components, const std::string &componentName)
 {
     auto it = components.find(componentName);
@@ -459,6 +463,10 @@ void MainWindow::run(nts::Circuit &circuit, std::string componentName)
         render(_textBox);
     }
 }
+
+
+// COMPONENTS
+
 
 void MainWindow::createTrue()
 {

@@ -26,16 +26,18 @@ nts::Tristate nts::AComponent::compute(std::size_t pin)
 
 void nts::AComponent::simulate(std::size_t tick)
 {
-    if (_isLock)
-        return;
-
-    _currentTick += tick;
+    if (_isLock == false)
+        _currentTick += tick;
     _isLock = true;
 
     for (auto& pinPair : _pins) {
         Pin* pin = pinPair.second.get();
 
-        if (pin->getPinType()== typeInput) {
+        if (pin->getPinType() == typeInput && pin->getScdLock() != true) {
+            if (pin->getLock() != true)
+                pin->setLock(true);
+            else
+                pin->setScdLock(true);
             for (auto& linkPtr : pin->getConnectedTo()) {
                 IComponent* component = linkPtr->component;
 
