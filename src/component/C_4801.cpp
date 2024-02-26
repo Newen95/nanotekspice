@@ -38,5 +38,32 @@ nts::C_4801::C_4801() : AComponent("4801")
 
 void nts::C_4801::simulateComponent()
 {
-    // todo
+    Tristate enableState = this->getPin(18)->getState();
+    Tristate writeState = this->getPin(21)->getState();
+    Tristate readState = this->getPin(20)->getState();
+
+    std::string address;
+    for (int i = 0; i < 10; ++i) {
+        address += std::to_string(this->getPin(i + 1)->getState());
+    }
+
+    int decimalAddress = std::stoi(address, nullptr, 2);
+
+    if (enableState == True) {
+        if (writeState == True) {
+            std::string inputData;
+            for (int i = 0; i < 8; ++i) {
+                Tristate inputState = this->getPin(i + 9)->getState();
+                inputData += std::to_string(inputState);
+            }
+            ram[decimalAddress] = inputData;
+        }
+        else if (readState == True) {
+            std::string outputData = ram[decimalAddress];
+            for (int i = 0; i < 8; ++i) {
+                Tristate outputState = outputData[i] == '1' ? True : False;
+                this->getPin(i + 9)->setState(outputState);
+            }
+        }
+    }
 }

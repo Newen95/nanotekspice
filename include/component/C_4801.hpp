@@ -10,10 +10,13 @@
 #define C_4801_HPP
 
 #include "../AComponent.hpp"
+#include <unordered_map>
 
 namespace nts
 {
     class C_4801 : public AComponent {
+        private:
+            std::unordered_map<int, std::string> ram;
         public:
             C_4801();
             ~C_4801() override = default;
