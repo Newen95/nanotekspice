@@ -33,7 +33,7 @@ void nts::C_4008::_adder(int in1, int in2, int out)
     Tristate in_1 = this->getPin(in1)->getState();
     Tristate in_2 = this->getPin(in2)->getState();
     Tristate in_c = this->getPin(9)->getState();
-    Tristate _out, _sum, _carry;
+    Tristate _out, _sum;
 
     const auto &f = (*getPin(out)).getConnectedTo();
 
@@ -85,23 +85,8 @@ void nts::C_4008::_adder(int in1, int in2, int out)
             _sum = Undefined;
         else
             _sum = False;
-
-        if (in_1 == True && in_2 == True)
-            _carry = True;
-        else if (in_1 == True && in_c == True)
-            _carry = True;
-        else if (in_2 == True && in_c == True)
-            _carry = True;
-        else if ((in_1 == Undefined && in_2 == Undefined && in_c != False)
-                || (in_1 == Undefined && in_c == Undefined && in_2 != False)
-                || (in_2 == Undefined && in_c == Undefined && in_1 != False))
-            _carry = Undefined;
-        else
-            _carry = False;
     }
 
-    if (out != 13)
-        assignPinValue(9, _carry, this);
     assignPinValue(14, _out, this);
     assignPinValue(out, _sum, this);
 }
