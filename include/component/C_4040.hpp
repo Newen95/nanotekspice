@@ -21,7 +21,7 @@ namespace nts
             C_4040();
             ~C_4040() override = default;
 
-            void simulateComponent() override;
+            void compute(std::size_t pin) override;
     };
 }
 

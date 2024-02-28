@@ -18,7 +18,7 @@ namespace nts
             C_4030();
             ~C_4030() override = default;
 
-            void simulateComponent() override;
+            void compute(std::size_t pin) override;
             void _xor(int in1, int in2, int out);
     };
 }

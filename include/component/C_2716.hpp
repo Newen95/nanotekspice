@@ -18,7 +18,7 @@ class C_2716 : public AComponent {
         C_2716();
         ~C_2716() override = default;
 
-        void simulateComponent() override;
+        void compute(std::size_t pin) override;
     };
 }
 

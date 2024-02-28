@@ -50,8 +50,10 @@ static int getPos(int pos)
     return _pos;
 }
 
-void nts::C_4094::simulateComponent()
+void nts::C_4094::compute(std::size_t pin)
 {
+    getPin(pin)->setLock(true);
+
     Tristate clock = this->getPin(3)->getState();
     Tristate data = this->getPin(2)->getState();
     Tristate strobe = this->getPin(1)->getState();

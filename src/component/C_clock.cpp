@@ -13,8 +13,9 @@ nts::C_clock::C_clock() : AComponent("clock")
     addPin(1, PinType::typeOutput);
 }
 
-void nts::C_clock::simulateComponent()
+void nts::C_clock::compute(std::size_t pin)
 {
+    getPin(pin)->setLock(true);
     Tristate in_1 = (*getPin(1)).getState();
 
     for (const auto &tmp : (*getPin(1)).getConnectedTo()) {

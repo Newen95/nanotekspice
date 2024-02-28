@@ -26,8 +26,10 @@ nts::C_4013::C_4013() : AComponent("4013")
 }
 
 
-void nts::C_4013::simulateComponent()
+void nts::C_4013::compute(std::size_t pin)
 {
+    getPin(pin)->setLock(true);
+
     Tristate clk1 = this->getPin(3)->getState();
     Tristate clk2 = this->getPin(11)->getState();
 

@@ -21,7 +21,7 @@ namespace nts
             C_4801();
             ~C_4801() override = default;
 
-            void simulateComponent() override;
+            void compute(std::size_t pin) override;
     };
 }
 

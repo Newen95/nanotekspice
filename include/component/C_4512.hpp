@@ -18,7 +18,7 @@ namespace nts
             C_4512();
             ~C_4512() override = default;
 
-            void simulateComponent() override;
+            void compute(std::size_t pin) override;
     };
 }
 

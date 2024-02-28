@@ -20,7 +20,7 @@ namespace nts
             ~C_logger() override = default;
 
             int convertBoolToDecimal(bool boolArray[8]);
-            void simulateComponent() override;
+            void compute(std::size_t pin) override;
     };
 }
 

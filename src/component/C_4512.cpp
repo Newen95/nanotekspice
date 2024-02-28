@@ -26,8 +26,10 @@ nts::C_4512::C_4512() : AComponent("4512")
     addPin(15, PinType::typeInput);
 }
 
-void nts::C_4512::simulateComponent()
+void nts::C_4512::compute(std::size_t pin)
 {
+    getPin(pin)->setLock(true);
+
     Tristate inhibit = this->getPin(10)->getState();
     Tristate enable = this->getPin(15)->getState();
 

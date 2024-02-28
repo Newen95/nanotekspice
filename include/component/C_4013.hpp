@@ -21,7 +21,7 @@ namespace nts
             C_4013();
             ~C_4013() override = default;
 
-            void simulateComponent() override;
+            void compute(std::size_t pin) override;
     };
 }
 

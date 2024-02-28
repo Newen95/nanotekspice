@@ -22,7 +22,10 @@ nts::C_logger::C_logger() : AComponent("logger")
     addPin(10, PinType::typeInput);
 }
 
-void nts::C_logger::simulateComponent() {
+void nts::C_logger::compute(std::size_t pin)
+{
+    getPin(pin)->setLock(true);
+
     std::ofstream logfile("log.bin", std::ios::out | std::ios::binary | std::ios::app);
     char to_write = 0; // Modifier le type de to_write en char pour stocker un caractère ASCII
     nts::Tristate inhibit = this->getPin(10)->getState();

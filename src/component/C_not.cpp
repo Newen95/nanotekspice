@@ -14,8 +14,20 @@ nts::C_not::C_not() : AComponent("not")
     addPin(2, PinType::typeOutput);
 }
 
-void nts::C_not::simulateComponent()
+void nts::C_not::compute(std::size_t pin)
 {
+    getPin(pin)->setLock(true);
+    auto &_pin = getPin(1);
+    if (_pin->getLock() != true) {
+        _pin->setLock(true);
+        for (auto& linkPtr : _pin->getConnectedTo()) {
+            IComponent* component = linkPtr->component;
+            std::size_t pinNbr = linkPtr->pin;
+
+            component->compute(pinNbr);
+        }
+    }
+
     Tristate in = (*getPin(1)).getState();
 
     for (const auto &tmp : (*getPin(1)).getConnectedTo()) {

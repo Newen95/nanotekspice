@@ -60,8 +60,10 @@ static int getPos(int pos)
     return _pos;
 }
 
-void nts::C_4040::simulateComponent()
+void nts::C_4040::compute(std::size_t pin)
 {
+    getPin(pin)->setLock(true);
+
     Tristate reset = this->getPin(11)->getState();
     Tristate clock = this->getPin(10)->getState();
     Tristate toAssign = Undefined;

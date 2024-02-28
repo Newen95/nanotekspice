@@ -52,8 +52,10 @@ nts::Tristate nts::C_4008::_adder(int in1, int in2, int out, Tristate in_c)
     return _carry;
 }
 
-void nts::C_4008::simulateComponent()
+void nts::C_4008::compute(std::size_t pin)
 {
+    getPin(pin)->setLock(true);
+
     Tristate in_c = this->getPin(9)->getState();
     Tristate _1, _2, _3, _4;
 

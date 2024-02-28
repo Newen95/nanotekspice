@@ -52,12 +52,95 @@ void nts::C_4069::_not(int in, int out)
     }
 }
 
-void nts::C_4069::simulateComponent()
+void nts::C_4069::compute(std::size_t pin)
 {
-    _not(1, 2);
-    _not(3, 4);
-    _not(5, 6);
-    _not(9, 8);
-    _not(11, 10);
-    _not(13, 12);
+    if (pin == 2) {
+        getPin(2)->setLock(true);
+        auto &_pin = getPin(1);
+        if (_pin->getLock() != true) {
+            _pin->setLock(true);
+            for (auto& linkPtr : _pin->getConnectedTo()) {
+                IComponent* component = linkPtr->component;
+                std::size_t pinNbr = linkPtr->pin;
+
+                component->compute(pinNbr);
+            }
+        }
+        _not(1, 2);
+    }
+
+    if (pin == 4) {
+        getPin(4)->setLock(true);
+        auto &_pin = getPin(3);
+        if (_pin->getLock() != true) {
+            _pin->setLock(true);
+            for (auto& linkPtr : _pin->getConnectedTo()) {
+                IComponent* component = linkPtr->component;
+                std::size_t pinNbr = linkPtr->pin;
+
+                component->compute(pinNbr);
+            }
+            _not(3, 4);
+        }
+    }
+
+    if (pin == 6) {
+        getPin(6)->setLock(true);
+        auto &_pin = getPin(5);
+        if (_pin->getLock() != true) {
+            _pin->setLock(true);
+            for (auto& linkPtr : _pin->getConnectedTo()) {
+                IComponent* component = linkPtr->component;
+                std::size_t pinNbr = linkPtr->pin;
+
+                component->compute(pinNbr);
+            }
+            _not(5, 6);
+        }
+    }
+
+    if (pin == 8) {
+        getPin(8)->setLock(true);
+        auto &_pin = getPin(9);
+        if (_pin->getLock() != true) {
+            _pin->setLock(true);
+            for (auto& linkPtr : _pin->getConnectedTo()) {
+                IComponent* component = linkPtr->component;
+                std::size_t pinNbr = linkPtr->pin;
+
+                component->compute(pinNbr);
+            }
+            _not(9, 8);
+        }
+    }
+
+    if (pin == 10) {
+        getPin(10)->setLock(true);
+        auto &_pin = getPin(11);
+        if (_pin->getLock() != true) {
+            _pin->setLock(true);
+            for (auto& linkPtr : _pin->getConnectedTo()) {
+                IComponent* component = linkPtr->component;
+                std::size_t pinNbr = linkPtr->pin;
+
+                component->compute(pinNbr);
+            }
+            _not(11, 10);
+        }
+    }
+
+    if (pin == 12) {
+        getPin(12)->setLock(true);
+        auto &_pin = getPin(13);
+        if (_pin->getLock() != true) {
+            _pin->setLock(true);
+            for (auto& linkPtr : _pin->getConnectedTo()) {
+                IComponent* component = linkPtr->component;
+                std::size_t pinNbr = linkPtr->pin;
+
+                component->compute(pinNbr);
+            }
+            _not(13, 12);
+        }
+    }
 }

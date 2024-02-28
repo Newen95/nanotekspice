@@ -36,8 +36,10 @@ nts::C_4801::C_4801() : AComponent("4801")
     addPin(24, PinType::typeIgnored);
 }
 
-void nts::C_4801::simulateComponent()
+void nts::C_4801::compute(std::size_t pin)
 {
+    getPin(pin)->setLock(true);
+
     Tristate enableState = this->getPin(18)->getState();
     Tristate writeState = this->getPin(21)->getState();
     Tristate readState = this->getPin(20)->getState();

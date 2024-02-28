@@ -20,7 +20,7 @@ namespace nts
             C_4017();
             ~C_4017() override = default;
 
-            void simulateComponent() override;
+            void compute(std::size_t pin) override;
             void getNextIndex(int index);
     };
 }

@@ -18,7 +18,7 @@ namespace nts
             C_xor();
             ~C_xor() override = default;
 
-            void simulateComponent() override;
+            void compute(std::size_t pin) override;
     };
 }
 

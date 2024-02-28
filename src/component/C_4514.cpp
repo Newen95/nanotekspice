@@ -60,8 +60,10 @@ int nts::C_4514::getTotalValue(Tristate in_0, Tristate in_1, Tristate in_2, Tris
     return val_0 + (val_1 << 1) + (val_2 << 2) + (val_3 << 3);
 }
 
-void nts::C_4514::simulateComponent()
+void nts::C_4514::compute(std::size_t pin)
 {
+    getPin(pin)->setLock(true);
+
     Tristate in_0 = this->getPin(2)->getState();
     Tristate in_1 = this->getPin(3)->getState();
     Tristate in_2 = this->getPin(21)->getState();

@@ -13,7 +13,8 @@ nts::C_false::C_false() : AComponent("false")
     addPin(1, PinType::typeOutput);
 }
 
-void nts::C_false::simulateComponent()
+void nts::C_false::compute(std::size_t pin)
 {
+    getPin(pin)->setLock(true);
     assignPinValue(1, False, this);
 }

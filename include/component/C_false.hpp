@@ -18,7 +18,7 @@ namespace nts
             C_false();
             ~C_false() override = default;
 
-            void simulateComponent() override;
+            void compute(std::size_t pin) override;
     };
 }
 

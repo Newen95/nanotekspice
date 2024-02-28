@@ -18,7 +18,7 @@ namespace nts
             C_4071();
             ~C_4071() override = default;
 
-            void simulateComponent() override;
+            void compute(std::size_t pin) override;
             void _or(int in1, int in2, int out);
     };
 }

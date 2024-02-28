@@ -18,7 +18,7 @@ namespace nts
             C_4001();
             ~C_4001() override = default;
 
-            void simulateComponent() override;
+            void compute(std::size_t pin) override;
             void _nor(int in1, int in2, int out);
     };
 }

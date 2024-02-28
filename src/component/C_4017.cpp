@@ -53,8 +53,10 @@ void nts::C_4017::getNextIndex(int index)
     _index = index;
 }
 
-void nts::C_4017::simulateComponent()
+void nts::C_4017::compute(std::size_t pin)
 {
+    getPin(pin)->setLock(true);
+
     Tristate in_0_state = this->getPin(14)->getState();
     Tristate in_1_state = this->getPin(13)->getState();
     Tristate in_r_state = this->getPin(15)->getState();

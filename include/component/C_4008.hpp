@@ -18,7 +18,7 @@ namespace nts
             C_4008();
             ~C_4008() override = default;
 
-            void simulateComponent() override;
+            void compute(std::size_t pin) override;
             Tristate _adder(int in1, int in2, int out, Tristate in_c);
     };
 }

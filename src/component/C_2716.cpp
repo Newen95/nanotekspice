@@ -35,8 +35,10 @@ nts::C_2716::C_2716() : AComponent("2716")
     addPin(24, PinType::typeIgnored);
 }
 
-void nts::C_2716::simulateComponent()
+void nts::C_2716::compute(std::size_t pin)
 {
+    getPin(pin)->setLock(true);
+
     Tristate enable = this->getPin(18)->getState();
     Tristate read = this->getPin(20)->getState();
 

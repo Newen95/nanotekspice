@@ -15,8 +15,30 @@ nts::C_nor::C_nor() : AComponent("nor")
     addPin(3, PinType::typeOutput);
 }
 
-void nts::C_nor::simulateComponent()
+void nts::C_nor::compute(std::size_t pin)
 {
+    getPin(pin)->setLock(true);
+    auto &_pin1 = getPin(1);
+    if (_pin1->getLock() != true) {
+        _pin1->setLock(true);
+        for (auto& linkPtr : _pin1->getConnectedTo()) {
+            IComponent* component = linkPtr->component;
+            std::size_t pinNbr = linkPtr->pin;
+
+            component->compute(pinNbr);
+        }
+    }
+    auto &_pin2 = getPin(2);
+    if (_pin2->getLock() != true) {
+        _pin2->setLock(true);
+        for (auto& linkPtr : _pin2->getConnectedTo()) {
+            IComponent* component = linkPtr->component;
+            std::size_t pinNbr = linkPtr->pin;
+
+            component->compute(pinNbr);
+        }
+    }
+
     Tristate in_1 = (*getPin(1)).getState();
     Tristate in_2 = (*getPin(2)).getState();
 

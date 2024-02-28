@@ -20,7 +20,7 @@ namespace nts
             C_4094();
             ~C_4094() override = default;
 
-            void simulateComponent() override;
+            void compute(std::size_t pin) override;
     };
 }
 

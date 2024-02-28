@@ -18,7 +18,7 @@ namespace nts
             C_clock();
             ~C_clock() override = default;
 
-            void simulateComponent() override;
+            void compute(std::size_t pin) override;
     };
 }
 

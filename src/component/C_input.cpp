@@ -13,8 +13,9 @@ nts::C_input::C_input() : AComponent("input")
     addPin(1, PinType::typeOutput);
 }
 
-void nts::C_input::simulateComponent()
+void nts::C_input::compute(std::size_t pin)
 {
+    getPin(pin)->setLock(true);
     Tristate state = (*getPin(1)).getState();
     assignPinValue(1, state, this);
 }

@@ -17,13 +17,6 @@ nts::AComponent::AComponent(const std::string &type) : _type(type), _currentTick
 // ICOMPONENT FUNCTION
 
 
-nts::Tristate nts::AComponent::compute(std::size_t pin)
-{
-    (void)pin;
-    // fonction qui sert a rien
-    return Undefined;
-}
-
 void nts::AComponent::simulate(std::size_t tick)
 {
     if (_isLock == false)
@@ -31,19 +24,14 @@ void nts::AComponent::simulate(std::size_t tick)
     _isLock = true;
 
     for (auto& pinPair : _pins) {
+        std::size_t pinNbr = pinPair.first;
         Pin* pin = pinPair.second.get();
 
-        if (pin->getPinType() == typeInput && pin->getLock() != true) {
+        if (pin->getPinType() == typeOutput && pin->getLock() != true) {
             pin->setLock(true);
-            for (auto& linkPtr : pin->getConnectedTo()) {
-                IComponent* component = linkPtr->component;
-
-                if (component->getCurrentTick() != _currentTick)
-                    component->simulate(1);
-            }
+            compute(pinNbr);
         }
     }
-    this->simulateComponent();
 }
 
 void nts::AComponent::setLink(std::size_t pin, IComponent &other, std::size_t otherPin)
