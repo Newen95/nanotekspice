@@ -30,6 +30,77 @@ void nts::C_4013::compute(std::size_t pin)
 {
     getPin(pin)->setLock(true);
 
+    getPin(12)->setLock(true);
+    getPin(13)->setLock(true);
+    getPin(1)->setLock(true);
+    getPin(2)->setLock(true);
+
+    auto &_pin5 = getPin(5);
+    if (_pin5->getLock() != true) {
+        _pin5->setLock(true);
+        for (auto& linkPtr : _pin5->getConnectedTo()) {
+            IComponent* component = linkPtr->component;
+            std::size_t pinNbr = linkPtr->pin;
+
+            component->compute(pinNbr);
+        }
+    }
+
+    auto &_pin6 = getPin(6);
+    if (_pin6->getLock() != true) {
+        _pin6->setLock(true);
+        for (auto& linkPtr : _pin6->getConnectedTo()) {
+            IComponent* component = linkPtr->component;
+            std::size_t pinNbr = linkPtr->pin;
+
+            component->compute(pinNbr);
+        }
+    }
+
+    auto &_pin4 = getPin(4);
+    if (_pin4->getLock() != true) {
+        _pin4->setLock(true);
+        for (auto& linkPtr : _pin4->getConnectedTo()) {
+            IComponent* component = linkPtr->component;
+            std::size_t pinNbr = linkPtr->pin;
+
+            component->compute(pinNbr);
+        }
+    }
+
+    auto &_pin9 = getPin(9);
+    if (_pin9->getLock() != true) {
+        _pin9->setLock(true);
+        for (auto& linkPtr : _pin9->getConnectedTo()) {
+            IComponent* component = linkPtr->component;
+            std::size_t pinNbr = linkPtr->pin;
+
+            component->compute(pinNbr);
+        }
+    }
+
+    auto &_pin8 = getPin(8);
+    if (_pin8->getLock() != true) {
+        _pin8->setLock(true);
+        for (auto& linkPtr : _pin8->getConnectedTo()) {
+            IComponent* component = linkPtr->component;
+            std::size_t pinNbr = linkPtr->pin;
+
+            component->compute(pinNbr);
+        }
+    }
+
+    auto &_pin10 = getPin(10);
+    if (_pin10->getLock() != true) {
+        _pin10->setLock(true);
+        for (auto& linkPtr : _pin10->getConnectedTo()) {
+            IComponent* component = linkPtr->component;
+            std::size_t pinNbr = linkPtr->pin;
+
+            component->compute(pinNbr);
+        }
+    }
+
     Tristate clk1 = this->getPin(3)->getState();
     Tristate clk2 = this->getPin(11)->getState();
 
