@@ -44,7 +44,7 @@ void nts::C_4514::allUndefined()
 
 int nts::C_4514::isUndefined(Tristate in_0, Tristate in_1, Tristate in_2, Tristate in_3)
 {
-    if (in_0 == Undefined && in_1 == Undefined && in_2 == Undefined && in_3 == Undefined) {
+    if (in_0 == Undefined || in_1 == Undefined || in_2 == Undefined || in_3 == Undefined) {
         return 1;
     }
     return 0;
