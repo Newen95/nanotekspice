@@ -64,6 +64,30 @@ void nts::C_4040::compute(std::size_t pin)
 {
     getPin(pin)->setLock(true);
 
+    getPin(1)->setLock(true);
+    getPin(2)->setLock(true);
+    getPin(3)->setLock(true);
+    getPin(4)->setLock(true);
+    getPin(5)->setLock(true);
+    getPin(6)->setLock(true);
+    getPin(7)->setLock(true);
+    getPin(9)->setLock(true);
+    getPin(12)->setLock(true);
+    getPin(13)->setLock(true);
+    getPin(14)->setLock(true);
+    getPin(15)->setLock(true);
+
+    auto &_pin1 = getPin(11);
+    if (_pin1->getLock() != true) {
+        _pin1->setLock(true);
+        for (auto& linkPtr : _pin1->getConnectedTo()) {
+            IComponent* component = linkPtr->component;
+            std::size_t pinNbr = linkPtr->pin;
+
+            component->compute(pinNbr);
+        }
+    }
+
     Tristate reset = this->getPin(11)->getState();
     Tristate clock = this->getPin(10)->getState();
     Tristate toAssign = Undefined;
