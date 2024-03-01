@@ -14,8 +14,9 @@
 namespace nts
 {
     class C_4017 : public AComponent {
-        protected:
+        private:
             int _index = -1;
+            bool _bip = false;
         public:
             C_4017();
             ~C_4017() override = default;
