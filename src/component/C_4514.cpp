@@ -63,6 +63,89 @@ int nts::C_4514::getTotalValue(Tristate in_0, Tristate in_1, Tristate in_2, Tris
 void nts::C_4514::compute(std::size_t pin)
 {
     getPin(pin)->setLock(true);
+    getPin(11)->setLock(true);
+    getPin(9)->setLock(true);
+    getPin(10)->setLock(true);
+    getPin(8)->setLock(true);
+    getPin(7)->setLock(true);
+    getPin(6)->setLock(true);
+    getPin(5)->setLock(true);
+    getPin(4)->setLock(true);
+    getPin(18)->setLock(true);
+    getPin(17)->setLock(true);
+    getPin(20)->setLock(true);
+    getPin(19)->setLock(true);
+    getPin(14)->setLock(true);
+    getPin(13)->setLock(true);
+    getPin(16)->setLock(true);
+    getPin(15)->setLock(true);
+
+    auto &_pin2 = getPin(2);
+    if (_pin2->getLock() != true) {
+        _pin2->setLock(true);
+        for (auto& linkPtr : _pin2->getConnectedTo()) {
+            IComponent* component = linkPtr->component;
+            std::size_t pinNbr = linkPtr->pin;
+
+            component->compute(pinNbr);
+        }
+    }
+
+    auto &_pin3 = getPin(3);
+    if (_pin3->getLock() != true) {
+        _pin3->setLock(true);
+        for (auto& linkPtr : _pin3->getConnectedTo()) {
+            IComponent* component = linkPtr->component;
+            std::size_t pinNbr = linkPtr->pin;
+
+            component->compute(pinNbr);
+        }
+    }
+
+    auto &_pin21 = getPin(21);
+    if (_pin21->getLock() != true) {
+        _pin21->setLock(true);
+        for (auto& linkPtr : _pin21->getConnectedTo()) {
+            IComponent* component = linkPtr->component;
+            std::size_t pinNbr = linkPtr->pin;
+
+            component->compute(pinNbr);
+        }
+    }
+
+    auto &_pin22 = getPin(22);
+    if (_pin22->getLock() != true) {
+        _pin22->setLock(true);
+        for (auto& linkPtr : _pin22->getConnectedTo()) {
+            IComponent* component = linkPtr->component;
+            std::size_t pinNbr = linkPtr->pin;
+
+            component->compute(pinNbr);
+        }
+    }
+
+    auto &_pin1 = getPin(1);
+    if (_pin1->getLock() != true) {
+        _pin1->setLock(true);
+        for (auto& linkPtr : _pin1->getConnectedTo()) {
+            IComponent* component = linkPtr->component;
+            std::size_t pinNbr = linkPtr->pin;
+
+            component->compute(pinNbr);
+        }
+    }
+
+    auto &_pin23 = getPin(23);
+    if (_pin23->getLock() != true) {
+        _pin23->setLock(true);
+        for (auto& linkPtr : _pin23->getConnectedTo()) {
+            IComponent* component = linkPtr->component;
+            std::size_t pinNbr = linkPtr->pin;
+
+            component->compute(pinNbr);
+        }
+    }
+
 
     Tristate in_0 = this->getPin(2)->getState();
     Tristate in_1 = this->getPin(3)->getState();
