@@ -23,13 +23,17 @@ void nts::AComponent::simulate(std::size_t tick)
         _currentTick += tick;
     _isLock = true;
 
-    for (auto& pinPair : _pins) {
-        std::size_t pinNbr = pinPair.first;
-        Pin* pin = pinPair.second.get();
+    if (getType() == "logger")
+        compute(0);
+    else {
+        for (auto& pinPair : _pins) {
+            std::size_t pinNbr = pinPair.first;
+            Pin* pin = pinPair.second.get();
 
-        if (pin->getPinType() == typeOutput && pin->getLock() != true) {
-            pin->setLock(true);
-            compute(pinNbr);
+            if (pin->getPinType() == typeOutput && pin->getLock() != true) {
+                pin->setLock(true);
+                compute(pinNbr);
+            }
         }
     }
 }
