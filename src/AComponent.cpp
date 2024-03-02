@@ -7,7 +7,6 @@
 
 #include "../include/AComponent.hpp"
 
-
 // CTOR
 
 
@@ -83,7 +82,9 @@ std::unique_ptr<nts::Pin> &nts::AComponent::getPin(int number)
     if (it != _pins.end()) {
         return it->second;
     } else {
-        throw std::out_of_range("Pin not found");
+        std::ostringstream oss;
+        oss << "Pin " << number << " not found";
+        throw std::out_of_range(oss.str());
     }
 }
 

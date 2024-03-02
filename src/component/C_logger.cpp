@@ -22,10 +22,8 @@ nts::C_logger::C_logger() : AComponent("logger")
     addPin(10, PinType::typeInput);
 }
 
-void nts::C_logger::compute(std::size_t pin)
+void nts::C_logger::compute(std::size_t pin __attribute_maybe_unused__)
 {
-    getPin(pin)->setLock(true);
-
     auto &_pin1 = getPin(1);
     if (_pin1->getLock() != true) {
         _pin1->setLock(true);
@@ -124,8 +122,6 @@ void nts::C_logger::compute(std::size_t pin)
             component->compute(pinNbr);
         }
     }
-
-
 
     std::ofstream logfile("log.bin", std::ios::out | std::ios::binary | std::ios::app);
     char to_write = 0; // Modifier le type de to_write en char pour stocker un caractère ASCII

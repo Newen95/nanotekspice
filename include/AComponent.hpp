@@ -12,6 +12,9 @@
 #include "pin.hpp"
 #include <map>
 #include <memory>
+#include <sstream>
+#include <stdexcept>
+
 
 namespace nts
 {
