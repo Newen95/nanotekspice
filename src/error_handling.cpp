@@ -135,8 +135,8 @@ static int parse_content(std::deque<std::string> &lines, std::deque<Component> &
             break;
     }
 
-    if (!is_chipsets) {
-        std::cerr << "Erreur: Le parametre suivant n'est pas fournis '.chipsets'." << std::endl;
+    if (!is_chipsets || !is_links_section) {
+        std::cerr << "Erreur: Le/les parametre suivant n'est pas fournis '.chipsets' et/ou '.links'." << std::endl;
         return 84;
     }
 
