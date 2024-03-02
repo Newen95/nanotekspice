@@ -129,9 +129,10 @@
             _index = 3;
         }
 
-        if (_goAhead == true) {
+        else {
             assignPinValue(12, True, this);
-            getNextIndex(_index);
+            if (_goAhead == true)
+                getNextIndex(_index);
 
             if (_index == 1 || _index == 5 || _index == 6 || _index == 9 || _index == 11)
                 assignPinValue(12, False, this);

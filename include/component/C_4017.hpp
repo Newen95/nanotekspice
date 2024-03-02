@@ -15,7 +15,7 @@ namespace nts
 {
     class C_4017 : public AComponent {
         private:
-            int _index = -1;
+            int _index = 3;
             bool _bip = false;
         public:
             C_4017();
