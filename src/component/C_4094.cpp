@@ -53,6 +53,27 @@ static int getPos(int pos)
 void nts::C_4094::compute(std::size_t pin)
 {
     getPin(pin)->setLock(true);
+    getPin(4)->setLock(true);
+    getPin(5)->setLock(true);
+    getPin(6)->setLock(true);
+    getPin(7)->setLock(true);
+    getPin(11)->setLock(true);
+    getPin(12)->setLock(true);
+    getPin(13)->setLock(true);
+    getPin(14)->setLock(true);
+    getPin(9)->setLock(true);
+    getPin(10)->setLock(true);
+
+    auto &_pin2 = getPin(2);
+        if (_pin2->getLock() != true) {
+            _pin2->setLock(true);
+            for (auto& linkPtr : _pin2->getConnectedTo()) {
+                IComponent* component = linkPtr->component;
+                std::size_t pinNbr = linkPtr->pin;
+
+                component->compute(pinNbr);
+            }
+        }
 
     Tristate clock = this->getPin(3)->getState();
     Tristate data = this->getPin(2)->getState();
@@ -77,11 +98,13 @@ void nts::C_4094::compute(std::size_t pin)
 
             len = _data.length();
 
-            if (len > 8) {
-                toAssign = _data[8] == '0' ? False : True;
+            if (len > 6) {
+                toAssign = _data[6] == '0' ? False : True;
                 assignPinValue(9, toAssign, this);
-                _data.pop_back();
-                len--;
+                if (len > 8) {
+                    _data.pop_back();
+                    len--;
+                }
             }
 
             for (int i = 0; i < len; i++) {
@@ -100,10 +123,10 @@ void nts::C_4094::compute(std::size_t pin)
             for (int i = 0; i < 8; i++)
                 assignPinValue(getPos(i), Undefined, this);
             assignPinValue(10, Undefined, this);
-        } if (enable == True && strobe == True && data == True) {
+        } if (enable == True && strobe == True && data != Undefined) {
             len = _data.length();
-            if (len >= 8) {
-                toAssign = _data[7] == '0' ? False : True;
+            if (len > 6) {
+                toAssign = _data[6] == '0' ? False : True;
                 assignPinValue(10, toAssign, this);
             }
         }
