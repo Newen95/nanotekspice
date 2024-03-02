@@ -35,29 +35,45 @@ nts::C_4514::C_4514() : AComponent("4514")
     addPin(24, PinType::typeIgnored);
 }
 
-void nts::C_4514::allUndefined()
+int nts::C_4514::getIndex(Tristate in_0, Tristate in_1, Tristate in_2, Tristate in_3)
 {
-    for (int i = 4; i <= 20; i++) {
-        assignPinValue(i, Undefined, this);
-    }
-}
+    std::string str = std::to_string(in_3) + std::to_string(in_2) + std::to_string(in_1) + std::to_string(in_0);
+    int index = std::stoi(str, nullptr, 2);
 
-int nts::C_4514::isUndefined(Tristate in_0, Tristate in_1, Tristate in_2, Tristate in_3)
-{
-    if (in_0 == Undefined || in_1 == Undefined || in_2 == Undefined || in_3 == Undefined) {
-        return 1;
-    }
-    return 0;
-}
-
-int nts::C_4514::getTotalValue(Tristate in_0, Tristate in_1, Tristate in_2, Tristate in_3)
-{
-    int val_0 = (in_0 == True) ? 1 : 0;
-    int val_1 = (in_1 == True) ? 1 : 0;
-    int val_2 = (in_2 == True) ? 1 : 0;
-    int val_3 = (in_3 == True) ? 1 : 0;
-
-    return val_0 + (val_1 << 1) + (val_2 << 2) + (val_3 << 3);
+    if (index == 0)
+        return 11;
+    if (index == 1)
+        return 9;
+    if (index == 2)
+        return 10;
+    if (index == 3)
+        return 8;
+    if (index == 4)
+        return 7;
+    if (index == 5)
+        return 6;
+    if (index == 6)
+        return 5;
+    if (index == 7)
+        return 4;
+    if (index == 8)
+        return 18;
+    if (index == 9)
+        return 17;
+    if (index == 10)
+        return 20;
+    if (index == 11)
+        return 19;
+    if (index == 12)
+        return 14;
+    if (index == 13)
+        return 13;
+    if (index == 14)
+        return 16;
+    if (index == 15)
+        return 15;
+    else
+        return 11;
 }
 
 void nts::C_4514::compute(std::size_t pin)
@@ -146,33 +162,29 @@ void nts::C_4514::compute(std::size_t pin)
         }
     }
 
-
     Tristate in_0 = this->getPin(2)->getState();
     Tristate in_1 = this->getPin(3)->getState();
     Tristate in_2 = this->getPin(21)->getState();
     Tristate in_3 = this->getPin(22)->getState();
     Tristate inhibit = this->getPin(23)->getState();
-    int total_value = 0;
+    Tristate strobe = this->getPin(1)->getState();
+    int index = 0;
 
-    if (inhibit == 1) {
-        for (int i = 4; i <= 20; i++) {
-            assignPinValue(i, False, this);
-        }
-    } else {
-        if (isUndefined(in_0, in_1, in_2, in_3) == 1)
-            return;
-        total_value = getTotalValue(in_0, in_1, in_2, in_3);
-        if (total_value == 84) {
-            allUndefined();
-            return;
-        }
-        for (int i = 4; i <= 20; i++) {
-            if (i == total_value + 4) {
-                assignPinValue(total_value + 4, True, this);
-            } else {
+    if (strobe == 0) {
+        if (inhibit == 1) {
+            for (int i = 4; i <= 20; i++)
                 assignPinValue(i, False, this);
+        } else if (in_0 != Undefined && in_1 != Undefined && in_2 != Undefined && in_3 != Undefined) {
+            index = getIndex(in_0, in_1, in_2, in_3);
+
+            for (int i = 4; i <= 20; i++) {
+                if (i == 12)
+                    continue;
+                if (i == index)
+                    assignPinValue(index, True, this);
+                else
+                    assignPinValue(i, False, this);
             }
         }
-        assignPinValue(total_value + 4, True, this);
     }
 }
