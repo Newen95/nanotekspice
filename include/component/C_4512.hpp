@@ -18,6 +18,7 @@ namespace nts
             C_4512();
             ~C_4512() override = default;
 
+            Tristate getIndex(Tristate in_a, Tristate in_b, Tristate in_c);
             void compute(std::size_t pin) override;
     };
 }
