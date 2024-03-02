@@ -145,9 +145,11 @@ static int parse_content(std::deque<std::string> &lines, std::deque<Component> &
 
 static std::string remove_comments(const std::string &line)
 {
-    size_t pos_comment = line.find('#');
-    std::string cleaned_line = (pos_comment != std::string::npos) ? line.substr(0, pos_comment) : line;
+    // Supprimer les espaces et les tabulations en début de ligne
+    size_t pos_first_non_space = line.find_first_not_of(" \t");
+    std::string cleaned_line = (pos_first_non_space != std::string::npos) ? line.substr(pos_first_non_space) : "";
 
+    // Supprimer les espaces et les tabulations en fin de ligne
     size_t pos_last_non_space = cleaned_line.find_last_not_of(" \t");
     if (pos_last_non_space != std::string::npos) {
         cleaned_line.erase(pos_last_non_space + 1);
@@ -155,9 +157,16 @@ static std::string remove_comments(const std::string &line)
         cleaned_line.clear();
     }
 
+    // Rechercher un commentaire
+    size_t pos_comment = cleaned_line.find('#');
+
+    // Supprimer le commentaire s'il existe
+    if (pos_comment != std::string::npos) {
+        cleaned_line.erase(pos_comment);
+    }
+
     return cleaned_line;
 }
-
 int error_handling(int ac, char **av, std::deque<Component> &components)
 {
     std::deque<std::string> lines;
