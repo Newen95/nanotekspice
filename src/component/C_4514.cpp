@@ -170,7 +170,14 @@ void nts::C_4514::compute(std::size_t pin)
     Tristate strobe = this->getPin(1)->getState();
     int index = 0;
 
-    if (strobe == 0) {
+    if (inhibit == Undefined) {
+        for (int i = 4; i <= 20; i++) {
+            if (i == 12)
+                continue;
+            assignPinValue(i, Undefined, this);
+        }
+    }
+    else if (strobe == 0) {
         if (inhibit == 1) {
             for (int i = 4; i <= 20; i++)
                 assignPinValue(i, False, this);
@@ -185,9 +192,6 @@ void nts::C_4514::compute(std::size_t pin)
                 else
                     assignPinValue(i, False, this);
             }
-        } else {
-            for (int i = 4; i <= 20; i++)
-                assignPinValue(i, Undefined, this);
         }
     }
 }
