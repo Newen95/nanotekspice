@@ -185,6 +185,9 @@ void nts::C_4514::compute(std::size_t pin)
                 else
                     assignPinValue(i, False, this);
             }
+        } else {
+            for (int i = 4; i <= 20; i++)
+                assignPinValue(i, Undefined, this);
         }
     }
 }
