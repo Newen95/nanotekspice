@@ -1,0 +1,16 @@
+# 12-bit counter (4040) driven by a clock, first three bits shown.
+# Start with: cl=0, reset=0, then simulate a few times and display.
+.chipsets:
+clock cl
+input reset
+4040 counter
+output q1
+output q2
+output q3
+
+.links:
+cl:1 counter:10
+reset:1 counter:11
+counter:9 q1:1
+counter:7 q2:1
+counter:6 q3:1
